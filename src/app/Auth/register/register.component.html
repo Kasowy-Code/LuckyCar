@@ -1,0 +1,18 @@
+<div class="main">
+  <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Login: </mat-label>
+      <input matInput formControlName="login">
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Hasło: </mat-label>
+      <input matInput formControlName="pass" type="password">
+    </mat-form-field> <br>
+    <button mat-raised-button type="submit">Zaloguj</button>
+  </form>
+  <p *ngIf="!error"></p>
+</div>

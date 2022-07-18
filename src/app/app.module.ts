@@ -19,8 +19,10 @@ import { AccountComponent } from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Auth/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { RegisterComponent } from './Auth/register/register.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     LotteryComponent,
     CarsComponent,
     AccountComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
