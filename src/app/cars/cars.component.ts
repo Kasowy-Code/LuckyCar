@@ -12,4 +12,11 @@ export class CarsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  AddToList() {
+
+  }
+
+  getRegistration() {
+
+  }
 }

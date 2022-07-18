@@ -8,7 +8,8 @@ import {AccountComponent} from "./account/account.component";
 const routes: Routes = [{path: "Lottery", component: LotteryComponent},
   {path: "Calendar", component: CalendarComponent},
   {path: "Cars", component: CarsComponent},
-  {path: "Account", component: AccountComponent}
+  {path: "Account", component: AccountComponent},
+  {path: "", pathMatch: "full", redirectTo: "Calendar"}
 ];
 
 @NgModule({

@@ -1,1 +1,15 @@
-<p>cars-screen works!</p>
+<div class="main">
+  <div class="content">
+    <mat-form-field appearance="fill">
+      <mat-label>Nazwa auta</mat-label>
+      <input matInput >
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Rejestracja</mat-label>
+      <input matInput (change)="getRegistration()">
+    </mat-form-field>
+    <button mat-raised-button style="max-height: 60px; box-sizing: border-box" (click)="AddToList()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

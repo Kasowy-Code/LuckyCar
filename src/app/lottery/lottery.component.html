@@ -1,1 +1,15 @@
-<p>lottery works!</p>
+<div style="display: grid; justify-content: center; padding-top: 10rem">
+  <div *ngIf="!user&&lottery">
+    <form action="">
+      <h4>Wybierz parking</h4>
+      <mat-radio-group color="primary">
+        <mat-radio-button value="1">Parking 1</mat-radio-button><br> <br>
+        <mat-radio-button value="2">Parking 2</mat-radio-button><br> <br>
+        <mat-radio-button value="3">Parking 3</mat-radio-button><br> <br>
+      </mat-radio-group> <br>
+      <button mat-raised-button routerLink="/Calendar" (click)="SendSuccessMessage()">Zatwierdź</button>
+    </form>
+  </div>
+  <h1 *ngIf="user&&lottery">Bierzesz już udział w tym losowaniu</h1>
+  <h1 *ngIf="!lottery">W tej chwili nie ma dostępnego losowania</h1>
+</div>

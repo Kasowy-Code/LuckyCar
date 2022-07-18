@@ -17,6 +17,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { LotteryComponent } from './lottery/lottery.component';
 import { AccountComponent } from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
+import {MatSelectModule} from "@angular/material/select";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import {CarsComponent} from "./cars/cars.component";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
 
   ],
   providers: [],

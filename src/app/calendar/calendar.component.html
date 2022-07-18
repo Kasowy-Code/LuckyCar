@@ -1,4 +1,11 @@
 <div class="main">
+  <mat-form-field color="#064dd6">
+    <mat-select [(value)]="selectedValue">
+      <mat-option *ngFor="let parking of parkings" [value]="parking.value">
+        {{parking.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-card class="demo-inline-calendar-card">
     <mat-calendar [(selected)]="selected"></mat-calendar>
   </mat-card>

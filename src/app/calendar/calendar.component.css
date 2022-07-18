@@ -1,3 +1,6 @@
+.mat-form-field {
+  padding-bottom: 3rem;
+}
 .main {
   display: grid;
   justify-content: center;
@@ -5,6 +8,6 @@
   padding-bottom: 50px;
 }
 .demo-inline-calendar-card {
-  width: 300px;
+  width: 18rem;
 }
 

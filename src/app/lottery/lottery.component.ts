@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lottery.component.css']
 })
 export class LotteryComponent implements OnInit {
+  lottery: boolean;
+  user: boolean;
 
-  constructor() { }
+  constructor() {
+    this.lottery = true;
+    this.user = false;
+  }
 
   ngOnInit(): void {
   }
 
+  SendSuccessMessage() {
+    alert("Udało ci się zapisać na listę losowania");
+    
+  }
 }
