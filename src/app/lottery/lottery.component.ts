@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-lottery',
@@ -8,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class LotteryComponent implements OnInit {
   lottery: boolean;
   user: boolean;
+  choosingParkingLotFormIsShowed: boolean;
 
   constructor() {
     this.lottery = true;
     this.user = false;
+    this.choosingParkingLotFormIsShowed = false;
   }
 
   ngOnInit(): void {
@@ -19,6 +21,10 @@ export class LotteryComponent implements OnInit {
 
   SendSuccessMessage() {
     alert("Udało ci się zapisać na listę losowania");
-    
+
+  }
+
+  loadChosingParkingLotForm() {
+    this.choosingParkingLotFormIsShowed = true;
   }
 }
