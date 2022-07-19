@@ -19,6 +19,8 @@ import { AccountComponent } from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -44,6 +46,12 @@ import {MatRadioModule} from "@angular/material/radio";
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
 
   ],
   providers: [],
