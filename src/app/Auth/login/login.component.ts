@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 export class LoginComponent implements OnInit {
   LoginForm = new FormGroup({
     login: new FormControl(''),
-    pass: new FormControl(''),
+    password: new FormControl(''),
   });
   error: boolean = false;
   constructor(private http: HttpClient) {
@@ -21,12 +21,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    console.warn(this.LoginForm.value);
-    this.http.post('api/Login', this.LoginForm.value, {observe: "response"})
-      .subscribe(response => {
-        if(response.status != 200) {
-            this.error = true;
-          }
-      });
+    // this.http.get('http://localhost:8080/api/Login').subscribe(data => {console.log(data)});
+    //
+    // this.http.post('localhost:8080/api/Login', this.LoginForm.value, {observe: "response"})
+    //   .subscribe(response => {
+    //     if(response.status != 200) {
+    //         this.error = true;
+    //       }
+    //   });
   }
 }

@@ -1,17 +1,22 @@
 <div class="main">
-  <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="standard">
-      <mat-label>Email: </mat-label>
-      <input matInput formControlName="email">
+      <mat-label>Imię: </mat-label>
+      <input matInput formControlName="name">
     </mat-form-field> <br>
     <mat-form-field appearance="standard">
-      <mat-label>Login: </mat-label>
-      <input matInput formControlName="login">
+      <mat-label>Nazwisko: </mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email" type="email">
     </mat-form-field> <br>
     <mat-form-field appearance="standard">
       <mat-label>Hasło: </mat-label>
-      <input matInput formControlName="pass" type="password">
-    </mat-form-field> <br>
+      <input matInput formControlName="password" type="password" minlength="8">
+      <mat-hint>Minimum 8 znaków</mat-hint>
+    </mat-form-field> <br> <br>
     <button mat-raised-button type="submit">Zaloguj</button>
   </form>
   <p *ngIf="!error"></p>

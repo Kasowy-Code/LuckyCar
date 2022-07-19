@@ -23,6 +23,7 @@ import { LoginComponent } from './Auth/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
+import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { RegisterComponent } from './Auth/register/register.component';
     CarsComponent,
     AccountComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RegisterSuccessComponent
   ],
   imports: [
     BrowserModule,

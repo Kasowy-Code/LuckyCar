@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -9,12 +10,14 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RegisterComponent implements OnInit {
   LoginForm = new FormGroup({
-    login: new FormControl(''),
-    pass: new FormControl(''),
+    name: new FormControl(''), //TODO: minimum field length = 2
+    surname: new FormControl(''), //TODO: minimum field length = 2
+    password: new FormControl(''),
     email: new FormControl('')
   });
+
   error: boolean = false;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,11 +25,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
 
-    console.warn(this.LoginForm.value);
-    this.http.post('api/register', this.LoginForm.value, {observe: "response"})
+    this.http.post('localhost:8080/register', this.LoginForm.value, {observe: "response"})
       .subscribe(response => {
         if(response.status != 200) {
           this.error = true;
+          this.router.navigate(["/Registered"]);
         }
       });
   }
