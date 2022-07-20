@@ -24,6 +24,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
+import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RegisterSuccessComponent } from './Auth/register-success/register-succe
     AccountComponent,
     LoginComponent,
     RegisterComponent,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    RegisterPasswordComponent
   ],
   imports: [
     BrowserModule,

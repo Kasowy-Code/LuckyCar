@@ -7,6 +7,7 @@ import {AccountComponent} from "./account/account.component";
 import {LoginComponent} from "./Auth/login/login.component";
 import {RegisterComponent} from "./Auth/register/register.component";
 import {RegisterSuccessComponent} from "./Auth/register-success/register-success.component";
+import {RegisterPasswordComponent} from "./Auth/register-password/register-password.component";
 
 const routes: Routes = [{path: "Lottery", component: LotteryComponent},
   {path: "Calendar", component: CalendarComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [{path: "Lottery", component: LotteryComponent},
   {path: "Login", component: LoginComponent},
   {path: "Register", component: RegisterComponent},
   {path: "Registered", component: RegisterSuccessComponent},
+  {path: "RegisterPassword", component: RegisterPasswordComponent},
   {path: "", pathMatch: "full", redirectTo: "Calendar"}
 ];
 

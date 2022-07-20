@@ -2,22 +2,22 @@
   <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" >
     <mat-form-field appearance="standard">
       <mat-label>Imię: </mat-label>
-      <input matInput formControlName="name">
+      <input matInput formControlName="name" [required]="true" (ngModelChange)="this.nameError = false">
+      <mat-hint *ngIf="nameError" style="color: red">Niepoprawny format</mat-hint>
+      <mat-hint *ngIf="this.LoginForm.value.name == '' && !nameError">Imię nie może być puste</mat-hint>
     </mat-form-field> <br>
     <mat-form-field appearance="standard">
       <mat-label>Nazwisko: </mat-label>
-      <input matInput formControlName="name">
+      <input matInput formControlName="surname" [required]="true">
+      <mat-hint *ngIf="surnameError" style="color: red">Niepoprawny format</mat-hint>
+      <mat-hint *ngIf="this.LoginForm.value.surname == '' && !surnameError">Nazwisko nie może być puste</mat-hint>
     </mat-form-field> <br>
     <mat-form-field appearance="standard">
       <mat-label>Email: </mat-label>
-      <input matInput formControlName="email" type="email">
-    </mat-form-field> <br>
-    <mat-form-field appearance="standard">
-      <mat-label>Hasło: </mat-label>
-      <input matInput formControlName="password" type="password" minlength="8">
-      <mat-hint>Minimum 8 znaków</mat-hint>
+      <input matInput formControlName="email" ngModel email (ngModelChange)="emailError = false" [required]="true">
+      <mat-hint *ngIf="emailError" style="color: red">Niepoprawny email</mat-hint>
+      <mat-hint *ngIf="this.LoginForm.value.name == '' && !nameError">Email nie może być pusty</mat-hint>
     </mat-form-field> <br> <br>
-    <button mat-raised-button type="submit">Zaloguj</button>
+    <button mat-raised-button type="submit">Zarejestruj</button>
   </form>
-  <p *ngIf="!error"></p>
 </div>
