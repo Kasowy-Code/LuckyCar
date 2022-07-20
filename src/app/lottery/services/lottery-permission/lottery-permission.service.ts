@@ -10,11 +10,11 @@ export class LotteryPermissionService {
   }
 
   getUserIsSignedUpToLottery() {
-    return of(false)
+    return of(false);
   }
 
   getLotteryIsOpen() {
-    return of(true)
+    return of(true);
   }
 
 }

@@ -20,6 +20,8 @@ import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import { ParkingLotDialogComponent } from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import {FormsModule} from "@angular/forms";
     CalendarComponent,
     LotteryComponent,
     CarsComponent,
-    AccountComponent
+    AccountComponent,
+    ParkingLotDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import {FormsModule} from "@angular/forms";
     MatSelectModule,
     MatRadioModule,
     FormsModule,
-
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

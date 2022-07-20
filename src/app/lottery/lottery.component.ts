@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLotsListService} from "./services/parking-lots-list/parking-lots-list.service";
 import {LotteryPermissionService} from "./services/lottery-permission/lottery-permission.service";
-import {FormControl} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {ParkingLotDialogComponent} from "./parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component";
 
 @Component({
   selector: 'app-lottery',
@@ -15,9 +16,9 @@ export class LotteryComponent implements OnInit {
   parkingLots: string[] = [];
   choosedParkingLot: string = '';
 
-  choosedParkingLotControl = new FormControl('');
-
-  constructor(private parkingLotsService: ParkingLotsListService, private permissionService: LotteryPermissionService) {
+  constructor(private parkingLotsService: ParkingLotsListService,
+              private permissionService: LotteryPermissionService,
+              private parkingLotDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -32,7 +33,6 @@ export class LotteryComponent implements OnInit {
     this.permissionService.getLotteryIsOpen().subscribe(response => {
       this.lottery = response;
     });
-
   }
 
   onSubmit() {
@@ -44,7 +44,18 @@ export class LotteryComponent implements OnInit {
   }
 
   loadChosingParkingLotForm() {
-    this.choosingParkingLotFormIsShowed = true;
+    //this.choosingParkingLotFormIsShowed = true;
+
+    let dialogRef = this.parkingLotDialog.open(ParkingLotDialogComponent,
+      {
+        data: this.parkingLots,
+        disableClose: true,
+      });
+
+    dialogRef.afterClosed().subscribe(response => {
+        console.log("dialog response: " + response);
+      }
+    );
   }
 
   logChoosingParkingLot(parkingLot: string) {
