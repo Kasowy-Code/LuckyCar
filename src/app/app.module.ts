@@ -19,6 +19,8 @@ import { AccountComponent } from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
+import { AdminComponent } from './admin/admin.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MatRadioModule} from "@angular/material/radio";
     CalendarComponent,
     LotteryComponent,
     CarsComponent,
-    AccountComponent
+    AccountComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import {MatRadioModule} from "@angular/material/radio";
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
+    ReactiveFormsModule,
 
   ],
   providers: [],

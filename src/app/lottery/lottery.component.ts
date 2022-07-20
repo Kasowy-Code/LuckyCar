@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-lottery',
@@ -8,6 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class LotteryComponent implements OnInit {
   lottery: boolean;
   user: boolean;
+  selected: any;
+
+
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
 
   constructor() {
     this.lottery = true;
@@ -17,8 +25,6 @@ export class LotteryComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  SendSuccessMessage() {
-    alert("Udało ci się zapisać na listę losowania");
-    
-  }
 }
+
+
