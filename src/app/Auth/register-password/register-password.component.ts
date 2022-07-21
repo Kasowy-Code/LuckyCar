@@ -29,7 +29,7 @@ export class RegisterPasswordComponent implements OnInit {
         password: this.RegisterForm.value.password
       }
       let id = this.route.snapshot.params['id'];
-      this.http.post(`${environment.link}/register/`+id, this.RegisterForm.value.password, {observe: "response"})
+      this.http.post(`${environment.link}/api/register/`+id, Pass, {observe: "response"})
         .subscribe(response => {
 
         },
