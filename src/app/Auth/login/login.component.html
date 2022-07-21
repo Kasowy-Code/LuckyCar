@@ -1,8 +1,9 @@
 <div class="main">
   <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="standard">
-      <mat-label>Login: </mat-label>
-      <input matInput formControlName="login">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="username" type="email" [required]="true">
+      <mat-hint></mat-hint>
     </mat-form-field> <br>
     <mat-form-field appearance="standard">
       <mat-label>Hasło: </mat-label>
@@ -10,5 +11,5 @@
     </mat-form-field> <br>
     <button mat-raised-button type="submit">Zaloguj</button>
   </form>
-  <p *ngIf="!error"></p>
+  <p *ngIf="!error">Nieprawidłowe dane!</p>
 </div>

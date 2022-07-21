@@ -16,7 +16,7 @@ const routes: Routes = [{path: "Lottery", component: LotteryComponent},
   {path: "Login", component: LoginComponent},
   {path: "Register", component: RegisterComponent},
   {path: "Registered", component: RegisterSuccessComponent},
-  {path: "RegisterPassword", component: RegisterPasswordComponent},
+  {path: "RegisterPassword/:id", component: RegisterPasswordComponent},
   {path: "", pathMatch: "full", redirectTo: "Calendar"}
 ];
 

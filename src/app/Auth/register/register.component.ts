@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  LoginForm = new FormGroup({
+  RegisterForm = new FormGroup({
     name: new FormControl(''), //TODO: minimum field length = 2
     surname: new FormControl(''), //TODO: minimum field length = 2
     email: new FormControl('')
@@ -26,24 +26,24 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.LoginForm.value.email?.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/)) {
+    if (!this.RegisterForm.value.email?.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/)) {
         this.emailError = true;
     }
-    if(!this.LoginForm.value.name?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
+    if(!this.RegisterForm.value.name?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
       this.nameError = true;
     }
-    if(!this.LoginForm.value.surname?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
+    if(!this.RegisterForm.value.surname?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
       this.surnameError = true;
     }
     if(!this.emailError && !this.nameError && !this.surnameError) {
-      this.http.post(`${environment.link}/api/register`, this.LoginForm.value, {observe: "response"})
+      this.http.post(`${environment.link}/api/register`, this.RegisterForm.value, {observe: "response"})
         .subscribe(response => {
             this.error = true;
             this.router.navigate(["/Registered"]);
 
           },
           error => {
-            console.log(error);
+            this.error = true;
           });
     }
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -10,28 +10,32 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./register-password.component.css']
 })
 export class RegisterPasswordComponent implements OnInit {
-  LoginForm = new FormGroup({
+  RegisterForm = new FormGroup({
     password: new FormControl(''),
     repeat_password: new FormControl('')
 
   });
+  error = false;
   passwordError: boolean = false;
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
   onSubmit() {
-    if (this.LoginForm.value.repeat_password != this.LoginForm.value.password) {
+    if (this.RegisterForm.value.repeat_password != this.RegisterForm.value.password) {
       this.passwordError = true;
     } else {
       let Pass = {
-        password: this.LoginForm.value.password
+        password: this.RegisterForm.value.password
       }
-      console.log(Pass);
-      // this.http.post(`${environment.link}/register`, this.LoginForm.value.password, {observe: "response"})
-      //   .subscribe(response => {
-      //
-      //   });
+      let id = this.route.snapshot.params['id'];
+      this.http.post(`${environment.link}/register/`+id, this.RegisterForm.value.password, {observe: "response"})
+        .subscribe(response => {
+
+        },
+       error => {
+        this.error = true;
+      });
     }
   }
 }
