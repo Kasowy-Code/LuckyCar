@@ -25,6 +25,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
+import {APIServiceService} from "./api-service.service";
 
 
 @NgModule({
@@ -57,7 +58,7 @@ import { RegisterPasswordComponent } from './Auth/register-password/register-pas
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [APIServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
