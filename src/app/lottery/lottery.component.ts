@@ -36,8 +36,8 @@ export class LotteryComponent implements OnInit {
     });
 
     this.parkingLotsService.getParkingLots().subscribe(response => {
-      this.parkingLots = response;
 
+      this.parkingLots = response.filter(value => value.available);
     });
 
     this.messageForUser();

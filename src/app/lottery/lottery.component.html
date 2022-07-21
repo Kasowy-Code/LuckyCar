@@ -1,21 +1,8 @@
 <div style="display: grid; justify-content: center; padding-top: 10rem">
   <div>
-    <button (click)="loadChosingParkingLotForm()" [disabled]="user||!lottery" class="button" mat-flat-button
-            color="primary">zgłoś sie do
-      losowania
+    <button (click)="loadChosingParkingLotForm()" [disabled]="user||!lottery" class="button"
+            mat-flat-button color="primary">zgłoś sie do losowania
     </button>
   </div>
-
-  <!--    <div *ngIf="choosingParkingLotFormIsShowed&&!user&&lottery">-->
-  <!--      <form #myForm="ngForm" (ngSubmit)="onSubmit()">-->
-  <!--        <h4>Wybierz parking</h4>-->
-  <!--        <mat-radio-group (change)="logChoosingParkingLot($event.value)" color="primary">-->
-  <!--          <mat-radio-button *ngFor="let parkingLot of parkingLots" [value]="parkingLot">{{parkingLot}}</mat-radio-button>-->
-  <!--          <br> <br>-->
-  <!--        </mat-radio-group>-->
-  <!--        <br>-->
-  <!--        <button mat-raised-button type="button" (click)="sendSuccessMessage()">Zatwierdź</button>-->
-  <!--      </form>-->
-  <!--    </div>-->
 
 </div>
