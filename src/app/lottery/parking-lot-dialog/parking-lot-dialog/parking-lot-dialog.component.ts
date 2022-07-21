@@ -10,6 +10,7 @@ import {ParkingLot} from "../../services/parking-lots-list/parking-lot";
 export class ParkingLotDialogComponent implements OnInit {
   parkingLots: ParkingLot[] = [];
   choosedParkingLot: ParkingLot = <ParkingLot>{};
+  choiceChanged = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ParkingLot[],
               private parkingLotDialogRef: MatDialogRef<ParkingLotDialogComponent>) {
@@ -25,9 +26,12 @@ export class ParkingLotDialogComponent implements OnInit {
 
   setChoosedParkingLot(value: ParkingLot) {
     this.choosedParkingLot = value;
+    this.choiceChanged = true;
   }
 
   onSubmit() {
+
     this.parkingLotDialogRef.close(this.choosedParkingLot);
+
   }
 }

@@ -85,6 +85,8 @@ export class LotteryComponent implements OnInit {
             console.log(response);
           }
 
+          console.log(response);
+
           this.messageForUser();
         }
       );
