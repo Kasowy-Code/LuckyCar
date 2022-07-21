@@ -1,15 +1,23 @@
 import {Injectable} from '@angular/core';
-import {of} from "rxjs";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../../environments/environment";
+import {ParkingLot} from "./parking-lot";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParkingLotsListService {
+  private ParkingLotsUrl = `${environment.link}` + 'api/parking-lots';
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  getParkingLots() {
-    return of(['parking 1', 'parking 2', 'parking 3', 'parking 4'])
+  getParkingLots(): Observable<ParkingLot[]> {
+    return this.http.get<ParkingLot[]>(this.ParkingLotsUrl);
+  }
+
+  setChoosedPatkingLots(choosedParkingLot: ParkingLot): Observable<ParkingLot> {
+    return this.http.post<ParkingLot>(this.ParkingLotsUrl, choosedParkingLot);
   }
 }

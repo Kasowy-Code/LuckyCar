@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {ParkingLot} from "../../services/parking-lots-list/parking-lot";
 
 @Component({
   selector: 'app-parking-lot-dialog',
@@ -7,10 +8,10 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./parking-lot-dialog.component.css']
 })
 export class ParkingLotDialogComponent implements OnInit {
-  parkingLots: string[] = [];
-  choosedParkingLot: string = '';
+  parkingLots: ParkingLot[] = [];
+  choosedParkingLot: ParkingLot = <ParkingLot>{};
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string[],
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ParkingLot[],
               private parkingLotDialogRef: MatDialogRef<ParkingLotDialogComponent>) {
   }
 
@@ -22,7 +23,7 @@ export class ParkingLotDialogComponent implements OnInit {
     this.parkingLotDialogRef.close();
   }
 
-  setChoosedParkingLot(value: string) {
+  setChoosedParkingLot(value: ParkingLot) {
     this.choosedParkingLot = value;
   }
 

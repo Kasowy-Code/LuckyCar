@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from "./parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {ParkingLot} from "./services/parking-lots-list/parking-lot";
 
 @Component({
   selector: 'app-lottery',
@@ -16,7 +17,7 @@ export class LotteryComponent implements OnInit {
   lotteryIsClosedMessage: string = 'Lottery is closed!!';
   lottery = false;
   user = true;
-  parkingLots: string[] = [];
+  parkingLots: ParkingLot[] = [];
 
   constructor(private parkingLotsService: ParkingLotsListService,
               private permissionService: LotteryPermissionService,
@@ -26,10 +27,6 @@ export class LotteryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parkingLotsService.getParkingLots().subscribe(response => {
-      this.parkingLots = response;
-    });
-
     this.permissionService.getUserIsSignedUpToLottery().subscribe(response => {
       this.user = response;
     });
@@ -38,9 +35,13 @@ export class LotteryComponent implements OnInit {
       this.lottery = response;
     });
 
+    this.parkingLotsService.getParkingLots().subscribe(response => {
+      this.parkingLots = response;
+
+    });
+
     this.messageForUser();
   }
-
 
   private messageForUser() {
     if (!this.lottery) {
@@ -54,6 +55,10 @@ export class LotteryComponent implements OnInit {
       });
     }
 
+    this.closeSnackBar();
+  }
+
+  private closeSnackBar() {
     this.router.events.subscribe((val) => {
       this._snackBar.dismiss();
     });
@@ -73,13 +78,20 @@ export class LotteryComponent implements OnInit {
         });
 
       dialogRef.afterClosed().subscribe(response => {
-          console.log("dialog response: " + response);
 
-          this.user = true;
+          if (response !== undefined) {
+            this.signUpUsertoLottery();
+
+            console.log(response);
+          }
 
           this.messageForUser();
         }
       );
     }
+  }
+
+  private signUpUsertoLottery() {
+    this.user = true;
   }
 }
