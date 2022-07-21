@@ -21,7 +21,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
-import { ParkingLotDialogComponent } from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
+import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { ParkingLotDialogComponent } from './lottery/parking-lot-dialog/parking-
     MatSelectModule,
     MatRadioModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

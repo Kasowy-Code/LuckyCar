@@ -9,6 +9,7 @@ export class LotteryPermissionService {
   constructor() {
   }
 
+
   getUserIsSignedUpToLottery() {
     return of(false);
   }
