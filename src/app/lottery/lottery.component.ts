@@ -34,7 +34,6 @@ export class LotteryComponent implements OnInit {
     this.setupUserPermissionForLottery()
 
     this.parkingLotsService.getParkingLots().subscribe(response => {
-
       this.parkingLots = response.filter(value => value.available);
     });
   }
@@ -44,7 +43,7 @@ export class LotteryComponent implements OnInit {
     this.permissionService.getUserIsSignedUpToLottery().subscribe(response => {
       this.userDraw = response;
 
-      console.log(this.userDraw.registeredForDraw);
+      console.log("registered:" + this.userDraw.registeredForDraw);
 
       this.sendUserIsSignedUpToLotteryMessage();
     });
@@ -52,7 +51,7 @@ export class LotteryComponent implements OnInit {
     this.permissionService.getLotteryIsOpen().subscribe(response => {
       this.lotterySetting = response;
 
-      console.log(response.active);
+      console.log("lottery: " + response.active);
 
       this.sendLotteryIsClosedMessage();
     });
@@ -98,8 +97,8 @@ export class LotteryComponent implements OnInit {
 
         if (response !== undefined) {
 
-          this.userService.setUserChosenParking(response);
-          this.userService.registerUserForDraw();
+          this.userService.setUserChosenParking(response, this.userDraw);
+          this.userService.registerUserForDraw(this.userDraw);
 
           console.log(response);
         }

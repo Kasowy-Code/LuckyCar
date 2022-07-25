@@ -9,22 +9,21 @@ import {environment} from "../../../../environments/environment";
 })
 export class UserActionService {
   private userDrawUrl = `${environment.link}api/userdraw`;
-  user = <UserDraw>{};
 
   constructor(private http: HttpClient) {
   }
 
-  registerUserForDraw() {
-    this.user.registeredForDraw = true;
-    //this.http.patch(`${this.userDrawUrl}/${environment.currentUserId}`, user);
+  registerUserForDraw(user: UserDraw) {
+    user.registeredForDraw = true;
+    //this.http.patch(`${this.userDrawUrl}/${environment.currentUserId}`, this.user);
   }
 
   setUserChosenParking(chosenParkingLot: ParkingLot, user: UserDraw) {
-    this.user.declaredParking = chosenParkingLot.id;
+    user.declaredParking = chosenParkingLot.id;
   }
 
-  cancelSigningUpToLottery() {
-    this.user.registeredForDraw = false;
-    this.user.declaredParking = 0;
+  cancelSigningUpToLottery(user: UserDraw) {
+    user.registeredForDraw = false;
+    user.declaredParking = 0;
   }
 }
