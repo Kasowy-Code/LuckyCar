@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ParkingLotsListService} from "./services/parking-lots-list/parking-lots-list.service";
 import {LotteryPermissionService} from "./services/lottery-permission/lottery-permission.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -9,76 +9,76 @@ import {ParkingLot} from "../global-dto/parking-lot";
 import {UserDraw} from "../global-dto/user-draw";
 import {UserActionService} from "./services/user-action/user-action.service";
 import {DrawSettings} from "../global-dto/draw-settings";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-lottery',
   templateUrl: './lottery.component.html',
   styleUrls: ['./lottery.component.css'],
 })
-export class LotteryComponent implements OnInit {
+export class LotteryComponent implements OnInit, OnDestroy {
   userIsSignedUpToLotteryMessage = 'You are signed up to lottery!!';
   lotteryIsClosedMessage = 'Lottery is closed!!';
   lotterySetting = <DrawSettings>{};
   userDraw = <UserDraw>{};
   parkingLots: ParkingLot[] = [];
+  subscription: Subscription = <Subscription>{};
 
-  constructor(private parkingLotsService: ParkingLotsListService,
-              private permissionService: LotteryPermissionService,
-              private userService: UserActionService,
+  constructor(private parkingLotsListService: ParkingLotsListService,
+              private lotteryPermissionService: LotteryPermissionService,
+              private userActionService: UserActionService,
               private parkingLotDialog: MatDialog,
-              private _snackBar: MatSnackBar,
+              private snackBar: MatSnackBar,
               private router: Router) {
   }
 
   ngOnInit(): void {
     this.setupUserPermissionForLottery()
 
-    this.parkingLotsService.getParkingLots().subscribe(response => {
+    this.parkingLotsListService.getParkingLots().subscribe(response => {
       this.parkingLots = response.filter(value => value.available);
     });
   }
 
+  ngOnDestroy() {
+    this.snackBar.dismiss();
+  }
+
   private setupUserPermissionForLottery() {
 
-    this.permissionService.getUserIsSignedUpToLottery().subscribe(response => {
+    this.lotteryPermissionService.getUserIsSignedUpToLottery().subscribe(response => {
       this.userDraw = response;
 
       console.log("registered:" + this.userDraw.registeredForDraw);
 
-      this.sendUserIsSignedUpToLotteryMessage();
     });
 
-    this.permissionService.getLotteryIsOpen().subscribe(response => {
+    this.lotteryPermissionService.getLotteryIsOpen().subscribe(response => {
       this.lotterySetting = response;
 
-      console.log("lottery: " + response.active);
+      console.log("lottery: " + this.lotterySetting.active);
 
-      this.sendLotteryIsClosedMessage();
     });
+    this.showUserIsSignedUpToLotteryMessage();
+    this.sendLotteryIsClosedMessage();
   }
 
   private sendLotteryIsClosedMessage() {
     if (!this.lotterySetting.active) {
-      this._snackBar.open(this.lotteryIsClosedMessage, "", {
+      this.snackBar.open(this.lotteryIsClosedMessage, "", {
         verticalPosition: "top",
       });
     }
-    this.closeSnackBar();
   }
 
-  private sendUserIsSignedUpToLotteryMessage() {
+  private showUserIsSignedUpToLotteryMessage() {
     if (this.userDraw.registeredForDraw && this.lotterySetting.active) {
-      this._snackBar.open(this.userIsSignedUpToLotteryMessage, '', {
+      this.snackBar.open(this.userIsSignedUpToLotteryMessage, '', {
         verticalPosition: "top",
       });
     }
   }
 
-  private closeSnackBar() {
-    this.router.events.subscribe(() => {
-      this._snackBar.dismiss();
-    });
-  }
 
   onSubmit() {
     console.log("submited");
@@ -97,13 +97,13 @@ export class LotteryComponent implements OnInit {
 
         if (response !== undefined) {
 
-          this.userService.setUserChosenParking(response, this.userDraw);
-          this.userService.registerUserForDraw(this.userDraw);
+          this.userActionService.setUserChosenParking(response, this.userDraw);
+          this.userActionService.registerUserForDraw(this.userDraw);
 
           console.log(response);
         }
 
-        this.sendUserIsSignedUpToLotteryMessage();
+        this.showUserIsSignedUpToLotteryMessage();
         this.sendLotteryIsClosedMessage();
       }
     );
