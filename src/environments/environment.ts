@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  link: 'http://localhost:8080/'
+  link: 'http://localhost:8080'
 };
 
 /*

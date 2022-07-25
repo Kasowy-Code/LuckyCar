@@ -1,0 +1,15 @@
+<div class="main">
+  <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="username" type="email" [required]="true" (ngModelChange)="this.error = false">
+      <mat-hint></mat-hint>
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Hasło: </mat-label>
+      <input matInput formControlName="password" type="password" (ngModelChange)="this.error = false" >
+    </mat-form-field> <br>
+    <p *ngIf="error" style="color: red">Nieprawidłowe dane!</p>
+    <button mat-raised-button type="submit">Zaloguj</button>
+  </form>
+</div>

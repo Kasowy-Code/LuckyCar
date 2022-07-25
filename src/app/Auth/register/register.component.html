@@ -1,0 +1,24 @@
+<div class="main">
+  <form [formGroup]="RegisterForm" (ngSubmit)="onSubmit()" >
+    <mat-form-field appearance="standard">
+      <mat-label>Imię: </mat-label>
+      <input matInput formControlName="name" [required]="true" (ngModelChange)="this.nameError = false">
+      <mat-hint *ngIf="nameError" style="color: red">Niepoprawny format</mat-hint>
+      <mat-hint *ngIf="this.RegisterForm.value.name == '' && !nameError">Imię nie może być puste</mat-hint>
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Nazwisko: </mat-label>
+      <input matInput formControlName="surname" [required]="true" (ngModelChange)="this.surnameError = false">
+      <mat-hint *ngIf="surnameError" style="color: red">Niepoprawny format</mat-hint>
+      <mat-hint *ngIf="this.RegisterForm.value.surname == '' && !surnameError">Nazwisko nie może być puste</mat-hint>
+    </mat-form-field> <br>
+    <mat-form-field appearance="standard">
+      <mat-label>Email: </mat-label>
+      <input matInput formControlName="email" ngModel email (ngModelChange)="emailError = false" [required]="true">
+      <mat-hint *ngIf="emailError" style="color: red">Niepoprawny email</mat-hint>
+      <mat-hint *ngIf="this.RegisterForm.value.name == '' && !nameError">Email nie może być pusty</mat-hint>
+    </mat-form-field> <br> <br>
+    <p *ngIf="error" style="color: red">Coś poszło nie tak! <br> <br></p>
+    <button mat-raised-button type="submit">Zarejestruj</button>
+  </form>
+</div>
