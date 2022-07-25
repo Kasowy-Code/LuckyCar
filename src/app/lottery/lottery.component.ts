@@ -98,8 +98,8 @@ export class LotteryComponent implements OnInit {
 
         if (response !== undefined) {
 
-          this.userService.patchUserDeclaredParking(response);
-          this.userService.patchUserIsRegisterForDraw(this.userDraw);
+          this.userService.setUserChosenParking(response);
+          this.userService.registerUserForDraw();
 
           console.log(response);
         }

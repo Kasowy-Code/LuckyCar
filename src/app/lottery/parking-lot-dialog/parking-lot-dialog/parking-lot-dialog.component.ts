@@ -30,7 +30,6 @@ export class ParkingLotDialogComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.parkingLotDialogRef.close(this.chosenParkingLot);
 
   }
