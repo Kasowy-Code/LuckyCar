@@ -1,38 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {FormControl, Validators} from "@angular/forms";
+import {RestApiService} from "../../rest-api.service";
 import {Router} from "@angular/router";
-import {APIServiceService} from "../../api-service.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  LoginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+export class LoginComponent implements OnInit{
 
-  username: string|undefined|null= this.LoginForm.value.username;
-  password: string|undefined|null= this.LoginForm.value.password;
-  error: boolean = false;
-  constructor(private http: HttpClient, private router: Router, private service: APIServiceService) {
+  hide = true;
+  username:string = "";
+  password:string = "";
+
+  constructor(private service:RestApiService, private router:Router) {
   }
 
-  ngOnInit(): void {
+
+  ngOnInit():void {
   }
 
-  onSubmit() {
-    let response = this.service.Login(this.username, this.password)
-      response.subscribe(data => {
-        this.router.navigate(["/Calendar"]);
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  public getAccessToken(){
+    let resp = this.service.generateToken(this.username, this.password);
+    resp.subscribe(data => {
+        localStorage.setItem('token', data.toLocaleString());
+        this.router.navigate(["/calendar"]);
       },
       error => {
-          this.error = true;
-      }
-      );
+          //TODO: FUNKCJA WYPISZE INVALID USERNAME/PASSWORD NA FRONCIE
+      });
   }
+
 }
+
+

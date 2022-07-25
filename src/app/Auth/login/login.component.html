@@ -1,15 +1,32 @@
-<div class="main">
-  <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="standard">
-      <mat-label>Email: </mat-label>
-      <input matInput formControlName="username" type="email" [required]="true" (ngModelChange)="this.error = false">
-      <mat-hint></mat-hint>
-    </mat-form-field> <br>
-    <mat-form-field appearance="standard">
-      <mat-label>Hasło: </mat-label>
-      <input matInput formControlName="password" type="password" (ngModelChange)="this.error = false" >
-    </mat-form-field> <br>
-    <p *ngIf="error" style="color: red">Nieprawidłowe dane!</p>
-    <button mat-raised-button type="submit">Zaloguj</button>
+<section class="main">
+  <form id="login-form" class="form" action="login" method="post">
+    <h1>Log in</h1>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="example@mail.com" [formControl]="email" name="email" [(ngModel)]="username" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input placeholder="Password" matInput [type]="hide ? 'password' : 'text'" name ="password" [(ngModel)]="password" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </p>
+
+    <div class="forgot">
+      <a href="">Forgot password?</a>
+    </div>
+
+    <button mat-raised-button (click)="getAccessToken()">Login</button>
+    <p class="reg">
+      Don't have an account? <a href="#" class="register">Register</a>
+    </p>
   </form>
-</div>
+</section>
