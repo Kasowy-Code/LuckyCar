@@ -9,7 +9,7 @@ import {of} from "rxjs";
   providedIn: 'root'
 })
 export class UserActionService {
-  private userDrawUrl = `${environment.link}api/userdraw`;
+  private userDrawUrl = `${environment.link}/api/userdraw`;
 
   constructor(private http: HttpClient) {
   }

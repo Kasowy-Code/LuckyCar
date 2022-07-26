@@ -9,9 +9,8 @@ import {User} from "../../../global-dto/user";
   providedIn: 'root'
 })
 export class LotteryPermissionService {
-  private userDrawUrl = `${environment.link}api/userdraw`;
-  private drawSettingsUrl = `${environment.link}api/settings`;
-  private currentUserId = '1';
+  private userDrawUrl = `${environment.link}/api/userdraw`;
+  private drawSettingsUrl = `${environment.link}/api/settings`;
   user = <User>{"id": 1}
   userDraw = {"id": 1, "user": this.user, "registeredForDraw": false, "consecutiveDraws": 0, "declaredParking": 0};
   drawSettings = {"registrationEndDay": 20, "active": true};

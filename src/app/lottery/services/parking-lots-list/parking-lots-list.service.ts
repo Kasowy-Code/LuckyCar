@@ -9,7 +9,7 @@ import {ParkingLot} from "../../../global-dto/parking-lot";
   providedIn: 'root'
 })
 export class ParkingLotsListService {
-  private ParkingLotsUrl = `${environment.link}api/parking-lots`;
+  private ParkingLotsUrl = `${environment.link}/api/parking-lots`;
 
   constructor(private http: HttpClient) {
   }
