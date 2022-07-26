@@ -21,7 +21,7 @@ export class LotteryPermissionService {
 
 
   getUserIsSignedUpToLottery(): Observable<UserDraw> {
-    //return this.http.get<UserDraw>(`${this.userDrawUrl}/${this.currentUserId}`);
+    //return this.http.get<UserDraw>(`${this.userDrawUrl}`);
     return of(this.userDraw);
   }
 

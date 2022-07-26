@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>Choose Parking Lot</h2>
 <form>
   <mat-radio-group (change)="setChosenParkingLot($event.value)" color="primary">
-    <mat-radio-button *ngFor=" let parkingLot of parkingLots"
-                      [value]="parkingLot">{{parkingLot.name}}</mat-radio-button>
-    <br> <br>
+    <div *ngFor=" let parkingLot of parkingLots">
+      <mat-radio-button
+        [value]="parkingLot">{{parkingLot.name}}
+      </mat-radio-button>
+    </div>
   </mat-radio-group>
   <br>
   <mat-dialog-actions align="end">

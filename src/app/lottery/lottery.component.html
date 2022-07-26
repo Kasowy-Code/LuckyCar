@@ -1,9 +1,5 @@
 <div style="display: grid; justify-content: center; padding-top: 10rem">
-  <div>
-    <button (click)="loadChosingParkingLotForm()" [disabled]="userDraw.registeredForDraw||!lotterySetting.active"
-            class="button"
-            mat-flat-button color="primary">zgłoś sie do losowania
-    </button>
-  </div>
-
+  <app-sign-up-to-lottery-button>
+    <!--show if is user-->
+  </app-sign-up-to-lottery-button>
 </div>

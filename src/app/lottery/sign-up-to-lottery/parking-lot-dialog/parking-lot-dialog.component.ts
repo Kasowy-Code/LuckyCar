@@ -5,7 +5,7 @@ import {ParkingLot} from "../../../global-dto/parking-lot";
 @Component({
   selector: 'app-parking-lot-dialog',
   templateUrl: './parking-lot-dialog.component.html',
-  styleUrls: ['./parking-lot-dialog.component.css']
+  styleUrls: ['./parking-lot-dialog.component.scss']
 })
 export class ParkingLotDialogComponent implements OnInit {
   parkingLots: ParkingLot[] = [];

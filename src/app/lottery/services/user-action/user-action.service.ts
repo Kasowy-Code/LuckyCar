@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {UserDraw} from "../../../global-dto/user-draw";
 import {ParkingLot} from "../../../global-dto/parking-lot";
 import {environment} from "../../../../environments/environment";
+import {of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserActionService {
 
   registerUserForDraw(user: UserDraw) {
     user.registeredForDraw = true;
-    //this.http.patch(`${this.userDrawUrl}/${environment.currentUserId}`, this.user);
+    return of(user.registeredForDraw);
+    //return this.http.patch(`${this.userDrawUrl}/${environment.currentUserId}`, this.user);
   }
 
   setUserChosenParking(chosenParkingLot: ParkingLot, user: UserDraw) {
@@ -25,5 +27,6 @@ export class UserActionService {
   cancelSigningUpToLottery(user: UserDraw) {
     user.registeredForDraw = false;
     user.declaredParking = 0;
+    return of(true);
   }
 }
