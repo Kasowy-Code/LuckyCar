@@ -20,18 +20,19 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import { LoginComponent } from './Auth/login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
-import {APIServiceService} from "./api-service.service";
+import {RestApiService} from "./rest-api.service";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {AuthGuard} from "./auth.guard";
+import {TokenInterceptorService} from "./token-interceptor.service";
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { environment } from '../environments/environment';
     LoginComponent,
     RegisterComponent,
     RegisterSuccessComponent,
-    RegisterPasswordComponent
+    RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent
   ],
@@ -64,7 +65,7 @@ import { environment } from '../environments/environment';
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
@@ -76,7 +77,11 @@ import { environment } from '../environments/environment';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [APIServiceService],
+  providers: [RestApiService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
