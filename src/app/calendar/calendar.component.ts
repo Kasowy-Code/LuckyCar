@@ -1,14 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-
-class Parking {
-  constructor(value: string, viewValue: string) {
-    this.value = value;
-    this.viewValue = viewValue;
-  }
-
-  value: string;
-  viewValue: string;
-}
+import { Component, OnInit } from '@angular/core';
+import {RestApiService} from "../rest-api.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-calendar',
@@ -17,17 +9,8 @@ class Parking {
 })
 export class CalendarComponent implements OnInit {
   selected: Date | null | undefined;
-
-  constructor() {
-  }
+  constructor(private service:RestApiService, private router:Router) { }
 
   ngOnInit(): void {
   }
-
-  parkings: Parking[] = [
-    {value: 'Parking-0', viewValue: 'Parking 1'},
-    {value: 'Parking-1', viewValue: 'Parking 2'},
-    {value: 'Parking-2', viewValue: 'Parking 3'},
-  ];
-  selectedValue: any = 'Parking-0';
 }

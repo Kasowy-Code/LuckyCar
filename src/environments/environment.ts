@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  link: 'http://localhost:8080/',
-  currentUserId: '1'
+  link: 'http://localhost:8080'
 };
 
 /*

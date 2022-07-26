@@ -18,13 +18,21 @@ import {AccountComponent} from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
+import { LoginComponent } from './Auth/login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { RegisterComponent } from './Auth/register/register.component';
+import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
+import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
+import {RestApiService} from "./rest-api.service";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {HttpClientModule} from "@angular/common/http";
-import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {AuthGuard} from "./auth.guard";
+import {TokenInterceptorService} from "./token-interceptor.service";
 import {
   SignUpToLotteryButtonComponent
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
@@ -38,6 +46,11 @@ import {MatDividerModule} from "@angular/material/divider";
     CalendarComponent,
     LotteryComponent,
     CarsComponent,
+    AccountComponent,
+    LoginComponent,
+    RegisterComponent,
+    RegisterSuccessComponent,
+    RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent,
     SignUpToLotteryButtonComponent,
@@ -57,6 +70,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
@@ -69,8 +84,11 @@ import {MatDividerModule} from "@angular/material/divider";
     }),
     MatDividerModule
   ],
-  providers: [],
+  providers: [RestApiService, AuthGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
