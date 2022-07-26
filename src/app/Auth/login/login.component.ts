@@ -14,21 +14,26 @@ export class LoginComponent implements OnInit{
   username:string = "";
   password:string = "";
 
+  email = new FormControl('', [Validators.required, Validators.email]);
+  pass = new FormControl('', [Validators.required, Validators.minLength(8)]);
+
+  error: boolean = false;
+
+
   constructor(private service:RestApiService, private router:Router) {
   }
 
-
   ngOnInit():void {
   }
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+  getErrorMessage(item: any) {
+    if(item.hasError('email')) {
+      return 'Not a valid email';
     }
+    if(item.hasError('minlength')) {
+      return 'Must be at least 8 characters long';
+    }
+    return item.hasError('required') ? 'You must enter a value' : '';
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
   public getAccessToken(){
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit{
         this.router.navigate(["/calendar"]);
       },
       error => {
-          //TODO: FUNKCJA WYPISZE INVALID USERNAME/PASSWORD NA FRONCIE
+        this.error = true;
       });
   }
 
