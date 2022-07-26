@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ThemePalette} from "@angular/material/core";
+import {map, Observable, startWith} from "rxjs";
+import {FormControl} from "@angular/forms";
 
 
 export interface User {
@@ -14,7 +16,7 @@ export interface User {
   templateUrl: './select-users.component.html',
   styleUrls: ['./select-users.component.css']
 })
-export class SelectUsersComponent  {
+export class SelectUsersComponent implements OnInit{
   user: User = {
     name: 'Indeterminate',
     completed: false,
@@ -25,9 +27,21 @@ export class SelectUsersComponent  {
       {name: 'Warn', completed: false, color: 'warn'},
     ],
   };
-
+  filteredUsers: Observable<User[]>|any;
   allComplete: boolean = false;
+  employees = new FormControl('');
 
+  ngOnInit() {
+    this.filteredUsers = this.employees.valueChanges.pipe(
+      startWith(''),
+      map(value => this.filter(value || '')),
+    );
+  }
+
+  private filter(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.user.subusers?.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
   updateAllComplete() {
     this.allComplete = this.user.subusers != null && this.user.subusers.every(t => t.completed);
   }

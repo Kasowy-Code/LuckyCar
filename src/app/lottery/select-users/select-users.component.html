@@ -5,16 +5,21 @@
       [checked]="allComplete"
       [color]="user.color"
       [indeterminate]="someComplete()"
-      (change)="setAll($event.checked)">Zaznacz wszystich</mat-checkbox>
-    <mat-divider></mat-divider>
+      (change)="setAll($event.checked)" class="select-all">select all</mat-checkbox>
+    <mat-form-field class="search" appearance="legacy">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="employees">
+      <span matPrefix><mat-icon>search</mat-icon></span>
+    </mat-form-field>
   </div>
-  <div class="example-list-section">
+    <mat-divider></mat-divider>
+    <div class="example-list-section">
     <ul>
-      <div *ngFor="let subusers of user.subusers">
-        <mat-checkbox [(ngModel)]="subusers.completed"
-                      [color]="subusers.color"
+      <div *ngFor="let subuser of filteredUsers | async">
+        <mat-checkbox [(ngModel)]="subuser.completed"
+                      [color]="subuser.color"
                       (ngModelChange)="updateAllComplete()">
-          {{subusers.name}}
+          {{subuser.name}}
         </mat-checkbox>
       </div>
     </ul>

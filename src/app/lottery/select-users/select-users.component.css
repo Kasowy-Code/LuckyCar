@@ -5,10 +5,19 @@
   justify-content: center;
 }
 .content {
-  padding: 2rem;
+  padding: 0.5rem 2rem;
 }
-
 .header {
-  height: 10vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 3rem;
   width: 100%;
+}
+.select-all {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.search {
+  width: 8rem;
 }

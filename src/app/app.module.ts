@@ -34,6 +34,7 @@ import { environment } from '../environments/environment';
 import { SelectUsersComponent } from './lottery/select-users/select-users.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
       registrationStrategy: 'registerWhenStable:30000'
     }),
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   providers: [APIServiceService],
   bootstrap: [AppComponent]
