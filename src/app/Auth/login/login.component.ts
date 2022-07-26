@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {RestApiService} from "../../rest-api.service";
+import {LoginService} from "./services/login.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
   username:string = "";
   password:string = "";
 
-  constructor(private service:RestApiService, private router:Router) {
+  constructor(private loginService:LoginService, private router:Router) {
   }
 
 
@@ -32,9 +32,8 @@ export class LoginComponent implements OnInit{
   }
 
   public getAccessToken(){
-    let resp = this.service.generateToken(this.username, this.password);
-    resp.subscribe(data => {
-        localStorage.setItem('token', data.toLocaleString());
+    this.loginService.loginUser(this.username, this.password)
+      .subscribe(() => {
         this.router.navigate(["/calendar"]);
       },
       error => {
