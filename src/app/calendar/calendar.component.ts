@@ -13,7 +13,7 @@ export class CalendarComponent implements OnInit {
   constructor(private service:RestApiService, private router:Router) { }
 
   ngOnInit(): void {
-    this.service.checkTokenUser().subscribe(
+    this.service.checkTokenAdmin().subscribe(
       res=>{
         console.log(res);
       },
@@ -22,6 +22,9 @@ export class CalendarComponent implements OnInit {
           if(err.status === 401) {
             this.router.navigate(['/login']);
           }
+          // if(err.status === 403) {  // Jesli jestes adminem
+          //   this.router.navigate(['/login']);
+          // }
         }
       });
   }
