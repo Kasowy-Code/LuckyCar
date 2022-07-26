@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" *ngIf="!hasRoute('login')&&!hasRoute('register')">
   <mat-toolbar class="footer" color="primary">
     <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
 
