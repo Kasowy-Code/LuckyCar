@@ -1,0 +1,23 @@
+<div class="main">
+  <div class="content">
+  <div class="header">
+    <mat-checkbox
+      [checked]="allComplete"
+      [color]="user.color"
+      [indeterminate]="someComplete()"
+      (change)="setAll($event.checked)">Zaznacz wszystich</mat-checkbox>
+    <mat-divider></mat-divider>
+  </div>
+  <div class="example-list-section">
+    <ul>
+      <div *ngFor="let subusers of user.subusers">
+        <mat-checkbox [(ngModel)]="subusers.completed"
+                      [color]="subusers.color"
+                      (ngModelChange)="updateAllComplete()">
+          {{subusers.name}}
+        </mat-checkbox>
+      </div>
+    </ul>
+  </div>
+</div>
+</div>

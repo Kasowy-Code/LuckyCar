@@ -29,9 +29,11 @@ import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SelectUsersComponent } from './lottery/select-users/select-users.component';
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -45,9 +47,10 @@ import { environment } from '../environments/environment';
     LoginComponent,
     RegisterComponent,
     RegisterSuccessComponent,
-    RegisterPasswordComponent
+    RegisterPasswordComponent,
     AccountComponent,
-    ParkingLotDialogComponent
+    ParkingLotDialogComponent,
+    SelectUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { environment } from '../environments/environment';
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
@@ -74,7 +77,9 @@ import { environment } from '../environments/environment';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    MatDividerModule,
+    MatCheckboxModule
   ],
   providers: [APIServiceService],
   bootstrap: [AppComponent]

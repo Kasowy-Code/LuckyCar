@@ -1,0 +1,14 @@
+.main {
+  height: 80vh;
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+}
+.content {
+  padding: 2rem;
+}
+
+.header {
+  height: 10vh;
+  width: 100%;
+}
