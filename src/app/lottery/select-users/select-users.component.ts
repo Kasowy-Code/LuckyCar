@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ThemePalette} from "@angular/material/core";
 import {map, Observable, startWith} from "rxjs";
 import {FormControl} from "@angular/forms";
 
 
 export interface User {
   name: string;
+  surname: string;
   completed: boolean;
-  color: ThemePalette;
   subusers?: User[];
 }
 
@@ -19,12 +18,34 @@ export interface User {
 export class SelectUsersComponent implements OnInit{
   user: User = {
     name: 'Indeterminate',
+    surname: 'Field',
     completed: false,
-    color: 'primary',
     subusers: [
-      {name: 'Primary', completed: false, color: 'primary'},
-      {name: 'Accent', completed: false, color: 'accent'},
-      {name: 'Warn', completed: false, color: 'warn'},
+      {name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
+      {name: 'Tomasz', surname: 'Problem', completed: false},
+      {name: 'Waldemar', surname: 'Kostka', completed: false},
     ],
   };
   filteredUsers: Observable<User[]>|any;
@@ -40,7 +61,7 @@ export class SelectUsersComponent implements OnInit{
 
   private filter(value: string) {
     const filterValue = value.toLowerCase();
-    return this.user.subusers?.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.user.subusers?.filter(option => (option.name.toLowerCase() + " " + option.surname.toLowerCase()).includes(filterValue));
   }
   updateAllComplete() {
     this.allComplete = this.user.subusers != null && this.user.subusers.every(t => t.completed);

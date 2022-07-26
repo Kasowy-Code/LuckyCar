@@ -1,8 +1,9 @@
 .main {
-  height: 80vh;
+  height: calc(100vh - 50px);
   width: 100vw;
   display: grid;
   justify-content: center;
+  grid-template-rows: 14fr 2fr ;
 }
 .content {
   padding: 0.5rem 2rem;
@@ -16,8 +17,36 @@
 .select-all {
   display: grid;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 .search {
   width: 8rem;
+  border: none;
+}
+
+.users-list {
+  padding-top: 2rem;
+  height: 60vh;
+  overflow-y: scroll;
+}
+.user-field {
+  padding: 0.2rem;
+}
+.btns-wrapper {
+  padding: 0.5rem;
+  width: 100%;
+  position: fixed;
+  bottom: 60px;
+  height: 3rem;
+}
+.user-btns {
+  display: grid;
+  justify-content: center;
+}
+.user-select-btns {
+  width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 1.5rem;
+  padding: 0 1rem;
 }

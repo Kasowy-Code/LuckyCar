@@ -1,28 +1,38 @@
 <div class="main">
   <div class="content">
-  <div class="header">
-    <mat-checkbox
-      [checked]="allComplete"
-      [color]="user.color"
-      [indeterminate]="someComplete()"
-      (change)="setAll($event.checked)" class="select-all">select all</mat-checkbox>
-    <mat-form-field class="search" appearance="legacy">
-      <mat-label>Search</mat-label>
-      <input matInput [formControl]="employees">
-      <span matPrefix><mat-icon>search</mat-icon></span>
-    </mat-form-field>
-  </div>
+    <div class="header">
+      <mat-checkbox
+        [checked]="allComplete"
+        color="primary"
+        [indeterminate]="someComplete()"
+        (change)="setAll($event.checked)" class="select-all">Select All</mat-checkbox>
+      <mat-form-field class="search" appearance="legacy">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="employees">
+        <span matPrefix><mat-icon>search</mat-icon></span>
+      </mat-form-field>
+    </div>
     <mat-divider></mat-divider>
-    <div class="example-list-section">
-    <ul>
-      <div *ngFor="let subuser of filteredUsers | async">
-        <mat-checkbox [(ngModel)]="subuser.completed"
-                      [color]="subuser.color"
-                      (ngModelChange)="updateAllComplete()">
-          {{subuser.name}}
-        </mat-checkbox>
-      </div>
-    </ul>
+    <div class="users-list">
+
+        <div *ngFor="let subuser of filteredUsers | async" class="user-field">
+          <mat-checkbox [(ngModel)]="subuser.completed"
+                        color="primary"
+                        (ngModelChange)="updateAllComplete()">
+            {{subuser.name}} {{subuser.surname}}
+          </mat-checkbox>
+        </div>
+
+    </div>
+    <mat-divider></mat-divider>
   </div>
-</div>
+
+  <div class="btns-wrapper">
+    <div class="user-btns">
+      <div class="user-select-btns">
+        <button mat-raised-button>Close <mat-icon>close</mat-icon></button>
+        <button mat-raised-button color="primary">Draw <mat-icon>casino</mat-icon></button>
+      </div>
+    </div>
+  </div>
 </div>
