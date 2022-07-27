@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {LoginService} from "./services/login.service";
 import {Router} from "@angular/router";
+import {LoginService} from "./services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit{
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  register(){
+    this.router.navigate(["/register"]);
   }
 
   public getAccessToken(){

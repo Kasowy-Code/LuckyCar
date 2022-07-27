@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
+import {RegisterService} from "../services/register.service";
 
 @Component({
   selector: 'app-register-password',
@@ -17,25 +18,21 @@ export class RegisterPasswordComponent implements OnInit {
   });
   error = false;
   passwordError: boolean = false;
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  password:string = "";
+  id = this.route.snapshot.params['id'];
+
+  constructor(private http: HttpClient, private router: Router, private registerService:RegisterService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
-  onSubmit() {
-    if (this.RegisterForm.value.repeat_password != this.RegisterForm.value.password) {
-      this.passwordError = true;
-    } else {
-      let Pass = {
-        password: this.RegisterForm.value.password
-      }
-      let id = this.route.snapshot.params['id'];
-      this.http.post(`${environment.link}/api/register/`+id, Pass, {observe: "response"})
-        .subscribe(response => {
 
-        },
-       error => {
-        this.error = true;
-      });
-    }
+
+  //TODO MACIEK WES SPRAWDZ CZY HASLA SA IDENTYCZNE :)
+  // JAK NIE TO WYSWIETL TO err => "cos"
+  setPassword(){
+      this.registerService.setPassword(this.password, this.id)
+        .subscribe(()=>{
+            this.router.navigate(["/login"]);
+        });
   }
 }

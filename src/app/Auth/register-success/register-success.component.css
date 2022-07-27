@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: grid;
+  justify-content: center;
+  height: 85vh;
+  align-items: center;
+}
+
+h1 {
+  width:100%;
+  color: limegreen;
+  text-align: center;
+}
+
+p {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.wait {
+  margin-top: 50px;
+  color: red;
+}
+
+div{
+  width: 100%;
+}
