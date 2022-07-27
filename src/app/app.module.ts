@@ -33,6 +33,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {AuthGuard} from "./auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import {TokenInterceptorService} from "./shared/services/token-interceptor.servi
     RegisterSuccessComponent,
     RegisterPasswordComponent,
     AccountComponent,
-    ParkingLotDialogComponent
+    ParkingLotDialogComponent,
+    AcceptUserComponent
   ],
   imports: [
     BrowserModule,

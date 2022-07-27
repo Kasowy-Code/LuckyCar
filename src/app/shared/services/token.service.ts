@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
+import jwtDecode from "jwt-decode";
+import {RoleEnum} from "../../role-enum";
+
+interface Token {
+
+  sub: string;
+  roles: RoleEnum[];
+  exp: number;
+  iat: number;
+
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  loggedIn(){
+  isLoggedIn(){
     return !!localStorage.getItem('token');
   }
 
@@ -15,5 +26,10 @@ export class TokenService {
 
   setToken(token:string) {
     localStorage.setItem('token', token);
+  }
+
+  getDecodedToken():Token {
+    // @ts-ignore
+    return jwtDecode(this.getToken());
   }
 }
