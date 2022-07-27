@@ -9,6 +9,8 @@ import {RegisterComponent} from "./Auth/register/register.component";
 import {RegisterSuccessComponent} from "./Auth/register-success/register-success.component";
 import {RegisterPasswordComponent} from "./Auth/register-password/register-password.component";
 import {AuthGuard} from "./auth.guard";
+import {AcceptUserComponent} from "./Auth/accept-user/accept-user.component";
+import {DeleteUserComponent} from "./Auth/delete-user/delete-user.component";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard]},
@@ -18,6 +20,8 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "register", component: RegisterComponent},
   {path: "registered", component: RegisterSuccessComponent},
   {path: "registerPassword/:id", component: RegisterPasswordComponent},
+  {path: "accept/:id", component: AcceptUserComponent, canActivate: [AuthGuard]},
+  {path: "delete/:id", component: DeleteUserComponent},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 

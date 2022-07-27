@@ -26,7 +26,7 @@ export class RegisterService {
   setPassword(password:string, id:any){
     this.request = {
       "password": password
-    }
+    };
 
     return this.http.post(`${environment.link}/api/register/`+id, this.request, {responseType: 'text' as 'json'});
   }

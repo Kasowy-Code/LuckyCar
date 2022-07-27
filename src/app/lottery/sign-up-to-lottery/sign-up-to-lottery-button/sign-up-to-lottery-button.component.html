@@ -1,0 +1,39 @@
+<div [ngSwitch]="lotteryState">
+  <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
+    <h1>You can sign up to lottery!!</h1>
+    <button
+      (click)="loadChosingParkingLotForm()"
+      mat-raised-button color="primary">
+      <h2>sign up!</h2>
+      <p></p>
+    </button>
+  </div>
+
+  <div class="lotteryIsClosed" *ngSwitchCase="LotteryStateEnum.INACTIVE">
+    <h1>ikonka lotteryIsClosed</h1>
+    <button
+      [disabled]="true"
+      mat-flat-button color="primary">
+      <h2>lottery is closed</h2>
+      <p></p>
+    </button>
+  </div>
+
+  <div class="userIsSignedUpToLottery" *ngSwitchCase="LotteryStateEnum.REGISTERED">
+    <h1>ikonka You are signed up to lottery</h1>
+    <button
+      [disabled]="true"
+      mat-flat-button color="primary">
+      <h2>lottery is closed</h2>
+      <p></p>
+    </button>
+    <br>
+    <br>
+    <button
+      (click)="resignFromSingingUpToLottery()"
+      mat-raised-button color="primary">
+      <h2>Resign</h2>
+      <p></p>
+    </button>
+  </div>
+</div>

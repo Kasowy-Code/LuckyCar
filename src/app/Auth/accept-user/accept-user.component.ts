@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {AcceptUserService} from "./services/accept-user.service";
+import {RoleService} from "../../role.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-accept-user',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcceptUserComponent implements OnInit {
 
-  constructor() { }
+  id = this.route.snapshot.params['id'];
+
+  constructor(private route:ActivatedRoute, private service:AcceptUserService,
+              private roleService:RoleService, private router:Router,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.acceptUser();
   }
 
+  acceptUser(){
+    if(this.roleService.isAdmin()) {
+      this.service.acceptUser(this.id).subscribe(
+        (data) => {},
+          error => {
+          if(error.status === 400){
+            this._snackBar.open("This user does not exist", "Ok");
+          }
+          if(error.status === 404) {
+            this._snackBar.open("This user was approved earlier", "Ok");
+          }
+        }
+      )
+    }else{
+        this.router.navigate(["/calendar"]);
+    }
+  }
 }

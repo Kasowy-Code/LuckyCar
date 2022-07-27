@@ -34,6 +34,7 @@ import { environment } from '../environments/environment';
 import {AuthGuard} from "./auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent,
-    AcceptUserComponent
+    AcceptUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
