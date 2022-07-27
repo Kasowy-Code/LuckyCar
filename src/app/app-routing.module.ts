@@ -10,7 +10,7 @@ import {RegisterSuccessComponent} from "./Auth/register-success/register-success
 import {RegisterPasswordComponent} from "./Auth/register-password/register-password.component";
 import {AuthGuard} from "./auth.guard";
 
-const routes: Routes = [{path: "Lottery", component: LotteryComponent},
+const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard]},
   {path: "cars", component: CarsComponent},
   {path: "account", component: AccountComponent},

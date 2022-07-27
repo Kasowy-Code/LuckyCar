@@ -1,8 +1,8 @@
-<footer class="footer">
+<footer class="footer" *ngIf="!hasRoute('login')&&!hasRoute('register')">
   <mat-toolbar class="footer" color="primary">
     <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
 
-      <button mat-button routerLink="/Lottery" routerLinkActive="active-menu-item">
+      <button mat-button routerLink="/lottery" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>casino</mat-icon>
         </div>
@@ -11,7 +11,7 @@
         </div>
       </button>
 
-      <button mat-button routerLink="/Calendar" routerLinkActive="active-menu-item">
+      <button mat-button routerLink="/calendar" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>calendar_month</mat-icon>
         </div>
@@ -20,7 +20,7 @@
         </div>
       </button>
 
-      <button mat-button routerLink="/Cars" routerLinkActive="active-menu-item">
+      <button mat-button routerLink="/cars" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>directions_car</mat-icon>
         </div>
@@ -29,7 +29,7 @@
         </div>
       </button>
 
-      <button mat-button routerLink="/Account" routerLinkActive="active-menu-item">
+      <button mat-button routerLink="/account" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>person</mat-icon>
         </div>
