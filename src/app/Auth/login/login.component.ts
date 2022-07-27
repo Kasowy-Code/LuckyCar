@@ -36,10 +36,6 @@ export class LoginComponent implements OnInit{
 
   }
 
-  register(){
-    this.router.navigate(["/register"]);
-  }
-
   public getAccessToken(){
     this.loginService.loginUser(this.username, this.password)
       .subscribe(() => {

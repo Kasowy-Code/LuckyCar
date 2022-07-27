@@ -1,5 +1,5 @@
 <section class="main">
-  <form id="login-form" class="form" action="login" method="post">
+  <form id="login-form" class="form" method="post">
     <h1>Log in</h1>
 
     <p>
@@ -29,7 +29,7 @@
 
     <button mat-raised-button (click)="getAccessToken()">Login</button>
     <p class="reg">
-      Don't have an account? <a class="register" (click)="register()">Register</a>
+      Don't have an account? <a class="register" routerLink="/register">Register</a>
     </p>
   </form>
 </section>

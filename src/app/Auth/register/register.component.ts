@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {environment} from "../../../environments/environment";
 import {RegisterService} from "../services/register.service";
 
 @Component({
@@ -28,10 +27,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  login() {
-    this.router.navigate(["/login"]);
   }
 
   register() {
