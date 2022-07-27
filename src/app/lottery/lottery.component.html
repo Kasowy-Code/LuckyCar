@@ -19,5 +19,6 @@
       <button mat-raised-button color="accent">Zapisz</button>
     </form>
   </div>
-
-
+  <h1 *ngIf="user&&lottery">Bierzesz już udział w tym losowaniu</h1>
+  <h1 *ngIf="!lottery">W tej chwili nie ma dostępnego losowania</h1>
+</div>

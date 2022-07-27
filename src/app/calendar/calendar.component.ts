@@ -1,29 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-
-class Parking {
-  constructor(value: string, viewValue: string) {
-    this.value = value;
-    this.viewValue = viewValue;
-  }
-  value: string;
-  viewValue: string;
-}
+import {Router} from "@angular/router";
+import {RoleService} from "../role.service";
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit{
   selected: Date | null | undefined;
-  constructor() { }
+  constructor(private roleService:RoleService) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    // DO KOMPONENTOW ADMIN ZWRACA TRUE JESLI POSIADA ADMINA
+    // TODO: Przenieść do RoleGuard
+    console.log(this.roleService.isAdmin())
   }
-  parkings: Parking[] = [
-    {value: 'Parking-0', viewValue: 'Parking 1'},
-    {value: 'Parking-1', viewValue: 'Parking 2'},
-    {value: 'Parking-2', viewValue: 'Parking 3'},
-  ];
-  selectedValue: any = 'Parking-0';
 }

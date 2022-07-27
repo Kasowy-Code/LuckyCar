@@ -4,7 +4,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-lottery',
   templateUrl: './lottery.component.html',
-  styleUrls: ['./lottery.component.css']
+  styleUrls: ['./lottery.component.css'],
 })
 export class LotteryComponent implements OnInit {
   lottery: boolean;
@@ -26,5 +26,3 @@ export class LotteryComponent implements OnInit {
   }
 
 }
-
-
