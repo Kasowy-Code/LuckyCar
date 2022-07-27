@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {map, Observable, startWith} from "rxjs";
 import {FormControl} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
 
 
 export interface User {
@@ -20,39 +22,24 @@ export class SelectUsersComponent implements OnInit{
     name: 'Indeterminate',
     surname: 'Field',
     completed: false,
-    subusers: [
-      {name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},{name: 'Adam', surname: 'Cegła', completed: false},
-      {name: 'Tomasz', surname: 'Problem', completed: false},
-      {name: 'Waldemar', surname: 'Kostka', completed: false},
-    ],
+    subusers: [],
   };
   filteredUsers: Observable<User[]>|any;
   allComplete: boolean = false;
   employees = new FormControl('');
 
+  constructor(private http: HttpClient) {}
   ngOnInit() {
+
+    this.http.get(`${environment.link}/api/userdraw`).subscribe(
+      res =>
+        {
+         // @ts-ignore
+          this.user.subusers = res;
+        }
+
+    )
+
     this.filteredUsers = this.employees.valueChanges.pipe(
       startWith(''),
       map(value => this.filter(value || '')),
@@ -61,17 +48,17 @@ export class SelectUsersComponent implements OnInit{
 
   private filter(value: string) {
     const filterValue = value.toLowerCase();
-    return this.user.subusers?.filter(option => (option.name.toLowerCase() + " " + option.surname.toLowerCase()).includes(filterValue));
+    return this.user.subusers?.filter((option: { name: string; surname: string; }) => (option.name.toLowerCase() + " " + option.surname.toLowerCase()).includes(filterValue));
   }
   updateAllComplete() {
-    this.allComplete = this.user.subusers != null && this.user.subusers.every(t => t.completed);
+    this.allComplete = this.user.subusers != null && this.user.subusers.every((t: { completed: any; }) => t.completed);
   }
 
   someComplete(): boolean {
     if (this.user.subusers == null) {
       return false;
     }
-    return this.user.subusers.filter(t => t.completed).length > 0 && !this.allComplete;
+    return this.user.subusers.filter((t: { completed: any; }) => t.completed).length > 0 && !this.allComplete;
   }
 
   setAll(completed: boolean) {
@@ -79,7 +66,7 @@ export class SelectUsersComponent implements OnInit{
     if (this.user.subusers == null) {
       return;
     }
-    this.user.subusers.forEach(t => (t.completed = completed));
+    this.user.subusers.forEach((t: { completed: boolean; }) => (t.completed = completed));
   }
 
 }
