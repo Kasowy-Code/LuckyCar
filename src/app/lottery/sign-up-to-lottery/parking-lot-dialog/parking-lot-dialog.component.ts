@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ParkingLot} from "../../../global-dto/parking-lot";
+import {ParkingLot} from "../../../shared/dto/parking-lot";
 
 @Component({
   selector: 'app-parking-lot-dialog',

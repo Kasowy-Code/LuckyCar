@@ -24,16 +24,21 @@
     <button
       [disabled]="true"
       mat-flat-button color="primary">
-      <h2>lottery is closed</h2>
+      <h2>You've chosen {{chosenParkingLotName}}</h2>
       <p></p>
     </button>
     <br>
     <br>
     <button
-      (click)="resignFromSingingUpToLottery()"
+      (click)="openResigningFromLotteryDialog()"
       mat-raised-button color="primary">
       <h2>Resign</h2>
       <p></p>
     </button>
+  </div>
+  <div *ngSwitchCase="LotteryStateEnum.NOTLOADED">
+    <h1>LOADING...</h1>
+    <mat-spinner>
+    </mat-spinner>
   </div>
 </div>
