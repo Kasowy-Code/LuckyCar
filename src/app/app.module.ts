@@ -24,7 +24,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
-import {RestApiService} from "./rest-api.service";
+import {LoginService} from "./Auth/login/services/login.service";
 import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
@@ -36,7 +36,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthGuard} from "./auth.guard";
-import {TokenInterceptorService} from "./token-interceptor.service";
+import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
     RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent,
+    AcceptUserComponent,
     SelectUsersComponent
   ],
   imports: [
@@ -85,7 +87,7 @@ import {TokenInterceptorService} from "./token-interceptor.service";
       registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
-  providers: [RestApiService, AuthGuard, {
+  providers: [LoginService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

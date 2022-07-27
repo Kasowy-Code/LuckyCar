@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {RestApiService} from "../../rest-api.service";
 import {Router} from "@angular/router";
+import {LoginService} from "./services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -13,32 +13,36 @@ export class LoginComponent implements OnInit{
   hide = true;
   username:string = "";
   password:string = "";
+  error: boolean = false;
 
-  constructor(private service:RestApiService, private router:Router) {
+  email = new FormControl('', [Validators.required, Validators.email]);
+  pass = new FormControl('', [Validators.required, Validators.minLength(8)]);
+
+
+  constructor(private loginService:LoginService, private router:Router) {
   }
-
 
   ngOnInit():void {
   }
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+  getErrorMessage(item: any) {
+    if(item.hasError('email')) {
+      return 'Not a valid email';
     }
+    if(item.hasError('minlength')) {
+      return 'Must be at least 8 characters long';
+    }
+    return item.hasError('required') ? 'You must enter a value' : '';
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
   public getAccessToken(){
-    let resp = this.service.generateToken(this.username, this.password);
-    resp.subscribe(data => {
-        localStorage.setItem('token', data.toLocaleString());
+    this.loginService.loginUser(this.username, this.password)
+      .subscribe(() => {
         this.router.navigate(["/calendar"]);
       },
       error => {
-          //TODO: FUNKCJA WYPISZE INVALID USERNAME/PASSWORD NA FRONCIE
+        this.error = true;
       });
   }
 

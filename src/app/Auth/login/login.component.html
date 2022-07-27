@@ -1,24 +1,27 @@
 <section class="main">
-  <form id="login-form" class="form" action="login" method="post">
+  <form id="login-form" class="form" method="post">
     <h1>Log in</h1>
 
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="example@mail.com" [formControl]="email" name="email" [(ngModel)]="username" required>
-        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        <input matInput placeholder="example@mail.com" [formControl]="email" name="email" [(ngModel)]="username" (ngModelChange)="error = false" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input placeholder="Password" matInput [type]="hide ? 'password' : 'text'" name ="password" [(ngModel)]="password" required>
+        <input placeholder="Password" matInput [type]="hide ? 'password' : 'text'" name ="password" [(ngModel)]="password" [formControl]="pass" (ngModelChange)="error = false" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-error *ngIf="pass.invalid">{{getErrorMessage(pass)}}</mat-error>
       </mat-form-field>
     </p>
+
+    <mat-error *ngIf="error" class="error">The email or password is incorrect</mat-error>
 
     <div class="forgot">
       <a href="">Forgot password?</a>
@@ -26,7 +29,7 @@
 
     <button mat-raised-button (click)="getAccessToken()">Login</button>
     <p class="reg">
-      Don't have an account? <a href="#" class="register">Register</a>
+      Don't have an account? <a class="register" routerLink="/register">Register</a>
     </p>
   </form>
 </section>
