@@ -12,7 +12,7 @@ import {SelectUsersComponent} from "./lottery/select-users/select-users.componen
 import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
-  {path: "Lottery/SelectUsers", component: SelectUsersComponent},
+  {path: "lottery/selectUsers", component: SelectUsersComponent},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard]},
   {path: "cars", component: CarsComponent},
   {path: "account", component: AccountComponent},
