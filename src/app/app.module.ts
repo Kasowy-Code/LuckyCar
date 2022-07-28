@@ -25,7 +25,6 @@ import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
 import {LoginService} from "./Auth/login/services/login.service";
-import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
@@ -62,7 +61,7 @@ import {
     ParkingLotDialogComponent,
     SignUpToLotteryButtonComponent,
     SignUpToLotteryButtonComponent,
-    ResigningFromLotteryDialogComponent
+    ResigningFromLotteryDialogComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent
