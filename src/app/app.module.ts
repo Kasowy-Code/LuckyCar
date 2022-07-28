@@ -86,7 +86,9 @@ import {
       registrationStrategy: 'registerWhenStable:30000'
     }),
     MatDividerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [RestApiService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,

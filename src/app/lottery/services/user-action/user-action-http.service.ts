@@ -9,7 +9,6 @@ import {environment} from "../../../../environments/environment";
 export class UserActionHttpService {
   private userDrawSignUpToLotteryUrl = `${environment.link}/api/userdraw/registerfordraw`;
   private userDrawResignFromLotteryUrl = `${environment.link}/api/userdraw/resignfromdraw`;
-  private userDrawSetChosenParkingLotUrl = `${environment.link}/api/userdraw/setdeclaredparkinglot`;
 
   constructor(private http: HttpClient) {
   }

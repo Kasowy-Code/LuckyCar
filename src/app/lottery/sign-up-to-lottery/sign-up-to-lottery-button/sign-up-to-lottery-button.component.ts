@@ -12,6 +12,7 @@ import {forkJoin} from "rxjs";
 import {
   ResigningFromLotteryDialogComponent
 } from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+import {UserDrawInfoHttpService} from "../../../shared/services/parking-lot/user-draw-info-http.service";
 
 enum LotteryStateEnum {
   ACTIVE, INACTIVE, REGISTERED, NOTLOADED
@@ -35,7 +36,8 @@ export class SignUpToLotteryButtonComponent implements OnInit {
               private parkingLotDialog: MatDialog,
               private confirmResigningFromLotteryDialog: MatDialog,
               private parkingLotsListService: ParkingLotsListService,
-              private userActionHttpService: UserActionHttpService) {
+              private userActionHttpService: UserActionHttpService,
+              private userDrawInfoHttpService: UserDrawInfoHttpService) {
   }
 
   ngOnInit(): void {
@@ -46,16 +48,27 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
     this.setupUserPermissionForLottery();
 
+    this.setChosenParkingLot();
+  }
+
+  private setChosenParkingLot() {
+
+    this.userDrawInfoHttpService.getCurrentUserDrawInfo().subscribe(response => {
+      this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
+
+        this.chosenParkingLotName = response.name;
+      })
+    })
   }
 
   private setupUserPermissionForLottery() {
 
     forkJoin([
-      this.lotteryPermissionService.getUserIsSignedUpToLottery(),
+      this.userDrawInfoHttpService.getCurrentUserDrawInfo(),
       this.lotteryPermissionService.getLotteryIsOpen()
     ])
-      .subscribe(([isUserSignedUp, isLotteryOpen]) => {
-        this.userDraw = isUserSignedUp;
+      .subscribe(([userDrawInfo, isLotteryOpen]) => {
+        this.userDraw = userDrawInfo;
         this.lotterySetting = isLotteryOpen;
 
         console.log("user is signed up to lottery: " + this.userDraw.registeredForDraw);
@@ -101,6 +114,9 @@ export class SignUpToLotteryButtonComponent implements OnInit {
           this.userActionHttpService.registerUserForDraw(response).subscribe(() => {
 
             this.setupUserPermissionForLottery();
+            this.setChosenParkingLot();
+
+            console.log(this.chosenParkingLotName);
           });
 
           console.log(response);

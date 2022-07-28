@@ -18,8 +18,7 @@ export class LotteryComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
-
-
+  
   onSubmit() {
     console.log("submited");
   }
