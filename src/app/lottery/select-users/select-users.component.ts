@@ -30,20 +30,19 @@ export class SelectUsersComponent implements OnInit{
 
   constructor(private http: HttpClient) {}
   ngOnInit() {
+      this.http.get<any>(`${environment.link}/api/userdraw/users`)
+        .subscribe(Users=>{
+          console.log(Users);
+          for (let response of Users) {
+            this.user.subusers?.push({name: response.name, surname: response.surname, completed: false});
+          }
+          this.filteredUsers = this.employees.valueChanges.pipe(
+            startWith(''),
+            map(value => this.filter(value || '')),
+          );
+        });
 
-    this.http.get(`${environment.link}/api/userdraw`).subscribe(
-      res =>
-        {
-         // @ts-ignore
-          this.user.subusers = res;
-        }
 
-    )
-
-    this.filteredUsers = this.employees.valueChanges.pipe(
-      startWith(''),
-      map(value => this.filter(value || '')),
-    );
   }
 
   private filter(value: string) {

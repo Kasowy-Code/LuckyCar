@@ -15,11 +15,11 @@
     <mat-divider></mat-divider>
     <div class="users-list">
 
-        <div *ngFor="let subuser of filteredUsers | async" class="user-field">
-          <mat-checkbox [(ngModel)]="subuser.completed"
+        <div *ngFor="let employee of filteredUsers | async" class="user-field">
+          <mat-checkbox [(ngModel)]="employee.completed"
                         color="primary"
                         (ngModelChange)="updateAllComplete()">
-            {{subuser.name}} {{subuser.surname}}
+            {{employee.name}} {{employee.surname}}
           </mat-checkbox>
         </div>
 
