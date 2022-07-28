@@ -26,13 +26,22 @@ export class RegisterPasswordComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   //TODO MACIEK WES SPRAWDZ CZY HASLA SA IDENTYCZNE :)
   // JAK NIE TO WYSWIETL TO err => "cos"
+
   setPassword(){
       this.registerService.setPassword(this.password, this.id)
         .subscribe(()=>{
             this.router.navigate(["/login"]);
+        }, error =>{
+            if(error.status===400){
+              //TODO MACIEK WYSWIETL ZE TAKI UZYTKOWNIK NIE ISTNIEJE
+            }
+            if(error.status===409){
+              //TODO MACIEK WYSWIETL ZE NIE MOZNA ZMIENIC HASLA TEMU UZYTKOWNIKOWI
+              //TODO A MACIEK JESZCZE WES USUN NAVBAR Z AcceptUserComponent, DeleteUserComponen
+              // ZEBY SIE DOSTAC DO TYCH EKRANOW TO TRZEBA PODAC ID Z TABELI USERVERIFICATION
+            }
         });
   }
 }

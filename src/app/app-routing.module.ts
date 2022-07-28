@@ -8,16 +8,22 @@ import {LoginComponent} from "./Auth/login/login.component";
 import {RegisterComponent} from "./Auth/register/register.component";
 import {RegisterSuccessComponent} from "./Auth/register-success/register-success.component";
 import {RegisterPasswordComponent} from "./Auth/register-password/register-password.component";
-import {AuthGuard} from "./auth.guard";
+import {AuthGuard} from "./guards/auth.guard";
+import {AcceptUserComponent} from "./Auth/accept-user/accept-user.component";
+import {DeleteUserComponent} from "./Auth/delete-user/delete-user.component";
+import {LoginGuard} from "./guards/login.guard";
+import {TokenGuard} from "./guards/token.guard";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
-  {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard]},
+  {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard, TokenGuard]},
   {path: "cars", component: CarsComponent},
-  {path: "account", component: AccountComponent},
-  {path: "login", component: LoginComponent},
+  {path: "account", component: AccountComponent, canActivate: [AuthGuard]},
+  {path: "login", component: LoginComponent, canActivate: [LoginGuard]},
   {path: "register", component: RegisterComponent},
   {path: "registered", component: RegisterSuccessComponent},
   {path: "registerPassword/:id", component: RegisterPasswordComponent},
+  {path: "accept/:id", component: AcceptUserComponent, canActivate: [AuthGuard]},
+  {path: "delete/:id", component: DeleteUserComponent},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 

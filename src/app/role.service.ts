@@ -10,6 +10,10 @@ export class RoleService {
   constructor(private tokenService:TokenService) { }
 
   isAdmin(){
-    return this.tokenService.getDecodedToken().roles.some(role => role===RoleEnum.ADMIN);
+    try {
+      return this.tokenService.getDecodedToken().roles.some(role => role===RoleEnum.ADMIN);
+    }catch{
+      return false;
+    }
   }
 }

@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .main {
   display: grid;
   justify-content: center;
@@ -11,11 +6,6 @@
 }
 
 h1 {
-  color: limegreen;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-p {
+  color: red;
   text-align: center;
 }

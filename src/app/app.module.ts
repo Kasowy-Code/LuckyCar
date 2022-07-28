@@ -31,9 +31,11 @@ import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lo
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import {AuthGuard} from "./auth.guard";
+import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
+import {LoginGuard} from "./guards/login.guard";
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent,
-    AcceptUserComponent
+    AcceptUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,7 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [LoginService, AuthGuard, {
+  providers: [LoginService, AuthGuard, LoginGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
