@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {RegisterService} from "../services/register.service";
 
 @Component({
@@ -11,11 +10,10 @@ import {RegisterService} from "../services/register.service";
   styleUrls: ['./register-password.component.css']
 })
 export class RegisterPasswordComponent implements OnInit {
-  RegisterForm = new FormGroup({
-    password: new FormControl(''),
-    repeat_password: new FormControl('')
 
-  });
+  pass = new FormControl('', [Validators.minLength(8), Validators.required]);
+  repeat_password = new FormControl('', [Validators.minLength(8), Validators.required]);
+
   error = false;
   passwordError: boolean = false;
   password:string = "";
@@ -25,14 +23,32 @@ export class RegisterPasswordComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  clearErrors() {
+    this.passwordError = false;
+    this.error = false;
+  }
 
+  getErrorMessage(item: any) {
+    if(item.hasError('minlength')) {
+      return 'Must be at least 8 characters long';
+    }
+    return item.hasError('required') ? 'You must enter a value' : '';
 
+  }
   //TODO MACIEK WES SPRAWDZ CZY HASLA SA IDENTYCZNE :)
   // JAK NIE TO WYSWIETL TO err => "cos"
-  setPassword(){
+  setPassword() {
+    if (this.pass.value === this.repeat_password.value && this.password.length >= 8) {
       this.registerService.setPassword(this.password, this.id)
-        .subscribe(()=>{
-            this.router.navigate(["/login"]);
-        });
+        .subscribe(() => {
+          this.router.navigate(["/login"]);
+        },
+        ()=> {
+            this.error = true;
+          });
+    }
+    else {
+      this.passwordError = true;
+    }
   }
 }
