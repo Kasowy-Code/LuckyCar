@@ -21,17 +21,21 @@ import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {RegisterComponent} from './Auth/register/register.component';
-import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
-import {RegisterPasswordComponent} from './Auth/register-password/register-password.component';
-import {RestApiService} from "./rest-api.service";
+import { RegisterComponent } from './Auth/register/register.component';
+import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
+import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
+import {LoginService} from "./Auth/login/services/login.service";
+import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
-import {AuthGuard} from "./auth.guard";
-import {TokenInterceptorService} from "./token-interceptor.service";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {AuthGuard} from "./guards/auth.guard";
+import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
+import {LoginGuard} from "./guards/login.guard";
 import {
   SignUpToLotteryButtonComponent
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
@@ -40,6 +44,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+
 
 @NgModule({
   declarations: [
@@ -58,6 +63,9 @@ import {
     SignUpToLotteryButtonComponent,
     SignUpToLotteryButtonComponent,
     ResigningFromLotteryDialogComponent
+    ParkingLotDialogComponent,
+    AcceptUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +98,7 @@ import {
     MatIconModule,
     MatToolbarModule
   ],
-  providers: [RestApiService, AuthGuard, {
+  providers: [LoginService, AuthGuard, LoginGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

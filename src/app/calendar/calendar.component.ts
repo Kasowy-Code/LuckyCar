@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {RestApiService} from "../rest-api.service";
 import {Router} from "@angular/router";
+import {RoleService} from "../role.service";
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit{
   selected: Date | null | undefined;
-  constructor(private service:RestApiService, private router:Router) { }
+  constructor(private roleService:RoleService) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    // DO KOMPONENTOW ADMIN ZWRACA TRUE JESLI POSIADA ADMINA
+    // TODO: Przenieść do RoleGuard
+    console.log(this.roleService.isAdmin())
   }
 }
