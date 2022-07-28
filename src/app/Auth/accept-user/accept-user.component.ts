@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AcceptUserService} from "./services/accept-user.service";
 import {RoleService} from "../../role.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {LogoutService} from "../services/logout.service";
 
 @Component({
   selector: 'app-accept-user',
@@ -15,7 +16,7 @@ export class AcceptUserComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private service:AcceptUserService,
               private roleService:RoleService, private router:Router,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar, private logoutService:LogoutService) { }
 
   ngOnInit(): void {
     this.acceptUser();
@@ -31,6 +32,9 @@ export class AcceptUserComponent implements OnInit {
           }
           if(error.status === 404) {
             this._snackBar.open("This user was approved earlier", "Ok");
+          }
+          if(error.status === 401){
+            this.logoutService.logout();
           }
         }
       )

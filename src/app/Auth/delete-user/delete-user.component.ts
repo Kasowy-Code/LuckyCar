@@ -3,6 +3,7 @@ import {RoleService} from "../../role.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DeleteUserService} from "./services/delete-user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {LogoutService} from "../services/logout.service";
 
 @Component({
   selector: 'app-delete-user',
@@ -15,7 +16,7 @@ export class DeleteUserComponent implements OnInit {
 
   constructor(private roleService:RoleService, private route:ActivatedRoute,
               private service:DeleteUserService, private _snackBar:MatSnackBar,
-              private router:Router) { }
+              private router:Router, private logoutService:LogoutService) { }
 
   ngOnInit(): void {
     this.deleteUser();
@@ -31,6 +32,9 @@ export class DeleteUserComponent implements OnInit {
           }
           if(error.status === 404) {
             this._snackBar.open("This user does not exist", "Ok");
+          }
+          if(error.status === 401){
+            this.logoutService.logout();
           }
         }
       )
