@@ -1,39 +1,50 @@
 <div [ngSwitch]="lotteryState">
   <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
-    <h1>You can sign up to lottery!!</h1>
+    <h1>
+      <mat-icon class="material-icons">accessibility_new</mat-icon>
+      <p>lottery is open!</p>
+    </h1>
     <button
       (click)="loadChosingParkingLotForm()"
-      mat-raised-button color="primary">
+      mat-raised-button>
       <h2>sign up!</h2>
-      <p></p>
     </button>
   </div>
 
   <div class="lotteryIsClosed" *ngSwitchCase="LotteryStateEnum.INACTIVE">
-    <h1>ikonka lotteryIsClosed</h1>
+    <h1>
+      <mat-icon class="material-icons">lock</mat-icon>
+      <p>lottery is closed</p>
+    </h1>
     <button
       [disabled]="true"
       mat-flat-button color="primary">
-      <h2>lottery is closed</h2>
-      <p></p>
+      <h2>you can't sign up</h2>
     </button>
   </div>
 
   <div class="userIsSignedUpToLottery" *ngSwitchCase="LotteryStateEnum.REGISTERED">
-    <h1>ikonka You are signed up to lottery</h1>
+    <h1>
+      <mat-icon class="material-icons">done</mat-icon>
+      <p>success!</p>
+    </h1>
     <button
       [disabled]="true"
       mat-flat-button color="primary">
-      <h2>lottery is closed</h2>
-      <p></p>
+      <h2>You've chosen {{chosenParkingLotName}}</h2>
     </button>
     <br>
     <br>
     <button
-      (click)="resignFromSingingUpToLottery()"
-      mat-raised-button color="primary">
+      (click)="openResigningFromLotteryDialog()"
+      mat-raised-button
+      color="primary">
       <h2>Resign</h2>
-      <p></p>
     </button>
+  </div>
+  <div *ngSwitchCase="LotteryStateEnum.NOTLOADED">
+    <h1>LOADING...</h1>
+    <mat-spinner>
+    </mat-spinner>
   </div>
 </div>

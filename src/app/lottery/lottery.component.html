@@ -1,8 +1,6 @@
-<div style="display: grid; justify-content: center; padding-top: 10rem">
-  <div>
-    <button (click)="loadChosingParkingLotForm()" [disabled]="user||!lottery" class="button"
-            mat-flat-button color="primary">zgłoś sie do losowania
-    </button>
-  </div>
+<mat-toolbar></mat-toolbar>
 
+<div style="display: grid; justify-content: center; height: 80%; padding: 2rem">
+  <app-sign-up-to-lottery-button>
+  </app-sign-up-to-lottery-button>
 </div>

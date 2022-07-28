@@ -18,16 +18,15 @@ import {AccountComponent} from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
-import { LoginComponent } from './Auth/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {LoginComponent} from './Auth/login/login.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
 import {LoginService} from "./Auth/login/services/login.service";
-import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
-import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
+import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -36,6 +35,14 @@ import {TokenInterceptorService} from "./shared/services/token-interceptor.servi
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
 import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
+import {
+  SignUpToLotteryButtonComponent
+} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {
+  ResigningFromLotteryDialogComponent
+} from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
 
 
 @NgModule({
@@ -51,6 +58,10 @@ import {LoginGuard} from "./guards/login.guard";
     RegisterSuccessComponent,
     RegisterPasswordComponent,
     AccountComponent,
+    ParkingLotDialogComponent,
+    SignUpToLotteryButtonComponent,
+    SignUpToLotteryButtonComponent,
+    ResigningFromLotteryDialogComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent
@@ -80,7 +91,11 @@ import {LoginGuard} from "./guards/login.guard";
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, {
     provide: HTTP_INTERCEPTORS,
@@ -89,4 +104,5 @@ import {LoginGuard} from "./guards/login.guard";
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
