@@ -12,6 +12,7 @@
 
 h1{
   margin-bottom: 15px;
+  text-align: center;
 }
 
 mat-form-field{
@@ -34,7 +35,9 @@ mat-form-field{
 .login{
   color: red;
 }
-
+.backend-error {
+  text-align: center;
+}
 a {
   text-decoration: none;
 }

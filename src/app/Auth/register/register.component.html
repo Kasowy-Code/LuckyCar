@@ -1,33 +1,31 @@
 <section class="main">
-  <form [formGroup]="RegisterForm">
+  <form>
     <h1>Register</h1>
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput formControlName="name" [(ngModel)]="name" [required]="true" (ngModelChange)="this.nameError = false">
-        <mat-hint *ngIf="nameError" style="color: red">Niepoprawny format</mat-hint>
-        <mat-hint *ngIf="this.RegisterForm.value.name == '' && !nameError">Imię nie może być puste</mat-hint>
+        <input matInput [formControl]="name" (ngModelChange)="error = false;" [required]="true">
+        <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Surname</mat-label>
-        <input matInput formControlName="surname" [(ngModel)]="surname" [required]="true" (ngModelChange)="this.surnameError = false">
-        <mat-hint *ngIf="surnameError" style="color: red">Niepoprawny format</mat-hint>
-        <mat-hint *ngIf="this.RegisterForm.value.surname == '' && !surnameError">Nazwisko nie może być puste</mat-hint>
+        <input matInput [formControl]="surname" (ngModelChange)="error = false;" [required]="true">
+        <mat-error *ngIf="surname.invalid">{{getErrorMessage(surname)}}</mat-error>
       </mat-form-field>
     </p>
 
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" [(ngModel)]="email" (ngModelChange)="emailError = false" [required]="true">
-        <mat-hint *ngIf="emailError" style="color: red">Niepoprawny email</mat-hint>
-        <mat-hint *ngIf="this.RegisterForm.value.name == '' && !nameError">Email nie może być pusty</mat-hint>
+        <input matInput [formControl]="email" (ngModelChange)="error = false;" [required]="true">
+        <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
       </mat-form-field>
     </p>
-    <p *ngIf="error" style="color: red">Coś poszło nie tak!</p>
+
+    <mat-error class="backend-error">{{this.backendError}}</mat-error>
     <button mat-raised-button (click)="register()">Register</button>
     <p class="log">
       Have already an account? <a class="login" routerLink="/login">Login here</a>
