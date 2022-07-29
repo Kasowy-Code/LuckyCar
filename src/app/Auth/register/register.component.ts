@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   name: string = "";
   surname: string = "";
   email: string = "";
+  loading = false;
 
   constructor(private http: HttpClient, private router: Router, private registerService: RegisterService) {
   }
@@ -30,20 +31,16 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.loading = true;
     this.registerService.register(this.name, this.surname, this.email)
       .subscribe(() => {
         this.router.navigate(["/registered"]);
       }, err => {
+        this.loading = false;
         //TODO: MACIEK ZROB ZE WYSWITLI BLEDY ONE PRZYJDA Z BACKEDNU W ARRAYLISCIE
       });
   }
 }
-
-
-
-
-
-
 
 
   //TODO: MACIEJU ZROB WALIDACJE
