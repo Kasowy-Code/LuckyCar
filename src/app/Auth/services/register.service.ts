@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {tap} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
+import {AuthErrorHandler} from "../../errorhandler/AuthErrorHandler";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  constructor(private http:HttpClient, private route:ActivatedRoute) { }
+  constructor(private http:HttpClient, private route:ActivatedRoute, private errorHandler:AuthErrorHandler) { }
 
   register(name:string, surname:string, email:string) {
     const request={
@@ -26,6 +27,10 @@ export class RegisterService {
       "password": password
     };
 
-    return this.http.post(`${environment.link}/api/register/`+id, request, {responseType: 'text' as 'json'});
+    return this.http.post(`${environment.link}/api/register/`+id, request, {responseType: 'text' as 'json'})
+      .pipe(catchError(error => {
+          // this.errorHandler.handleError(error);
+        console.log(error);
+      }));
   }
 }

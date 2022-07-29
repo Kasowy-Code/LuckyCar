@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
 import {RegisterService} from "../services/register.service";
-import {AuthErrorHandler} from "../../errorhandler/AuthErrorHandler";
 
 @Component({
   selector: 'app-register-password',
@@ -23,7 +22,7 @@ export class RegisterPasswordComponent implements OnInit {
   id = this.route.snapshot.params['id'];
 
   constructor(private http: HttpClient, private router: Router, private registerService:RegisterService,
-              private route:ActivatedRoute, private errorHandler:AuthErrorHandler) { }
+              private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -35,8 +34,6 @@ export class RegisterPasswordComponent implements OnInit {
       this.registerService.setPassword(this.password, this.id)
         .subscribe(()=>{
             this.router.navigate(["/login"]);
-        }, error =>{
-            this.errorHandler.handleError(error);
         });
   }
 }
