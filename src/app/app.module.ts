@@ -27,7 +27,6 @@ import { RegisterPasswordComponent } from './Auth/register-password/register-pas
 import {LoginService} from "./Auth/login/services/login.service";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {AuthGuard} from "./guards/auth.guard";
@@ -47,6 +46,7 @@ import {
 import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -87,8 +87,8 @@ import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    MatDialogModule,
     MatSnackBarModule,
+    MatDialogModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

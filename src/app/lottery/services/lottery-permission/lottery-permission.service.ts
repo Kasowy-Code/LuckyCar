@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 export class LotteryPermissionService {
   private userIsSignedUpToLotteryUrl = `${environment.link}/api/userdraw/userlotteryinfo`;
   private drawSettingsUrl = `${environment.link}/api/settings`;
-  drawSettings = {"registrationEndDay": 20, "active": true};
+  drawSettings = {"registrationEndDay": 20, "active": false};
 
   constructor(private http: HttpClient) {
   }

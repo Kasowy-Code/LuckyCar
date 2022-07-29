@@ -18,7 +18,7 @@
     </h1>
     <button
       [disabled]="true"
-      mat-flat-button color="primary">
+      mat-flat-button>
       <h2>you can't sign up</h2>
     </button>
   </div>
@@ -30,15 +30,13 @@
     </h1>
     <button
       [disabled]="true"
-      mat-flat-button color="primary">
+      mat-flat-button>
       <h2>You've chosen {{chosenParkingLotName}}</h2>
     </button>
     <br>
     <br>
-    <button
-      (click)="openResigningFromLotteryDialog()"
-      mat-raised-button
-      color="primary">
+    <button (click)="openResigningFromLotteryDialog()"
+            mat-raised-button>
       <h2>Resign</h2>
     </button>
   </div>

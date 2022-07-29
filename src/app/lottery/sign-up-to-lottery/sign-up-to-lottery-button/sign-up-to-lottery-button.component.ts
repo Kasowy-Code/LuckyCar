@@ -24,7 +24,6 @@ enum LotteryStateEnum {
   styleUrls: ['./sign-up-to-lottery-button.component.scss']
 })
 export class SignUpToLotteryButtonComponent implements OnInit {
-  parkingLots: ParkingLot[] = [];
   userDraw = <UserDraw>{};
   lotterySetting = <DrawSettings>{};
   lotteryState = LotteryStateEnum.NOTLOADED;
@@ -41,10 +40,6 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.parkingLotsListService.getParkingLots().subscribe(response => {
-
-      this.parkingLots = response.filter(value => value.available);
-    });
 
     this.setupUserPermissionForLottery();
 
@@ -54,10 +49,12 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   private setChosenParkingLot() {
 
     this.userDrawInfoHttpService.getCurrentUserDrawInfo().subscribe(response => {
-      this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
+      if(response.declaredParking !== null) {
+        this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
 
-        this.chosenParkingLotName = response.name;
-      })
+          this.chosenParkingLotName = response.name;
+        })
+      }
     })
   }
 
@@ -90,11 +87,6 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
   resignFromSingingUpToLottery() {
     this.userActionHttpService.cancelSigningUpToLottery().subscribe(response => {
-      if (!response) {
-        console.log("youre not signed up to lottery")
-      } else {
-        console.log("youre signed up to lottery :c")
-      }
       this.setupUserPermissionForLottery();
     })
   }
@@ -103,23 +95,18 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
     let dialogRef = this.parkingLotDialog.open(ParkingLotDialogComponent,
       {
-        data: this.parkingLots,
         disableClose: true,
       });
 
-    dialogRef.afterClosed().subscribe(response => {
+    dialogRef.afterClosed().subscribe(chosenParkingLot => {
 
-        if (response !== undefined) {
+        if (chosenParkingLot !== undefined) {
 
-          this.userActionHttpService.registerUserForDraw(response).subscribe(() => {
+          this.userActionHttpService.registerUserForDraw(chosenParkingLot).subscribe(() => {
 
             this.setupUserPermissionForLottery();
             this.setChosenParkingLot();
-
-            console.log(this.chosenParkingLotName);
           });
-
-          console.log(response);
         }
       }
     );
