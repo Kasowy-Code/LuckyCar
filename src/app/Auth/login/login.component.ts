@@ -37,10 +37,6 @@ export class LoginComponent implements OnInit{
   }
 
   public getAccessToken(){
-
-    //TODO: JESLI W LOGOWANIU I REJESTRACJI I PASSWORD SECIE MASZ TOKEN TO PRZENIES DO KALENDARZA
-    // JESLI TOKEN NIE JEST PRAWIDLOWY TO USUN LOCAL STORAGE I DAJ NA LOGIN PAGE
-
     this.loginService.loginUser(this.username, this.password)
       .subscribe(() => {
         this.router.navigate(["/calendar"]);
@@ -49,7 +45,6 @@ export class LoginComponent implements OnInit{
         this.error = true;
       });
   }
-
 }
 
 

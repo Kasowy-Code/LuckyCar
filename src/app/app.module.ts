@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -40,6 +40,7 @@ import {
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {AuthErrorHandler} from "./errorhandler/AuthErrorHandler";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
@@ -101,7 +102,12 @@ import {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  }],
+  },
+    {
+      provide: ErrorHandler,
+      useClass: AuthErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
