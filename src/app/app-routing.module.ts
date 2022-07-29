@@ -13,6 +13,8 @@ import {AcceptUserComponent} from "./Auth/accept-user/accept-user.component";
 import {DeleteUserComponent} from "./Auth/delete-user/delete-user.component";
 import {LoginGuard} from "./guards/login.guard";
 import {TokenGuard} from "./guards/token.guard";
+import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
+import {RoleGuard} from "./guards/role.guard";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard, TokenGuard]},
@@ -22,8 +24,8 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "register", component: RegisterComponent, canActivate: [LoginGuard]},
   {path: "registered", component: RegisterSuccessComponent},
   {path: "registerPassword/:id", component: RegisterPasswordComponent, canActivate: [LoginGuard]},
-  {path: "accept/:id", component: AcceptUserComponent, canActivate: [AuthGuard]},
-  {path: "delete/:id", component: DeleteUserComponent},
+  {path: "accept/:id", component: AcceptUserComponent, canActivate: [AuthGuard, RoleGuard]},
+  {path: "delete/:id", component: DeleteUserComponent, canActivate: [AuthGuard, RoleGuard]},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 

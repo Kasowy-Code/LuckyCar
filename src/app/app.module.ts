@@ -40,10 +40,13 @@ import {
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {AuthErrorHandler} from "./errorhandler/AuthErrorHandler";
+import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
+import {RoleGuard} from "./guards/role.guard";
+import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 
 
 @NgModule({
@@ -98,14 +101,22 @@ import {
     MatIconModule,
     MatToolbarModule
   ],
-  providers: [LoginService, AuthGuard, LoginGuard, {
+  providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
   },
     {
       provide: ErrorHandler,
-      useClass: AuthErrorHandler
+      useClass: SetPasswordErrorHandler
+    },
+    {
+      provide: ErrorHandler,
+      useClass: AcceptUserErrorHandler
+    },
+    {
+      provide: ErrorHandler,
+      useClass:DeleteUserErrorHandler
     }
   ],
   bootstrap: [AppComponent]

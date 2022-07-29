@@ -23,24 +23,7 @@ export class DeleteUserComponent implements OnInit {
   }
 
   deleteUser(){
-    if(this.roleService.isAdmin()) {
       this.service.deleteUser(this.id).subscribe(
-        (data) => {
-        }, error => {
-          if(error.status === 400){
-            this._snackBar.open("This user does not exist", "Ok");
-          }
-          if(error.status === 404) {
-            this._snackBar.open("This user does not exist", "Ok");
-          }
-          if(error.status === 401){
-            this.logoutService.logout();
-          }
-        }
-      )
-    }else{
-      this.router.navigate(["/calendar"]);
-    }
+        (data) => {});
   }
-
 }
