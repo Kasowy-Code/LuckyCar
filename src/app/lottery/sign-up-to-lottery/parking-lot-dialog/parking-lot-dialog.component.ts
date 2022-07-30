@@ -1,15 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ParkingLot} from "../../services/parking-lots-list/parking-lot";
+import {ParkingLot} from "../../../shared/dto/parking-lot";
 
 @Component({
   selector: 'app-parking-lot-dialog',
   templateUrl: './parking-lot-dialog.component.html',
-  styleUrls: ['./parking-lot-dialog.component.css']
+  styleUrls: ['./parking-lot-dialog.component.scss']
 })
 export class ParkingLotDialogComponent implements OnInit {
   parkingLots: ParkingLot[] = [];
-  choosedParkingLot: ParkingLot = <ParkingLot>{};
+  chosenParkingLot: ParkingLot = <ParkingLot>{};
   choiceChanged = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ParkingLot[],
@@ -24,14 +24,13 @@ export class ParkingLotDialogComponent implements OnInit {
     this.parkingLotDialogRef.close();
   }
 
-  setChoosedParkingLot(value: ParkingLot) {
-    this.choosedParkingLot = value;
+  setChosenParkingLot(value: ParkingLot) {
+    this.chosenParkingLot = value;
     this.choiceChanged = true;
   }
 
   onSubmit() {
-
-    this.parkingLotDialogRef.close(this.choosedParkingLot);
+    this.parkingLotDialogRef.close(this.chosenParkingLot);
 
   }
 }

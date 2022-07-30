@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+
+h1 {
+  color: limegreen;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}

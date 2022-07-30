@@ -19,7 +19,8 @@ export class RegisterPasswordComponent implements OnInit {
   password:string = "";
   id = this.route.snapshot.params['id'];
 
-  constructor(private http: HttpClient, private router: Router, private registerService:RegisterService, private route:ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router, private registerService:RegisterService,
+              private route:ActivatedRoute) { }
 
   ngOnInit(): void {
   }

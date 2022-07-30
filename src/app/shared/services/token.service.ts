@@ -28,6 +28,10 @@ export class TokenService {
     localStorage.setItem('token', token);
   }
 
+  removeToken() {
+    localStorage.removeItem('token');
+  }
+
   getDecodedToken():Token {
     // @ts-ignore
     return jwtDecode(this.getToken());

@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -18,16 +18,15 @@ import {AccountComponent} from './account/account.component';
 import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
-import { LoginComponent } from './Auth/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {LoginComponent} from './Auth/login/login.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './Auth/register/register.component';
 import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
 import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
 import {LoginService} from "./Auth/login/services/login.service";
-import {FormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
-import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
+import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -35,9 +34,20 @@ import { SelectUsersComponent } from './lottery/select-users/select-users.compon
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {AuthGuard} from "./auth.guard";
+import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
+import {LoginGuard} from "./guards/login.guard";
+import {SignUpToLotteryButtonComponent} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
+import {
+  ResigningFromLotteryDialogComponent
+} from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
+import {RoleGuard} from "./guards/role.guard";
+import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 
 
 @NgModule({
@@ -55,7 +65,12 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     AccountComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
-    SelectUsersComponent
+    SelectUsersComponent,
+    SignUpToLotteryButtonComponent,
+    ResigningFromLotteryDialogComponent,
+    ParkingLotDialogComponent,
+    AcceptUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -76,22 +91,37 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
-    HttpClientModule,
     MatDividerModule,
     MatCheckboxModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+
   ],
-  providers: [LoginService, AuthGuard, {
+  providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  }],
+  },
+    {
+      provide: ErrorHandler,
+      useClass: SetPasswordErrorHandler
+    },
+    {
+      provide: ErrorHandler,
+      useClass: AcceptUserErrorHandler
+    },
+    {
+      provide: ErrorHandler,
+      useClass:DeleteUserErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

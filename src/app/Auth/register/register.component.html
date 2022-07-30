@@ -24,9 +24,8 @@
         <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
       </mat-form-field>
     </p>
-
-    <mat-error class="backend-error">{{this.backendError}}</mat-error>
-    <button mat-raised-button (click)="register()">Register</button>
+    <p *ngIf="error" style="color: red">Coś poszło nie tak!</p>
+    <button mat-raised-button [class.spinner]="loading" [disabled]="loading" (click)="register()">Register</button>
     <p class="log">
       Have already an account? <a class="login" routerLink="/login">Login here</a>
     </p>
