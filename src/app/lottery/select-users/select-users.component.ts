@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 export interface User {
   name: string;
   surname: string;
+  id: number;
   completed: boolean;
   subusers?: User[];
 }
@@ -21,6 +22,7 @@ export class SelectUsersComponent implements OnInit{
   user: User = {
     name: 'Indeterminate',
     surname: 'Field',
+    id: -1,
     completed: false,
     subusers: [],
   };
@@ -32,17 +34,30 @@ export class SelectUsersComponent implements OnInit{
   ngOnInit() {
       this.http.get<any>(`${environment.link}/api/userdraw/users`)
         .subscribe(Users=>{
+          Users = Users.filter((user: any) => user.registeredForDraw);
           console.log(Users);
           for (let response of Users) {
-            this.user.subusers?.push({name: response.name, surname: response.surname, completed: false});
+            this.user.subusers?.push({name: response.name, surname: response.surname, id: response.id, completed: false});
           }
           this.filteredUsers = this.employees.valueChanges.pipe(
             startWith(''),
             map(value => this.filter(value || '')),
           );
         });
+  }
 
-
+  startDraw() {
+    const deletionList = this.user.subusers?.filter(el => el.completed !== true);
+    console.log(deletionList);
+    this.http.patch(`${environment.link}/api/userdraw/resignfromdrawlist`, deletionList)
+      .subscribe(() => {
+          this.http.patch(`${environment.link}/api/draw`, {})
+            .subscribe(
+              () => {
+                console.log("wylosowano");
+              }
+            )
+      })
   }
 
   private filter(value: string) {
@@ -61,6 +76,7 @@ export class SelectUsersComponent implements OnInit{
   }
 
   setAll(completed: boolean) {
+
     this.allComplete = completed;
     if (this.user.subusers == null) {
       return;
