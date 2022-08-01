@@ -4,5 +4,5 @@ export interface DrawSettings {
   registrationEndDay: any;
   registrationEndWeek: any;
   temporaryDrawDate: any;
-  active: boolean;
+  isActive: boolean;
 }

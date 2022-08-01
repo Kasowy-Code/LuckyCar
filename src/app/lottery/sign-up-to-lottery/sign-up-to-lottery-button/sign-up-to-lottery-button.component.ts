@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLotDialogComponent} from "../parking-lot-dialog/parking-lot-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ParkingLot} from "../../../shared/dto/parking-lot";
 import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
 import {UserActionHttpService} from "../../services/user-action/user-action-http.service";
 import {UserDraw} from "../../../shared/dto/user-draw";
@@ -49,7 +48,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   private setChosenParkingLot() {
 
     this.userDrawInfoHttpService.getCurrentUserDrawInfo().subscribe(response => {
-      if(response.declaredParking !== null) {
+      if (response.declaredParking !== null) {
         this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
 
           this.chosenParkingLotName = response.name;
@@ -66,9 +65,9 @@ export class SignUpToLotteryButtonComponent implements OnInit {
     ])
       .subscribe(([userDrawInfo, isLotteryOpen]) => {
         this.userDraw = userDrawInfo;
-        this.lotterySettings.active = isLotteryOpen.active;
+        this.lotterySettings.isActive = isLotteryOpen.isActive;
 
-        console.log(isLotteryOpen.active);
+        console.log(isLotteryOpen.isActive);
 
         this.lotteryState = this.getLotteryState();
       });
@@ -115,7 +114,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   getLotteryState() {
     let message = LotteryStateEnum.ACTIVE;
 
-    if (!this.lotterySettings.active) {
+    if (!this.lotterySettings.isActive) {
       message = LotteryStateEnum.INACTIVE;
     } else if (this.userDraw.registeredForDraw) {
       message = LotteryStateEnum.REGISTERED;

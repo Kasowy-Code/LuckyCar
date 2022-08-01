@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {of} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {DrawSettings} from "../../../shared/dto/draw-settings";
@@ -14,6 +13,6 @@ export class LotteryPermissionService {
   }
 
   getLotteryIsOpen() {
-    return this.http.get<DrawSettings>(`${this.drawSettingsUrl}/1`);
+    return this.http.get<DrawSettings>(`${this.drawSettingsUrl}`);
   }
 }
