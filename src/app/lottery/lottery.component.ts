@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {LotteryDialogComponent} from "./lottery-dialog/lottery-dialog.component";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-lottery',
@@ -7,22 +8,14 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./lottery.component.css'],
 })
 export class LotteryComponent implements OnInit {
-  lottery: boolean;
-  user: boolean;
-  selected: any;
+  user: any;
+  lottery: any;
+  ngOnInit(): void {}
 
+  constructor(private dialog: MatDialog) {}
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-
-  constructor() {
-    this.lottery = true;
-    this.user = false;
-  }
-
-  ngOnInit(): void {
+  openDialog() {
+    this.dialog.open(LotteryDialogComponent);
   }
 
 }

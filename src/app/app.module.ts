@@ -1,9 +1,9 @@
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
@@ -35,6 +35,18 @@ import { environment } from '../environments/environment';
 import {AuthGuard} from "./auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import {ParkingComponent} from "./parkings/parking.component";
+import {MatListModule} from "@angular/material/list";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatChipsModule} from "@angular/material/chips";
+import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
+import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
+import {SwiperModule} from "swiper/angular";
+
+
 
 
 @NgModule({
@@ -45,6 +57,10 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     LotteryComponent,
     CarsComponent,
     AccountComponent,
+    AdminComponent,
+    ParkingComponent,
+    ParkingDialogComponent,
+    LotteryDialogComponent,
     LoginComponent,
     RegisterComponent,
     RegisterSuccessComponent,
@@ -74,13 +90,15 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
-    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    MatSlideToggleModule,
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers: [LoginService, AuthGuard, {
     provide: HTTP_INTERCEPTORS,
@@ -89,4 +107,5 @@ import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule{ }

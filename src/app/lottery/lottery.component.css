@@ -1,0 +1,13 @@
+#body {
+  text-align: center;
+  padding-top: 5rem;
+  display: block;
+  align-self: center;
+}
+
+.mat-raised-button {
+  color: white;
+  background-color: #064dd6;
+  width: 15rem;
+  height: 2rem;
+}
