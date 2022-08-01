@@ -14,10 +14,10 @@ export class UserActionHttpService {
   }
 
   registerUserForDraw(chosenParkingLot: ParkingLot) {
-    return this.http.post(this.userDrawSignUpToLotteryUrl, chosenParkingLot.id);
+    return this.http.patch(this.userDrawSignUpToLotteryUrl, chosenParkingLot.id);
   }
 
   cancelSigningUpToLottery() {
-    return this.http.post(this.userDrawResignFromLotteryUrl, {});
+    return this.http.patch(this.userDrawResignFromLotteryUrl, {});
   }
 }

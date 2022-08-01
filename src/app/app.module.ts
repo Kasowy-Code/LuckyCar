@@ -29,15 +29,16 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SelectUsersComponent } from './lottery/select-users/select-users.component';
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
 import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
-import {
-  SignUpToLotteryButtonComponent
-} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
-import {MatDividerModule} from "@angular/material/divider";
+import {SignUpToLotteryButtonComponent} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
 import {
@@ -46,7 +47,6 @@ import {
 import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
-import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -63,7 +63,8 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     RegisterPasswordComponent,
     AccountComponent,
     ParkingLotDialogComponent,
-    SignUpToLotteryButtonComponent,
+    AcceptUserComponent,
+    SelectUsersComponent,
     SignUpToLotteryButtonComponent,
     ResigningFromLotteryDialogComponent,
     ParkingLotDialogComponent,
@@ -87,7 +88,12 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatDialogModule,
     MatSnackBarModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule,
     MatDialogModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

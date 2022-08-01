@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLotDialogComponent} from "../parking-lot-dialog/parking-lot-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ParkingLot} from "../../../shared/dto/parking-lot";
 import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
 import {UserActionHttpService} from "../../services/user-action/user-action-http.service";
 import {UserDraw} from "../../../shared/dto/user-draw";
