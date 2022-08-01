@@ -1,0 +1,16 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" (click)="setupLotteryIsState()">
+  <mat-icon id="settings">settings</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <span class="menu-text">change lottery close date</span>
+  </button>
+  <span id="lottery-state-text">SET LOTTERY STATE:</span>
+  <mat-slide-toggle *ngIf="lotterySettings.isActive"
+                    checked="true"
+                    (click)="$event.stopPropagation(); changeLotteryState()"></mat-slide-toggle>
+  <mat-slide-toggle *ngIf="!lotterySettings.isActive"
+                    checked="false"
+                    (click)="$event.stopPropagation(); changeLotteryState()"></mat-slide-toggle>
+</mat-menu>

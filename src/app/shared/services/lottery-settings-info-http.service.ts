@@ -12,7 +12,7 @@ export class LotterySettingsInfoHttpService {
   constructor(private http: HttpClient) {
   }
 
-  getLotteryIsOpen() {
+  getLotterySettings() {
     return this.http.get<DrawSettings>(`${this.drawSettingsUrl}`);
   }
 

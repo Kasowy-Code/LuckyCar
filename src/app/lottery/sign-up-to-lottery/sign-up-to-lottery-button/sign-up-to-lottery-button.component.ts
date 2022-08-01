@@ -61,7 +61,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
     forkJoin([
       this.userDrawInfoHttpService.getCurrentUserDrawInfo(),
-      this.lotteryPermissionService.getLotteryIsOpen()
+      this.lotteryPermissionService.getLotterySettings()
     ])
       .subscribe(([userDrawInfo, isLotteryOpen]) => {
         this.userDraw = userDrawInfo;

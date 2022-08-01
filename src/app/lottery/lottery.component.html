@@ -5,19 +5,7 @@
 
   <h1 class="title">LOTTERY FOR {{lotteryMonth}}</h1>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon id="settings">settings</mat-icon>
-  </button>
-
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-
-    <mat-slide-toggle></mat-slide-toggle>
-
-  </mat-menu>
+  <app-change-lottery-settings-button></app-change-lottery-settings-button>
 </mat-toolbar>
 
 

@@ -58,6 +58,7 @@ import {
 } from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-form/change-lottery-settings-form.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ChangeLotterySettingsButtonComponent } from './lottery/change-lottery-settings/change-lottery-settings-button/change-lottery-settings-button.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     AcceptUserComponent,
     DeleteUserComponent,
     ChangeLotterySettingsDialogComponent,
-    ChangeLotterySettingsFormComponent
+    ChangeLotterySettingsFormComponent,
+    ChangeLotterySettingsButtonComponent
   ],
   imports: [
     BrowserModule,
