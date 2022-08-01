@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLotDialogComponent} from "../parking-lot-dialog/parking-lot-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
-import {UserActionHttpService} from "../../services/user-action/user-action-http.service";
+import {ParkingLotsListService} from "../../../shared/services/parking-lots-list.service";
+import {UserSignUpActionHttpService} from "../../services/user-sign-up-action-http.service";
 import {UserDraw} from "../../../shared/dto/user-draw";
-import {LotteryPermissionService} from "../../services/lottery-permission/lottery-permission.service";
+import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DrawSettings} from "../../../shared/dto/draw-settings";
 import {forkJoin} from "rxjs";
 import {
   ResigningFromLotteryDialogComponent
 } from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
-import {UserDrawInfoHttpService} from "../../../shared/services/parking-lot/user-draw-info-http.service";
+import {UserDrawInfoHttpService} from "../../../shared/services/user-draw-info-http.service";
 
 enum LotteryStateEnum {
   ACTIVE, INACTIVE, REGISTERED, NOTLOADED
@@ -29,12 +29,12 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   LotteryStateEnum = LotteryStateEnum;
   chosenParkingLotName = '';
 
-  constructor(private lotteryPermissionService: LotteryPermissionService,
+  constructor(private lotteryPermissionService: LotterySettingsInfoHttpService,
               private snackBar: MatSnackBar,
               private parkingLotDialog: MatDialog,
               private confirmResigningFromLotteryDialog: MatDialog,
               private parkingLotsListService: ParkingLotsListService,
-              private userActionHttpService: UserActionHttpService,
+              private userActionHttpService: UserSignUpActionHttpService,
               private userDrawInfoHttpService: UserDrawInfoHttpService) {
   }
 

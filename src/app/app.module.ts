@@ -34,7 +34,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthGuard} from "./guards/auth.guard";
-import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import {TokenInterceptorService} from "./shared/services/token/token-interceptor.service";
 import {AcceptUserComponent} from './Auth/accept-user/accept-user.component';
 import {DeleteUserComponent} from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
@@ -50,6 +50,14 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {
+  ChangeLotterySettingsDialogComponent
+} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-dialog.component';
+import {
+  ChangeLotterySettingsFormComponent
+} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-form/change-lottery-settings-form.component';
+import {MatMenuModule} from "@angular/material/menu";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 
 @NgModule({
@@ -72,7 +80,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ResigningFromLotteryDialogComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ChangeLotterySettingsDialogComponent,
+    ChangeLotterySettingsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +118,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatDividerModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatMenuModule,
+    MatSlideToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import jwtDecode from "jwt-decode";
-import {RoleEnum} from "../../role-enum";
+import {RoleEnum} from "../../../role-enum";
 
 interface Token {
 
@@ -16,15 +16,15 @@ interface Token {
 })
 export class TokenService {
 
-  isLoggedIn(){
+  isLoggedIn() {
     return !!localStorage.getItem('token');
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
 
-  setToken(token:string) {
+  setToken(token: string) {
     localStorage.setItem('token', token);
   }
 
@@ -32,7 +32,7 @@ export class TokenService {
     localStorage.removeItem('token');
   }
 
-  getDecodedToken():Token {
+  getDecodedToken(): Token {
     // @ts-ignore
     return jwtDecode(this.getToken());
   }

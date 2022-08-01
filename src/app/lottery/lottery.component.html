@@ -1,7 +1,33 @@
-<mat-toolbar></mat-toolbar>
+<mat-toolbar>
+  <button mat-icon-button disabled="true">
+    <mat-icon style="color: var(--mainColor)">settings</mat-icon>
+  </button>
 
-<div style="display: grid; justify-content: center; height: 80%; padding: 2rem">
+  <h1 class="title">LOTTERY FOR {{lotteryMonth}}</h1>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon id="settings">settings</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+
+    <mat-slide-toggle></mat-slide-toggle>
+
+  </mat-menu>
+</mat-toolbar>
+
+
+<div id="main-window">
   <app-sign-up-to-lottery-button>
   </app-sign-up-to-lottery-button>
-  <button routerLink="/lottery/selectUsers">Start lottery</button>
+
+  <button mat-raised-button routerLink="/lottery/selectUsers">
+    <h2>
+      Start lottery
+    </h2>
+  </button>
 </div>
