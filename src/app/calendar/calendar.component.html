@@ -1,6 +1,8 @@
 <div class="main">
   <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected"></mat-calendar>
+      <mat-calendar (selectedChange)="selectedChange($event)" [selected]="selectedRangeValue"></mat-calendar>
   </mat-card>
-  <p>Wybrany dzień: {{selected}}</p>
+
+  <button mat-raised-button (click)="changeSelectStrategy()">Confirm</button>
+<!--  Do zmiany, tymczasowo tak zostanie-->
 </div>
