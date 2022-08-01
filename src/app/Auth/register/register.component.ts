@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {RegisterService} from "../services/register.service";
@@ -10,35 +10,43 @@ import {RegisterService} from "../services/register.service";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  RegisterForm = new FormGroup({
-    name: new FormControl(''), //TODO: minimum field length = 2
-    surname: new FormControl(''), //TODO: minimum field length = 2
-    email: new FormControl('')
-  });
-  emailError: boolean = false;
-  error: boolean = false;
-  nameError: boolean = false;
-  surnameError: boolean = false;
-  name: string = "";
-  surname: string = "";
-  email: string = "";
+    NameSurnamePattern = /^[A-Z|[ĄĘŁĆŻŹŃŚÓ]{1}[a-z|[ąęłćźżńśó]{1,38}$/;
+    name = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
+    surname = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
+    email = new FormControl('', [Validators.email, Validators.required]);
+    error = true;
   loading = false;
-
   constructor(private http: HttpClient, private router: Router, private registerService: RegisterService) {
   }
 
   ngOnInit(): void {
   }
 
+  getErrorMessage(item: any) {
+      this.error = true;
+    if(item.hasError('email')) {
+      return 'Not a valid email';
+    }
+    if(item.hasError('minlength')) {
+      return 'Must be at least 2 characters long';
+    }
+    if(item.hasError('pattern')) {
+      return 'Invalid format';
+    }
+    return item.hasError('required') ? 'You must enter a value' : '';
+
+  }
+
   register() {
     this.loading = true;
-    this.registerService.register(this.name, this.surname, this.email)
-      .subscribe(() => {
-        this.router.navigate(["/registered"]);
-      }, err => {
-        this.loading = false;
-        //TODO: MACIEK ZROB ZE WYSWITLI BLEDY ONE PRZYJDA Z BACKEDNU W ARRAYLISCIE
-      });
+    if (!this.error) {
+      this.registerService.register(String(this.name.value), String(this.surname.value), String(this.email.value))
+        .subscribe(() => {
+          this.router.navigate(["/registered"]);
+        }, err => {
+            this.loading = false;
+        });
+    }
   }
 }
 

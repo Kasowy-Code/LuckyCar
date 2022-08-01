@@ -54,10 +54,12 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   private setChosenParkingLot() {
 
     this.userDrawInfoHttpService.getCurrentUserDrawInfo().subscribe(response => {
-      this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
+      if(response.declaredParking != null) {
+        this.userDrawInfoHttpService.getCurrentUserChosenParkingLot(response.declaredParking).subscribe(response => {
 
-        this.chosenParkingLotName = response.name;
-      })
+          this.chosenParkingLotName = response.name;
+        })
+      }
     })
   }
 
