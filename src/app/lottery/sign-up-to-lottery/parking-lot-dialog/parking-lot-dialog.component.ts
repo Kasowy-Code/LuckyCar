@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ParkingLot} from "../../../shared/dto/parking-lot";
+import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
 
 @Component({
   selector: 'app-parking-lot-dialog',
@@ -12,12 +13,19 @@ export class ParkingLotDialogComponent implements OnInit {
   chosenParkingLot: ParkingLot = <ParkingLot>{};
   choiceChanged = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ParkingLot[],
-              private parkingLotDialogRef: MatDialogRef<ParkingLotDialogComponent>) {
+  constructor(private parkingLotDialogRef: MatDialogRef<ParkingLotDialogComponent>,
+              private parkingLotsListService: ParkingLotsListService) {
   }
 
   ngOnInit(): void {
-    this.parkingLots = this.data;
+    this.setParkingLotsList();
+  }
+
+  private setParkingLotsList() {
+    this.parkingLotsListService.getParkingLots().subscribe(response => {
+
+      this.parkingLots = response.filter(value => value.available);
+    });
   }
 
   onCancelClick() {
@@ -28,6 +36,7 @@ export class ParkingLotDialogComponent implements OnInit {
     this.chosenParkingLot = value;
     this.choiceChanged = true;
   }
+
 
   onSubmit() {
     this.parkingLotDialogRef.close(this.chosenParkingLot);

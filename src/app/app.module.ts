@@ -21,25 +21,26 @@ import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { RegisterComponent } from './Auth/register/register.component';
-import { RegisterSuccessComponent } from './Auth/register-success/register-success.component';
-import { RegisterPasswordComponent } from './Auth/register-password/register-password.component';
+import {RegisterComponent} from './Auth/register/register.component';
+import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
+import {RegisterPasswordComponent} from './Auth/register-password/register-password.component';
 import {LoginService} from "./Auth/login/services/login.service";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
-import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { SelectUsersComponent } from './lottery/select-users/select-users.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
+import {SelectUsersComponent} from './lottery/select-users/select-users.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
-import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
-import { DeleteUserComponent } from './Auth/delete-user/delete-user.component';
+import {AcceptUserComponent} from './Auth/accept-user/accept-user.component';
+import {DeleteUserComponent} from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
-import {SignUpToLotteryButtonComponent} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
+import {
+  SignUpToLotteryButtonComponent
+} from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
 import {
@@ -48,6 +49,7 @@ import {
 import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -95,13 +97,18 @@ import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
     MatCheckboxModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
@@ -118,7 +125,7 @@ import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
     },
     {
       provide: ErrorHandler,
-      useClass:DeleteUserErrorHandler
+      useClass: DeleteUserErrorHandler
     }
   ],
   bootstrap: [AppComponent]

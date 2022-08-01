@@ -1,4 +1,8 @@
 export interface DrawSettings {
-  registrationEndDay: number;
-  active: boolean;
+  id: any;
+  registrationEndHour: number;
+  registrationEndDay: any;
+  registrationEndWeek: any;
+  temporaryDrawDate: any;
+  isActive: boolean;
 }

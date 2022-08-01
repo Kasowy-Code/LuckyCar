@@ -16,6 +16,8 @@ $globalWidth: 350px;
 
   .mat-raised-button {
     width: $globalWidth;
+    color: white;
+    background-color: var(--mainColor);
   }
 
 
