@@ -1,4 +1,5 @@
-<div [ngSwitch]="lotteryState">
+<div [ngSwitch]="setupUserPermissionForLotteryService.lotteryState">
+
   <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
     <h1>
       <mat-icon class="material-icons">accessibility_new</mat-icon>

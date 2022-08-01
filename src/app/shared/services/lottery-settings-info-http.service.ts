@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {DrawSettings} from "../dto/draw-settings";
+import {LotterySettings} from "../dto/lottery-settings";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class LotterySettingsInfoHttpService {
   }
 
   getLotterySettings() {
-    return this.http.get<DrawSettings>(`${this.drawSettingsUrl}`);
+    return this.http.get<LotterySettings>(`${this.drawSettingsUrl}`);
   }
 
   getLotteryMonth() {

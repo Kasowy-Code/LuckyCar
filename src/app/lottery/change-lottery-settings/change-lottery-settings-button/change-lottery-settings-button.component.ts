@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {DrawSettings} from "../../../shared/dto/draw-settings";
+import {Component, Input, OnInit} from '@angular/core';
+import {LotterySettings} from "../../../shared/dto/lottery-settings";
 import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
 import {ChangeLotterySettingsHttpService} from "../change-lottery-settings-http.service";
+import {SetupUserPermissionForLotteryService} from "../../services/setup-user-permission-for-lottery.service";
+import {LotteryStateEnum} from "../../lottery-state-enum";
 
 @Component({
   selector: 'app-change-lottery-settings-button',
@@ -9,16 +11,17 @@ import {ChangeLotterySettingsHttpService} from "../change-lottery-settings-http.
   styleUrls: ['./change-lottery-settings-button.component.scss']
 })
 export class ChangeLotterySettingsButtonComponent implements OnInit {
-  lotterySettings = <DrawSettings>{};
+  lotterySettings = <LotterySettings>{};
 
   constructor(private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService,
-              private changeLotterySettingsHttpService: ChangeLotterySettingsHttpService) {
+              private changeLotterySettingsHttpService: ChangeLotterySettingsHttpService,
+              public setupUserPermissionForLotteryService: SetupUserPermissionForLotteryService) {
   }
 
   ngOnInit(): void {
   }
 
-  setupLotteryIsState() {
+  setupLotteryState() {
     this.lotterySettingsInfoHttpService.getLotterySettings().subscribe(lotteryIsOpen => {
       this.lotterySettings = lotteryIsOpen;
     });
@@ -27,11 +30,15 @@ export class ChangeLotterySettingsButtonComponent implements OnInit {
   changeLotteryState() {
     if (this.lotterySettings.isActive) {
       this.changeLotterySettingsHttpService.deactivateLottery().subscribe(() => {
-        this.setupLotteryIsState()
+        this.setupLotteryState();
+
+        this.setupUserPermissionForLotteryService.lotteryState = LotteryStateEnum.INACTIVE;
       });
     } else if (!this.lotterySettings.isActive) {
       this.changeLotterySettingsHttpService.activateLottery().subscribe(() => {
-        this.setupLotteryIsState()
+        this.setupLotteryState();
+
+        this.setupUserPermissionForLotteryService.lotteryState = LotteryStateEnum.ACTIVE;
       });
     }
   }

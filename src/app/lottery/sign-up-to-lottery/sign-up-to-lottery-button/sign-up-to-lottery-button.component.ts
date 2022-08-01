@@ -6,16 +6,12 @@ import {UserSignUpActionHttpService} from "../../services/user-sign-up-action-ht
 import {UserDraw} from "../../../shared/dto/user-draw";
 import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {DrawSettings} from "../../../shared/dto/draw-settings";
+import {LotterySettings} from "../../../shared/dto/lottery-settings";
 import {forkJoin} from "rxjs";
-import {
-  ResigningFromLotteryDialogComponent
-} from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+import {ResigningFromLotteryDialogComponent} from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
 import {UserDrawInfoHttpService} from "../../../shared/services/user-draw-info-http.service";
-
-enum LotteryStateEnum {
-  ACTIVE, INACTIVE, REGISTERED, NOTLOADED
-}
+import {SetupUserPermissionForLotteryService} from "../../services/setup-user-permission-for-lottery.service";
+import {LotteryStateEnum} from "../../lottery-state-enum";
 
 @Component({
   selector: 'app-sign-up-to-lottery-button',
@@ -24,8 +20,7 @@ enum LotteryStateEnum {
 })
 export class SignUpToLotteryButtonComponent implements OnInit {
   userDraw = <UserDraw>{};
-  lotterySettings = <DrawSettings>{};
-  lotteryState = LotteryStateEnum.NOTLOADED;
+  lotterySettings = <LotterySettings>{};
   LotteryStateEnum = LotteryStateEnum;
   chosenParkingLotName = '';
 
@@ -35,7 +30,8 @@ export class SignUpToLotteryButtonComponent implements OnInit {
               private confirmResigningFromLotteryDialog: MatDialog,
               private parkingLotsListService: ParkingLotsListService,
               private userActionHttpService: UserSignUpActionHttpService,
-              private userDrawInfoHttpService: UserDrawInfoHttpService) {
+              private userDrawInfoHttpService: UserDrawInfoHttpService,
+              public setupUserPermissionForLotteryService: SetupUserPermissionForLotteryService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +53,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
     })
   }
 
-  private setupUserPermissionForLottery() {
+  setupUserPermissionForLottery() {
 
     forkJoin([
       this.userDrawInfoHttpService.getCurrentUserDrawInfo(),
@@ -69,7 +65,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
         console.log(isLotteryOpen.isActive);
 
-        this.lotteryState = this.getLotteryState();
+        this.setupUserPermissionForLotteryService.lotteryState = this.getLotteryState();
       });
   }
 
@@ -111,16 +107,16 @@ export class SignUpToLotteryButtonComponent implements OnInit {
     );
   }
 
-  getLotteryState() {
-    let message = LotteryStateEnum.ACTIVE;
+  getLotteryState(): LotteryStateEnum {
+    let result  = LotteryStateEnum.ACTIVE;
 
     if (!this.lotterySettings.isActive) {
-      message = LotteryStateEnum.INACTIVE;
+      result = LotteryStateEnum.INACTIVE;
     } else if (this.userDraw.registeredForDraw) {
-      message = LotteryStateEnum.REGISTERED;
+      result = LotteryStateEnum.REGISTERED;
     }
 
-    return message;
+    return result;
   }
 
 }

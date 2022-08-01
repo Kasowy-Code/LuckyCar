@@ -24,7 +24,7 @@ export class ParkingLotDialogComponent implements OnInit {
   private setParkingLotsList() {
     this.parkingLotsListService.getParkingLots().subscribe(response => {
 
-      this.parkingLots = response.filter(value => value.available);
+      this.parkingLots = response.filter(value => value.isAvailable);
     });
   }
 
