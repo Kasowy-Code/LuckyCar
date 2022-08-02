@@ -51,6 +51,7 @@ import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
+import { DialogComponent } from './account/dialog/dialog.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { RestartPasswordComponent } from './Auth/restart-password/restart-passwo
     ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent,
-    RestartPasswordComponent
+    RestartPasswordComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

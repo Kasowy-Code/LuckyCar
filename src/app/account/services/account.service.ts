@@ -21,7 +21,18 @@ export class AccountService {
           verticalPosition: "top",
         });
       }));
+  }
 
+  deleteAccount(){
+    return this.http.delete(`${environment.link}/api/user/delete`, {responseType: 'text' as 'json'})
+      .pipe(tap(data=>{
+        this.snackBar.open("Your account has been deleted", "", {
+          duration: 5*1000,
+          panelClass: ['good-snackbar'],
+          horizontalPosition: "end",
+          verticalPosition: "top",
+        });
+      }));
   }
 }
 
