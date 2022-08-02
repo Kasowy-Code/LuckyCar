@@ -1,4 +1,4 @@
-<div [ngSwitch]="setupUserPermissionForLotteryService.lotteryState">
+<div [ngSwitch]="lotteryStateEnumService.lotteryState">
 
   <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
     <h1>

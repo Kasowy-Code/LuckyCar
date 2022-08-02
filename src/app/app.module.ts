@@ -19,7 +19,6 @@ import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from './Auth/register/register.component';
 import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
@@ -53,12 +52,23 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {
   ChangeLotterySettingsDialogComponent
 } from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-dialog.component';
-import {
-  ChangeLotterySettingsFormComponent
-} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-form/change-lottery-settings-form.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { ChangeLotterySettingsButtonComponent } from './lottery/change-lottery-settings/change-lottery-settings-button/change-lottery-settings-button.component';
+import {
+  ChangeLotterySettingsMenuComponent
+} from "./lottery/change-lottery-settings/change-lottery-settings-menu/change-lottery-settings-menu.component";
+import {
+  ChangeRegularLotteryDateFormComponent
+} from "./lottery/change-lottery-settings/change-lottery-settings-dialog/change-regular-lottery-date-form/change-regular-lottery-date-form.component";
+import {
+  ChangeTemporaryLotteryDateFormComponent
+} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from "@angular-material-components/datetime-picker";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -83,8 +93,9 @@ import { ChangeLotterySettingsButtonComponent } from './lottery/change-lottery-s
     AcceptUserComponent,
     DeleteUserComponent,
     ChangeLotterySettingsDialogComponent,
-    ChangeLotterySettingsFormComponent,
-    ChangeLotterySettingsButtonComponent
+    ChangeRegularLotteryDateFormComponent,
+    ChangeLotterySettingsMenuComponent,
+    ChangeTemporaryLotteryDateFormComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +133,10 @@ import { ChangeLotterySettingsButtonComponent } from './lottery/change-lottery-s
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

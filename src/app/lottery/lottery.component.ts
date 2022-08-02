@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LotterySettingsInfoHttpService} from "../shared/services/lottery-settings-info-http.service";
+import {RoleService} from "../role.service";
 
 @Component({
   selector: 'app-lottery',
@@ -7,9 +8,10 @@ import {LotterySettingsInfoHttpService} from "../shared/services/lottery-setting
   styleUrls: ['./lottery.component.scss'],
 })
 export class LotteryComponent implements OnInit {
-  lotteryMonth = 'dupa';
+  lotteryMonth = '';
 
-  constructor(private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService) {
+  constructor(private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService,
+              public roleService: RoleService) {
   }
 
   ngOnInit(): void {

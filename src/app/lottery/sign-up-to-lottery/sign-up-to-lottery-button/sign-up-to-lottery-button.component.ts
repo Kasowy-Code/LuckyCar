@@ -5,13 +5,14 @@ import {ParkingLotsListService} from "../../../shared/services/parking-lots-list
 import {UserSignUpActionHttpService} from "../../services/user-sign-up-action-http.service";
 import {UserDraw} from "../../../shared/dto/user-draw";
 import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {LotterySettings} from "../../../shared/dto/lottery-settings";
 import {forkJoin} from "rxjs";
-import {ResigningFromLotteryDialogComponent} from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
+import {
+  ResigningFromLotteryDialogComponent
+} from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
 import {UserDrawInfoHttpService} from "../../../shared/services/user-draw-info-http.service";
-import {SetupUserPermissionForLotteryService} from "../../services/setup-user-permission-for-lottery.service";
 import {LotteryStateEnum} from "../../lottery-state-enum";
+import {LotteryStateEnumService} from "../../services/lottery-state-enum.service";
 
 @Component({
   selector: 'app-sign-up-to-lottery-button',
@@ -25,13 +26,12 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   chosenParkingLotName = '';
 
   constructor(private lotteryPermissionService: LotterySettingsInfoHttpService,
-              private snackBar: MatSnackBar,
               private parkingLotDialog: MatDialog,
               private confirmResigningFromLotteryDialog: MatDialog,
               private parkingLotsListService: ParkingLotsListService,
               private userActionHttpService: UserSignUpActionHttpService,
               private userDrawInfoHttpService: UserDrawInfoHttpService,
-              public setupUserPermissionForLotteryService: SetupUserPermissionForLotteryService) {
+              public lotteryStateEnumService: LotteryStateEnumService) {
   }
 
   ngOnInit(): void {
@@ -65,7 +65,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
         console.log(isLotteryOpen.isActive);
 
-        this.setupUserPermissionForLotteryService.lotteryState = this.getLotteryState();
+        this.lotteryStateEnumService.lotteryState = this.getLotteryState();
       });
   }
 
@@ -108,7 +108,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   }
 
   getLotteryState(): LotteryStateEnum {
-    let result  = LotteryStateEnum.ACTIVE;
+    let result = LotteryStateEnum.ACTIVE;
 
     if (!this.lotterySettings.isActive) {
       result = LotteryStateEnum.INACTIVE;

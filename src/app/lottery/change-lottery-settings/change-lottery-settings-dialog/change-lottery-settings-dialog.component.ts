@@ -1,4 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
+import {DateToChangeTypeEnumService} from "../services/date-to-change-type-enum.service";
+
+class DialogData {
+}
 
 @Component({
   selector: 'app-change-lottery-settings-dialog',
@@ -7,10 +12,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ChangeLotterySettingsDialogComponent implements OnInit {
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<ChangeLotterySettingsDialogComponent>,
+              public dateToChangeTypeEnum: DateToChangeTypeEnumService) {
   }
 
   ngOnInit(): void {
+
   }
 
 }

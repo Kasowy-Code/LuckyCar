@@ -1,18 +1,18 @@
 <mat-toolbar>
-  <button mat-icon-button disabled="true">
+  <button *ngIf="this.roleService.isAdmin()" mat-icon-button disabled="true">
     <mat-icon style="color: var(--mainColor)">settings</mat-icon>
   </button>
 
   <h1 class="title">LOTTERY FOR {{lotteryMonth}}</h1>
 
-  <app-change-lottery-settings-button></app-change-lottery-settings-button>
+  <app-change-lottery-settings-menu *ngIf="this.roleService.isAdmin()"></app-change-lottery-settings-menu>
 </mat-toolbar>
 
 
 <div id="main-window">
   <app-sign-up-to-lottery-button></app-sign-up-to-lottery-button>
 
-  <button mat-raised-button routerLink="/lottery/selectUsers">
+  <button *ngIf="this.roleService.isAdmin()" mat-raised-button routerLink="/lottery/selectUsers">
     <h2>
       Start lottery
     </h2>
