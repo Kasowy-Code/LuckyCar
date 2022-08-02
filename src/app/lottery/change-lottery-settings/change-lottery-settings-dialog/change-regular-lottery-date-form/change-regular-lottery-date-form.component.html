@@ -1,7 +1,26 @@
-<mat-form-field>
-  <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" [(ngModel)]="myDatePicker">
+<form [formGroup]="dateForm"
+      (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label for="week">Week:</mat-label>
+    <mat-select id="week" formControlName="week">
+      <mat-option value="first"> first</mat-option>
+      <mat-option value="second"> second</mat-option>
+      <mat-option value="third"> third</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-form-field>
+    <mat-label for="day">Day:</mat-label>
+    <mat-select id="day" formControlName="day">
+      <mat-option value="monday"> monday</mat-option>
+      <mat-option value="tuesday"> tuesday</mat-option>
+      <mat-option value="wednesday"> wednesday</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-flat-button
+          type="submit"
+          [disabled]="!dateForm.valid"
+          color="primary">Submit
+  </button>
+</form>
 
-  <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
-</mat-form-field>

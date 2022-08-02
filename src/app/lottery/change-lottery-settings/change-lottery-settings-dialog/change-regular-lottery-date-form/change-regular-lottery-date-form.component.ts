@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ChangeLotterySettingsHttpService} from "../../services/change-lottery-settings-http.service";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -8,14 +8,22 @@ import {ChangeLotterySettingsHttpService} from "../../services/change-lottery-se
   styleUrls: ['./change-regular-lottery-date-form.component.scss']
 })
 export class ChangeRegularLotteryDateFormComponent implements OnInit {
-  selectedDate = <Date>{};
+  public dateForm = new FormGroup({
+    week: new FormControl(''),
+    day: new FormControl(''),
+  });
 
-  constructor(public changeLotterySettingsHttpService: ChangeLotterySettingsHttpService) {
+  constructor(private formBuilder: FormBuilder) {
+
   }
 
-  ngOnInit(): void {
-    console.log('osiem')
+  ngOnInit() {
   }
 
+  changeValue() {
+  }
 
+  onSubmit() {
+    console.log('submitted values: ' + this.dateForm.value.week + ' ' + this.dateForm.value.day);
+  }
 }

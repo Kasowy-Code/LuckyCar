@@ -2,9 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {LotterySettings} from "../../../shared/dto/lottery-settings";
 import {DateToChangeTypeEnumService} from "../services/date-to-change-type-enum.service";
 import {MatDialog} from "@angular/material/dialog";
+import {DateToChangeTypeEnum} from "../DateToChangeTypeEnum";
 import {
-  ChangeLotterySettingsDialogComponent
-} from "../change-lottery-settings-dialog/change-lottery-settings-dialog.component";
+  ChangeTemporaryLotteryDateFormComponent
+} from "../change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component";
+import {
+  ChangeRegularLotteryDateFormComponent
+} from "../change-lottery-settings-dialog/change-regular-lottery-date-form/change-regular-lottery-date-form.component";
 
 
 @Component({
@@ -23,12 +27,22 @@ export class ChangeLotterySettingsMenuComponent implements OnInit {
   }
 
   public openChangeLotterySettingsDialog() {
-    let dialogRef = this.changeLotterySettingsDialog.open(ChangeLotterySettingsDialogComponent,
-      {});
 
-    dialogRef.afterClosed().subscribe(response => {
+    if (this.dateToChangeTypeEnumService.dateToChangeType === DateToChangeTypeEnum.REGULAR) {
+      let dialogRef = this.changeLotterySettingsDialog.open(ChangeRegularLotteryDateFormComponent,
+        {});
 
-    });
+      dialogRef.afterClosed().subscribe(response => {
+
+      });
+    } else if (this.dateToChangeTypeEnumService.dateToChangeType === DateToChangeTypeEnum.TEMPORARY) {
+      let dialogRef = this.changeLotterySettingsDialog.open(ChangeTemporaryLotteryDateFormComponent,
+        {});
+
+      dialogRef.afterClosed().subscribe(response => {
+
+      });
+    }
   }
 
 }

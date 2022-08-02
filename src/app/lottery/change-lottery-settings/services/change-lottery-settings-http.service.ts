@@ -1,24 +1,44 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import {Time} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChangeLotterySettingsHttpService {
   private drawSettingsUrl = `${environment.link}/api/settings`;
+  selectedDate = <Date>{};
+  selectedHour = <Time>{};
+
 
   constructor(private http: HttpClient) {
   }
 
-  changeTemporaryLotteryDate(date: any) {
-    console.log(date);
+  changeTemporaryLotteryDate(selectedDate: Date, selectedHour: Time) {
+    this.selectedDate = selectedDate;
+    this.selectedHour = selectedHour;
 
-    let body = `"temporaryDate": "${date}"`;
+    this.setSelectedDateHoursAndMinutes();
 
-    console.log("dupadupa " + body)
+    let body = {
+      "temporaryDrawDate": this.selectedDate.toISOString()
+    };
 
-    //"temporaryDate": "2022-08-07T12:00:00"
-    return this.http.patch(`${this.drawSettingsUrl}`, {body});
+    return this.http.patch(`${this.drawSettingsUrl}`, body);
+  }
+
+  setSelectedDateHoursAndMinutes() {
+
+    var hoursAndMinutes: number[] = [];
+
+    var timeArrayString = this.selectedHour.toString().split(":", 2);
+    for (let item of timeArrayString) {
+      let no: number = Number(item);
+      hoursAndMinutes.push(no)
+    }
+
+    this.selectedDate.setHours(hoursAndMinutes[0] + 2);
+    this.selectedDate.setMinutes(hoursAndMinutes[1]);
   }
 }

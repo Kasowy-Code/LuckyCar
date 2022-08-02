@@ -110,7 +110,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
   getLotteryState(): LotteryStateEnum {
     let result = LotteryStateEnum.ACTIVE;
 
-    if (!this.lotterySettings.isActive) {
+    if (this.lotterySettings.isActive) {
       result = LotteryStateEnum.INACTIVE;
     } else if (this.userDraw.registeredForDraw) {
       result = LotteryStateEnum.REGISTERED;
@@ -118,5 +118,4 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
     return result;
   }
-
 }

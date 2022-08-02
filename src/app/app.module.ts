@@ -49,9 +49,6 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {
-  ChangeLotterySettingsDialogComponent
-} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-lottery-settings-dialog.component';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {
@@ -63,13 +60,7 @@ import {
 import {
   ChangeTemporaryLotteryDateFormComponent
 } from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component';
-import {
-  NgxMatDatetimePickerModule,
-  NgxMatNativeDateModule,
-  NgxMatTimepickerModule
-} from "@angular-material-components/datetime-picker";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-
 
 @NgModule({
   declarations: [
@@ -92,7 +83,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent,
-    ChangeLotterySettingsDialogComponent,
     ChangeRegularLotteryDateFormComponent,
     ChangeLotterySettingsMenuComponent,
     ChangeTemporaryLotteryDateFormComponent
@@ -108,6 +98,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
@@ -133,10 +124,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatSlideToggleModule,
-    NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule,
-    NgxMatNativeDateModule
+    MatSlideToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ChangeLotterySettingsHttpService} from "../../services/change-lottery-settings-http.service";
+import {Time} from "@angular/common";
+import {MatDialogRef} from "@angular/material/dialog";
+import {DateRange} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-change-temporary-lottery-date-form',
@@ -8,18 +11,36 @@ import {ChangeLotterySettingsHttpService} from "../../services/change-lottery-se
 })
 export class ChangeTemporaryLotteryDateFormComponent implements OnInit {
   selectedDate = <Date>{};
+  selectedHour = <Time>{};
+  minDate: (Date & DateRange<Date>) | Date | null = null;
+  maxDate: (Date & DateRange<Date>) | Date | null = null;
 
-  constructor(public changeLotterySettingsHttpService: ChangeLotterySettingsHttpService) {
+  constructor(public changeLotterySettingsHttpService: ChangeLotterySettingsHttpService,
+              public dialogRef: MatDialogRef<ChangeTemporaryLotteryDateFormComponent>) {
+
   }
 
   ngOnInit(): void {
-    console.log('osiem')
+    this.setCalendarDateRange();
   }
 
-  changeSelectedDate() {
+  setCalendarDateRange() {
+    const currentDate = new Date();
+    this.minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    this.maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
+  }
 
-    this.changeLotterySettingsHttpService.changeTemporaryLotteryDate(this.selectedDate.toISOString()).subscribe(response => {
-      console.log(response);
+  onSubmit() {
+    //dlaczego to sie wykonuje tylko kiedy użytkownik wybierze i date i godzine i tylko jeśli wcześniej nie kliknie przycisku submit?
+
+    this.changeLotterySettingsHttpService.changeTemporaryLotteryDate(this.selectedDate, this.selectedHour).subscribe(response => {
+
+      this.dialogRef.close();
     })
+  }
+
+  onCancelClick() {
+
+    this.dialogRef.close();
   }
 }
