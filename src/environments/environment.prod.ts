@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  link: 'http://localhost:8080'
+  link: '192.168.253.213:8081/LuckyCar'
 };
