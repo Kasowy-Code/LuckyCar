@@ -9,7 +9,4 @@
   <span id="lottery-state-text">SET LOTTERY STATE:</span>
   <mat-slide-toggle [(ngModel)]="lotterySettings.isActive"
                     (click)="$event.stopPropagation(); changeLotteryState()"></mat-slide-toggle>
-<!--  <mat-slide-toggle *ngIf="!lotterySettings.isActive"-->
-<!--                    checked="false"-->
-<!--                    (click)="$event.stopPropagation(); changeLotteryState()"></mat-slide-toggle>-->
 </mat-menu>
