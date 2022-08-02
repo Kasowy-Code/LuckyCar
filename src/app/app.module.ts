@@ -50,6 +50,7 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatDividerModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

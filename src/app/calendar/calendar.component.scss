@@ -9,6 +9,20 @@
   padding-bottom: 50px;
 }
 .demo-inline-calendar-card {
+  margin-bottom: 2rem;
   width: 18rem;
 }
+.have-parking {
+  border-bottom: 2px solid #064dd6 !important;
+}
+.available-parking {
+  border-bottom: 2px solid limegreen !important;
+}
+button.disabled {
+  background-color: #3c3c3b !important;
+}
 
+.mat-button-toggle-group {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+}

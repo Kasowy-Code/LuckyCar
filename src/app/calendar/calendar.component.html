@@ -1,8 +1,13 @@
 <div class="main">
-  <mat-card class="demo-inline-calendar-card">
-      <mat-calendar (selectedChange)="selectedChange($event)" [selected]="selectedRangeValue"></mat-calendar>
+
+  <mat-spinner *ngIf="!loaded"></mat-spinner>
+  <div *ngIf="loaded">
+    <mat-card class="demo-inline-calendar-card">
+    <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedChange($event)" [selected]="selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
   </mat-card>
 
-  <button mat-raised-button (click)="changeSelectStrategy()">Confirm</button>
-<!--  Do zmiany, tymczasowo tak zostanie-->
+  <mat-button-toggle-group [disabled]="!this.selectedRangeValue.start">
+    <mat-button-toggle *ngFor="let parking of parkings" (click)="confirmDateRange()">{{parking.name}}</mat-button-toggle>
+  </mat-button-toggle-group>
+  </div>
 </div>
