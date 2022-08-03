@@ -30,14 +30,18 @@ export class ChangeLotterySettingsMenuComponent implements OnInit {
 
     if (this.dateToChangeTypeEnumService.dateToChangeType === DateToChangeTypeEnum.REGULAR) {
       let dialogRef = this.changeLotterySettingsDialog.open(ChangeRegularLotteryDateFormComponent,
-        {});
+        {
+          disableClose: true,
+        });
 
       dialogRef.afterClosed().subscribe(response => {
 
       });
     } else if (this.dateToChangeTypeEnumService.dateToChangeType === DateToChangeTypeEnum.TEMPORARY) {
       let dialogRef = this.changeLotterySettingsDialog.open(ChangeTemporaryLotteryDateFormComponent,
-        {});
+        {
+          disableClose: true,
+        });
 
       dialogRef.afterClosed().subscribe(response => {
 

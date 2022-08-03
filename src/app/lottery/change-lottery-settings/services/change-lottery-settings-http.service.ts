@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {Time} from "@angular/common";
+import {LotteryEndDateDto} from "../dto/lottery-end-date-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,19 @@ export class ChangeLotterySettingsHttpService {
   constructor(private http: HttpClient) {
   }
 
+  changeRegularLotteryDate(lotteryEndDateDto: LotteryEndDateDto) {
+
+    console.log('week ' + lotteryEndDateDto.registrationEndWeek);
+    console.log('day ' + lotteryEndDateDto.registrationEndDay);
+    console.log('hour ' + lotteryEndDateDto.registrationEndHour);
+
+    return this.http.patch(`${this.drawSettingsUrl}`, lotteryEndDateDto);
+  }
+
   changeTemporaryLotteryDate(selectedDate: Date, selectedHour: Time) {
     this.selectedDate = selectedDate;
     this.selectedHour = selectedHour;
+
 
     this.setSelectedDateHoursAndMinutes();
 

@@ -5,5 +5,5 @@ import {LotteryStateEnum} from "../lottery-state-enum";
   providedIn: 'root'
 })
 export class LotteryStateEnumService {
-  lotteryState = LotteryStateEnum.NOTLOADED;
+  lotteryState = LotteryStateEnum.NOT_LOADED;
 }

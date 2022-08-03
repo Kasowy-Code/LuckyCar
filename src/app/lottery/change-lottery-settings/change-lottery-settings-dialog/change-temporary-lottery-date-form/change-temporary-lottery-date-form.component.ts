@@ -10,8 +10,8 @@ import {DateRange} from "@angular/material/datepicker";
   styleUrls: ['./change-temporary-lottery-date-form.component.scss']
 })
 export class ChangeTemporaryLotteryDateFormComponent implements OnInit {
-  selectedDate = <Date>{};
-  selectedHour = <Time>{};
+  selectedDate: Date | null = null;
+  selectedHour: Time | null = null;
   minDate: (Date & DateRange<Date>) | Date | null = null;
   maxDate: (Date & DateRange<Date>) | Date | null = null;
 
@@ -31,12 +31,13 @@ export class ChangeTemporaryLotteryDateFormComponent implements OnInit {
   }
 
   onSubmit() {
-    //dlaczego to sie wykonuje tylko kiedy użytkownik wybierze i date i godzine i tylko jeśli wcześniej nie kliknie przycisku submit?
 
-    this.changeLotterySettingsHttpService.changeTemporaryLotteryDate(this.selectedDate, this.selectedHour).subscribe(response => {
+    if (this.selectedDate && this.selectedHour) {
+      this.changeLotterySettingsHttpService.changeTemporaryLotteryDate(this.selectedDate, this.selectedHour).subscribe(response => {
 
-      this.dialogRef.close();
-    })
+        this.dialogRef.close();
+      })
+    }
   }
 
   onCancelClick() {
