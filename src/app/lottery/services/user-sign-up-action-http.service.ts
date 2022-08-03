@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ParkingLot} from "../../../shared/dto/parking-lot";
-import {environment} from "../../../../environments/environment";
+import {ParkingLot} from "../../shared/dto/parking-lot";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserActionHttpService {
+export class UserSignUpActionHttpService {
   private userDrawSignUpToLotteryUrl = `${environment.link}/api/userdraw/registerfordraw`;
   private userDrawResignFromLotteryUrl = `${environment.link}/api/userdraw/resignfromdraw`;
 

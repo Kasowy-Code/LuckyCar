@@ -1,0 +1,6 @@
+export enum LotteryStateEnum {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  REGISTERED = 'REGISTERED',
+  NOT_LOADED = 'NOT_LOADED'
+}

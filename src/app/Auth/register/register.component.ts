@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -8,32 +8,29 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-    NameSurnamePattern = /^[A-Z|[ĄĘŁĆŻŹŃŚÓ]{1}[a-z|[ąęłćźżńśó]{1,38}$/;
-    name = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
-    surname = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
-    email = new FormControl('', [Validators.email, Validators.required]);
-    error = false;
+export class RegisterComponent {
+  NameSurnamePattern = /^[A-Z|[ĄĘŁĆŻŹŃŚÓ]{1}[a-z|[ąęłćźżńśó]{1,38}$/;
+  name = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
+  surname = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
+  email = new FormControl('', [Validators.email, Validators.required]);
+  error = false;
     loading = false;
   constructor(private http: HttpClient, private router: Router,
               private registerService: RegisterService,
               private snackBar:MatSnackBar) {
   }
 
-  ngOnInit(): void {
-  }
-
   getErrorMessage(item: any) {
-      // this.error = true;
-    if(item.hasError('email')) {
+    //this.error = true;
+    if (item.hasError('email')) {
       return 'Not a valid email';
     }
-    if(item.hasError('minlength')) {
+    if (item.hasError('minlength')) {
       return 'Must be at least 2 characters long';
     }
-    if(item.hasError('pattern')) {
+    if (item.hasError('pattern')) {
       return 'Invalid format';
     }
     return item.hasError('required') ? 'You must enter a value' : '';
@@ -58,5 +55,5 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
             this.error = true;
         });
-  }
+    }
 }

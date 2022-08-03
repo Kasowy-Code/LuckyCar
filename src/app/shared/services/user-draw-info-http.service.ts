@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
-import {UserDraw} from "../../dto/user-draw";
-import {ParkingLot} from "../../dto/parking-lot";
+import {environment} from "../../../environments/environment";
+import {UserDraw} from "../dto/user-draw";
+import {ParkingLot} from "../dto/parking-lot";
 
 @Injectable({
   providedIn: 'root'

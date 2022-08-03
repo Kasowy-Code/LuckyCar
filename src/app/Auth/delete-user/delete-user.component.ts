@@ -8,15 +8,16 @@ import {LogoutService} from "../services/logout.service";
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.css']
+  styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent implements OnInit {
 
   id = this.route.snapshot.params['id'];
 
-  constructor(private roleService:RoleService, private route:ActivatedRoute,
-              private service:DeleteUserService, private _snackBar:MatSnackBar,
-              private router:Router, private logoutService:LogoutService) { }
+  constructor(private roleService: RoleService, private route: ActivatedRoute,
+              private service: DeleteUserService, private _snackBar: MatSnackBar,
+              private router: Router, private logoutService: LogoutService) {
+  }
 
   ngOnInit(): void {
     this.deleteUser();
