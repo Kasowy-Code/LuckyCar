@@ -20,16 +20,16 @@ export class SetPasswordErrorHandler implements ErrorHandler {
   }
 
   handleError(error:any) {
-    if(error.status === 400){
-       this.openSnackBar("This user does not exist!");
-    }
-
-    if(error.status === 409){
-      this.openSnackBar("Password cannot be set for this user!");
-    }
-
-    if(error.status === 404){
-      this.openSnackBar("This user does not exist!");
-    }
+    // if(error.status === 400){
+    //    this.openSnackBar("This user does not exist!");
+    // }
+    //
+    // if(error.status === 409){
+    //   this.openSnackBar("Password cannot be set for this user!");
+    // }
+    //
+    // if(error.status === 404){
+    //   this.openSnackBar("This user does not exist!");
+    // }
   }
 }

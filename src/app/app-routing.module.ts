@@ -17,6 +17,7 @@ import {RoleGuard} from "./guards/role.guard";
 import {SelectUsersComponent} from "./lottery/select-users/select-users.component";
 import {RestartPasswordComponent} from "./Auth/restart-password/restart-password.component";
 import {UsersComponent} from "./account/users/users.component";
+import {AuthErrorComponent} from "./Auth/auth-error/auth-error.component";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "lottery/selectUsers", component: SelectUsersComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "delete/:id", component: DeleteUserComponent, canActivate: [AuthGuard, RoleGuard, TokenGuard]},
   {path: "changePassword/:id", component: RestartPasswordComponent},
   {path: "users", component: UsersComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
+  {path: "auth-error", component: AuthErrorComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 

@@ -55,6 +55,7 @@ import { DialogComponent } from './account/dialog/dialog.component';
 import { UsersComponent } from './account/users/users.component';
 import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
 import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
+import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     DialogComponent,
     UsersComponent,
     UserDialogComponent,
-    AreYouSureDialogComponent
+    AreYouSureDialogComponent,
+    AuthErrorComponent
   ],
   imports: [
     BrowserModule,

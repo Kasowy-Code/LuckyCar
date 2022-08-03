@@ -9,7 +9,6 @@
   justify-content: center;
   align-items: center;
   height: 85vh;
-  /*background-image: url("https://wallpaperaccess.com/full/2030997.jpg");*/
 }
 
 h1 {
@@ -21,11 +20,11 @@ p {
   text-align: center;
 }
 .box {
-  background-color: limegreen;
+  background-color: darkred;
   color: white;
-  width: 80%;
-  margin: 0 auto;
-  border: 2px solid black;
   padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
   border-radius: 15px;
+  border: 2px solid black;
 }

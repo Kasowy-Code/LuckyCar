@@ -20,16 +20,16 @@ export class DeleteUserErrorHandler implements ErrorHandler {
   }
 
   handleError(error:any) {
-    if(error.status === 400){
-      this.openSnackBar("This user does not exist!");
-    }
-
-    if(error.status === 404){
-      this.openSnackBar("This user does not exist!");
-    }
-
-    if(error.status === 401){
-      this.logoutService.logout();
-    }
+    // if(error.status === 400){
+    //   this.openSnackBar("This user does not exist!");
+    // }
+    //
+    // if(error.status === 404){
+    //   this.openSnackBar("This user does not exist!");
+    // }
+    //
+    // if(error.status === 401){
+    //   this.logoutService.logout();
+    // }
   }
 }
