@@ -23,6 +23,9 @@ button.disabled {
 }
 
 .mat-button-toggle-group {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr !important;
+  display: flex !important;
+  justify-content: space-evenly !important;
+}
+.mat-button-toggle {
+  flex-grow: 1 !important;
 }
