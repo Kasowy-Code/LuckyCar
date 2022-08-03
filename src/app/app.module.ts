@@ -50,6 +50,11 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
+import { DialogComponent } from './account/dialog/dialog.component';
+import { UsersComponent } from './account/users/users.component';
+import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
+import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
 
 
 @NgModule({
@@ -72,7 +77,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     ResigningFromLotteryDialogComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    RestartPasswordComponent,
+    DialogComponent,
+    UsersComponent,
+    UserDialogComponent,
+    AreYouSureDialogComponent
   ],
   imports: [
     BrowserModule,

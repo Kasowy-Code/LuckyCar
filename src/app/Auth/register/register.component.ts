@@ -14,8 +14,8 @@ export class RegisterComponent implements OnInit {
     name = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
     surname = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
     email = new FormControl('', [Validators.email, Validators.required]);
-    error = true;
-  loading = false;
+    error = false;
+    loading = false;
   constructor(private http: HttpClient, private router: Router, private registerService: RegisterService) {
   }
 
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getErrorMessage(item: any) {
-      this.error = true;
+      // this.error = true;
     if(item.hasError('email')) {
       return 'Not a valid email';
     }
@@ -39,39 +39,12 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-    if (!this.error) {
       this.registerService.register(String(this.name.value), String(this.surname.value), String(this.email.value))
         .subscribe(() => {
           this.router.navigate(["/registered"]);
         }, err => {
             this.loading = false;
+            this.error = true;
         });
-    }
   }
 }
-
-
-  //TODO: MACIEJU ZROB WALIDACJE
-  // onSubmit() {
-  //   if (!this.RegisterForm.value.email?.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/)) {
-  //       this.emailError = true;
-  //   }
-  //   if(!this.RegisterForm.value.name?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
-  //     this.nameError = true;
-  //   }
-  //   if(!this.RegisterForm.value.surname?.match(/^[A-Z|[ĄĘŁĆŻŹŃŚ]{1}[a-z|[ąęłćźżńś]{1,38}$/)) {
-  //     this.surnameError = true;
-  //   }
-  //   if(!this.emailError && !this.nameError && !this.surnameError) {
-  //     this.http.post(`${environment.link}/api/register`, this.RegisterForm.value, {observe: "response"})
-  //       .subscribe(response => {
-  //           this.error = true;
-  //           this.router.navigate(["/Registered"]);
-  //
-  //         },
-  //         error => {
-  //           this.error = true;
-  //         });
-  //   }
-  // }
-

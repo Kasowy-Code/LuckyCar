@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: grid;
+  justify-content: center;
+//height: 85vh;
+  align-items: end;
+}
+
+.search {
+  color: white;
+  width: 100%;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.mat-raised-button {
+  width: 350px;
+  height: 50px;
+  background-color: var(--mainColor);
+  color: white;
+  margin-top: 15px;
+  font-size: 17px;
+}
+.users-list {
+  padding: 4rem 0;
+}
+
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background-color: var(--mainColor);
+  padding: 1rem;
+}

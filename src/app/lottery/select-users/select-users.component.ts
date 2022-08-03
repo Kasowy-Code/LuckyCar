@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 
 
-export interface User {
+interface User {
   name: string;
   surname: string;
   id: number;
