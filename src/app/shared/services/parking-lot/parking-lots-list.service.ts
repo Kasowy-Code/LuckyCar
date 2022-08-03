@@ -17,6 +17,5 @@ export class ParkingLotsListService {
 
   getParkingLots(): Observable<ParkingLot[]> {
     return this.http.get<ParkingLot[]>(this.ParkingLotsUrl);
-
   }
 }
