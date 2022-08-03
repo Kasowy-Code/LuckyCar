@@ -4,6 +4,6 @@
 </div>
 <div mat-dialog-actions>
   <button class="no" mat-button mat-dialog-close cdkFocusInitial class="no">No</button>
-  <button class="yes" mat-button mat-dialog-close class="yes">Yes</button>
+  <button class="yes" (click)="setOrDel(data.action, data.id)" mat-button mat-dialog-close class="yes">Yes</button>
 </div>
 

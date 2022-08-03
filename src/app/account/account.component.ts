@@ -35,4 +35,8 @@ export class AccountComponent implements OnInit {
       width: '250px'
     });
   }
+
+  getUsers(){
+    this.router.navigate(["/users"]);
+  }
 }

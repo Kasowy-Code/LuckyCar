@@ -30,7 +30,7 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "accept/:id", component: AcceptUserComponent, canActivate: [AuthGuard, RoleGuard, TokenGuard]},
   {path: "delete/:id", component: DeleteUserComponent, canActivate: [AuthGuard, RoleGuard, TokenGuard]},
   {path: "changePassword/:id", component: RestartPasswordComponent},
-  {path: "users", component: UsersComponent},
+  {path: "users", component: UsersComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 

@@ -4,10 +4,10 @@
     {{data.email}}
   </div>
   <div>
-    <button class="giveAdmin" mat-raised-button mat-dialog-close (click)="giveAdmin()">
+    <button class="giveAdmin" mat-raised-button mat-dialog-close (click)="giveAdmin(data.id)">
       Give Admin Role
     </button><br>
-    <button class="delete" mat-raised-button mat-dialog-close (click)="deleteAccount()">
+    <button class="delete" mat-raised-button mat-dialog-close (click)="deleteAccount(data.id)">
       Delete account
     </button><br>
     <button class="cancel" mat-raised-button mat-dialog-close cdkFocusInitial>

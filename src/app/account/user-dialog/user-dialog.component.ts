@@ -14,20 +14,23 @@ export class UserDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDialog(message:string){
+  openDialog(message:string, id:any, action:string){
     this.dialog.open(AreYouSureDialogComponent, {
       width: '250px',
       data :{
-        'message':message
+        'message':message,
+        'id': id,
+        'action': action
       }
     });
   }
 
-  giveAdmin(){
-    this.openDialog("Do you want to give an admin to this user?");
+  giveAdmin(id:any){
+    //TODO: TEN USER MA ADMINROLE TO WYKASUJ PRZYCISK
+    this.openDialog("Do you want to give an admin to this user?", id, "ADMIN");
   }
 
-  deleteAccount(){
-    this.openDialog("Do you want to delete this user's account?")
+  deleteAccount(id:any){
+    this.openDialog("Do you want to delete this user's account?", id, "DELETE");
   }
 }

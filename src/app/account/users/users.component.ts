@@ -4,7 +4,6 @@ import {FormControl} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogComponent} from "../dialog/dialog.component";
 import {UserDialogComponent} from "../user-dialog/user-dialog.component";
 
 interface User {
@@ -58,5 +57,4 @@ export class UsersComponent implements OnInit {
       }
     });
   }
-
 }

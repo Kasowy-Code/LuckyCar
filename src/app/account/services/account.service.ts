@@ -34,5 +34,35 @@ export class AccountService {
         });
       }));
   }
+
+  setAdmin(id:any){
+    const request = {
+      "id": id
+    }
+    return this.http.patch(`${environment.link}/api/user/setAdmin`, request, {responseType: 'text' as 'json'})
+      .pipe(tap(data => {
+        this.snackBar.open("Admin role given", "", {
+          duration: 5*1000,
+          panelClass: ['good-snackbar'],
+          horizontalPosition: "end",
+          verticalPosition: "top",
+        });
+      }))
+  }
+
+  deleteAccountById(id:any){
+    const request = {
+      "id": id
+    }
+    return this.http.delete(`${environment.link}/api/user/delete-by-id`,  {responseType: 'text' as 'json',
+      body: request}).pipe(tap(data => {
+      this.snackBar.open("This account has been deleted", "", {
+        duration: 5*1000,
+        panelClass: ['good-snackbar'],
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
+    }))
+  }
 }
 
