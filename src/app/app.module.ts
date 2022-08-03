@@ -50,6 +50,7 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
 import { DialogComponent } from './account/dialog/dialog.component';
 import { UsersComponent } from './account/users/users.component';
@@ -118,7 +119,8 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     MatDividerModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

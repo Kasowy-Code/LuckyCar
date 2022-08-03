@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
 import {ParkingLot} from "../../../shared/dto/parking-lot";
 import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
 
