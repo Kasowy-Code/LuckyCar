@@ -1,4 +1,4 @@
-<footer class="footer" *ngIf="!hasRoute('login')&&!hasRoute('register')">
+<footer class="footer" *ngIf="!hasRoute('login')&&!hasRoute('register')&&!hasRoute('changePassword')">
   <mat-toolbar class="footer" color="primary">
     <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -7,7 +7,7 @@
           <mat-icon>casino</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>Losowanko</span>
+          <span>Lottery</span>
         </div>
       </button>
 
@@ -16,7 +16,7 @@
           <mat-icon>calendar_month</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>Kalendarz</span>
+          <span>Calendar</span>
         </div>
       </button>
 
@@ -25,7 +25,7 @@
           <mat-icon>directions_car</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>Moje autka</span>
+          <span>My cars</span>
         </div>
       </button>
 
@@ -34,7 +34,7 @@
           <mat-icon>person</mat-icon>
         </div>
         <div class="toolbar-icon-text">
-          <span>Konto</span>
+          <span>Account</span>
         </div>
       </button>
 

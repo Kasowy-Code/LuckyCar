@@ -1,6 +1,7 @@
 import {ErrorHandler, Injectable} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LogoutService} from "../Auth/services/logout.service";
+import {AcceptUserComponent} from "../Auth/accept-user/accept-user.component";
 
 @Injectable({
   providedIn: 'root'
