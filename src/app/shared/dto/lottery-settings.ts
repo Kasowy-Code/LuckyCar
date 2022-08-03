@@ -1,4 +1,4 @@
-export interface DrawSettings {
+export interface LotterySettings {
   id: any;
   registrationEndHour: number;
   registrationEndDay: any;

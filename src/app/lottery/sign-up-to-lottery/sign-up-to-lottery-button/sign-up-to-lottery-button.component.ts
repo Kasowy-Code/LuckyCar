@@ -1,21 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLotDialogComponent} from "../parking-lot-dialog/parking-lot-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ParkingLotsListService} from "../../../shared/services/parking-lot/parking-lots-list.service";
-import {UserActionHttpService} from "../../services/user-action/user-action-http.service";
+import {ParkingLotsListService} from "../../../shared/services/parking-lots-list.service";
+import {UserSignUpActionHttpService} from "../../services/user-sign-up-action-http.service";
 import {UserDraw} from "../../../shared/dto/user-draw";
-import {LotteryPermissionService} from "../../services/lottery-permission/lottery-permission.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {DrawSettings} from "../../../shared/dto/draw-settings";
+import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
+import {LotterySettings} from "../../../shared/dto/lottery-settings";
 import {forkJoin} from "rxjs";
 import {
   ResigningFromLotteryDialogComponent
 } from "../resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
-import {UserDrawInfoHttpService} from "../../../shared/services/parking-lot/user-draw-info-http.service";
-
-enum LotteryStateEnum {
-  ACTIVE, INACTIVE, REGISTERED, NOTLOADED
-}
+import {UserDrawInfoHttpService} from "../../../shared/services/user-draw-info-http.service";
+import {LotteryStateEnum} from "../../lottery-state-enum";
+import {LotteryStateEnumService} from "../../services/lottery-state-enum.service";
 
 @Component({
   selector: 'app-sign-up-to-lottery-button',
@@ -24,18 +21,17 @@ enum LotteryStateEnum {
 })
 export class SignUpToLotteryButtonComponent implements OnInit {
   userDraw = <UserDraw>{};
-  lotterySettings = <DrawSettings>{};
-  lotteryState = LotteryStateEnum.NOTLOADED;
+  lotterySettings = <LotterySettings>{};
   LotteryStateEnum = LotteryStateEnum;
   chosenParkingLotName = '';
 
-  constructor(private lotteryPermissionService: LotteryPermissionService,
-              private snackBar: MatSnackBar,
+  constructor(private lotteryPermissionService: LotterySettingsInfoHttpService,
               private parkingLotDialog: MatDialog,
               private confirmResigningFromLotteryDialog: MatDialog,
               private parkingLotsListService: ParkingLotsListService,
-              private userActionHttpService: UserActionHttpService,
-              private userDrawInfoHttpService: UserDrawInfoHttpService) {
+              private userActionHttpService: UserSignUpActionHttpService,
+              private userDrawInfoHttpService: UserDrawInfoHttpService,
+              public lotteryStateEnumService: LotteryStateEnumService) {
   }
 
   ngOnInit(): void {
@@ -57,11 +53,11 @@ export class SignUpToLotteryButtonComponent implements OnInit {
     })
   }
 
-  private setupUserPermissionForLottery() {
+  setupUserPermissionForLottery() {
 
     forkJoin([
       this.userDrawInfoHttpService.getCurrentUserDrawInfo(),
-      this.lotteryPermissionService.getLotteryIsOpen()
+      this.lotteryPermissionService.getLotterySettings()
     ])
       .subscribe(([userDrawInfo, isLotteryOpen]) => {
         this.userDraw = userDrawInfo;
@@ -69,7 +65,7 @@ export class SignUpToLotteryButtonComponent implements OnInit {
 
         console.log(isLotteryOpen.isActive);
 
-        this.lotteryState = this.getLotteryState();
+        this.lotteryStateEnumService.lotteryState = this.getLotteryState();
       });
   }
 
@@ -111,16 +107,15 @@ export class SignUpToLotteryButtonComponent implements OnInit {
     );
   }
 
-  getLotteryState() {
-    let message = LotteryStateEnum.ACTIVE;
+  getLotteryState(): LotteryStateEnum {
+    let result = LotteryStateEnum.ACTIVE;
 
-    if (!this.lotterySettings.isActive) {
-      message = LotteryStateEnum.INACTIVE;
+    if (this.lotterySettings.isActive) {
+      result = LotteryStateEnum.INACTIVE;
     } else if (this.userDraw.registeredForDraw) {
-      message = LotteryStateEnum.REGISTERED;
+      result = LotteryStateEnum.REGISTERED;
     }
 
-    return message;
+    return result;
   }
-
 }

@@ -19,7 +19,6 @@ import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from './Auth/register/register.component';
 import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
@@ -34,7 +33,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthGuard} from "./guards/auth.guard";
-import {TokenInterceptorService} from "./shared/services/token-interceptor.service";
+import {TokenInterceptorService} from "./shared/services/token/token-interceptor.service";
 import {AcceptUserComponent} from './Auth/accept-user/accept-user.component';
 import {DeleteUserComponent} from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
@@ -50,6 +49,17 @@ import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatMenuModule} from "@angular/material/menu";
+import {
+  ChangeLotterySettingsMenuComponent
+} from "./lottery/change-lottery-settings/change-lottery-settings-menu/change-lottery-settings-menu.component";
+import {
+  ChangeRegularLotteryDateFormComponent
+} from "./lottery/change-lottery-settings/change-lottery-settings-dialog/change-regular-lottery-date-form/change-regular-lottery-date-form.component";
+import {
+  ChangeTemporaryLotteryDateFormComponent
+} from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
 import { DialogComponent } from './account/dialog/dialog.component';
@@ -79,6 +89,10 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent,
+    ChangeRegularLotteryDateFormComponent,
+    ChangeLotterySettingsMenuComponent,
+    ChangeTemporaryLotteryDateFormComponent,
+    DeleteUserComponent,
     RestartPasswordComponent,
     DialogComponent,
     UsersComponent,
@@ -104,7 +118,6 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatDividerModule,
     MatCheckboxModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
@@ -119,6 +132,8 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     MatDividerModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
     MatToolbarModule,
     MatButtonToggleModule
   ],

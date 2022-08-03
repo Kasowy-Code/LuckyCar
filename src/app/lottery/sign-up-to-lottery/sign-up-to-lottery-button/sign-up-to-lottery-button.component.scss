@@ -4,6 +4,7 @@ $userIsSignedUpToLotteryMessage: 'You are signed up to lottery';
 $lotteryIsClosedMessage: 'Lottery is closed';
 $youCanSignUpToLotteryMessage: 'You can sign up to lottery';
 $globalWidth: 350px;
+$globalHeight: 50px;
 
 .userIsSignedUpToLottery {
   width: $globalWidth;
@@ -25,7 +26,6 @@ $globalWidth: 350px;
 
 .youCanSignUpToLottery {
   width: $globalWidth;
-
 
   .mat-raised-button {
     width: $globalWidth;
