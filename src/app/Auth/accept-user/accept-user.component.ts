@@ -12,8 +12,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AcceptUserComponent implements OnInit {
 
   id = this.route.snapshot.params['id'];
-  h1 = "User has been accepted";
-  p = "A message with the password setting form has been sent to the user";
 
   constructor(private route:ActivatedRoute, private service:AcceptUserService,
               private roleService:RoleService, private router:Router,
@@ -23,13 +21,10 @@ export class AcceptUserComponent implements OnInit {
     this.acceptUser();
   }
 
-  changeMessage(){
-    this.p = "This user does not exist!";
-    this.h1 = "This user cannot be accepted";
-  }
-
   acceptUser(){
-      this.service.acceptUser(this.id).subscribe(
-        (data) => {})
+      this.service.acceptUser(this.id).subscribe((data) => {},
+        error =>{
+          this.router.navigate(["/auth-error"]);
+        });
   }
 }

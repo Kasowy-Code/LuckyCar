@@ -41,13 +41,10 @@ import {
   SignUpToLotteryButtonComponent
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
-import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
-import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatMenuModule} from "@angular/material/menu";
 import {
@@ -66,6 +63,7 @@ import { DialogComponent } from './account/dialog/dialog.component';
 import { UsersComponent } from './account/users/users.component';
 import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
 import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
+import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
 
 
 @NgModule({
@@ -97,7 +95,8 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     DialogComponent,
     UsersComponent,
     UserDialogComponent,
-    AreYouSureDialogComponent
+    AreYouSureDialogComponent,
+    AuthErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -141,19 +140,7 @@ import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-di
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  },
-    {
-      provide: ErrorHandler,
-      useClass: SetPasswordErrorHandler
-    },
-    {
-      provide: ErrorHandler,
-      useClass: AcceptUserErrorHandler
-    },
-    {
-      provide: ErrorHandler,
-      useClass: DeleteUserErrorHandler
-    }
+  }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {RoleService} from "../../role.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DeleteUserService} from "./services/delete-user.service";
@@ -23,9 +23,11 @@ export class DeleteUserComponent implements OnInit {
     this.deleteUser();
   }
 
-  deleteUser() {
-    this.service.deleteUser(this.id).subscribe(
-      (data) => {
-      });
+  deleteUser(){
+      this.service.deleteUser(this.id).subscribe(
+        (data) => {},
+        error => {
+          this.router.navigate(["/auth-error"]);
+        });
   }
 }
