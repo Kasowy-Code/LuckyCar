@@ -22,7 +22,9 @@ export class AcceptUserComponent implements OnInit {
   }
 
   acceptUser(){
-      this.service.acceptUser(this.id).subscribe(
-        (data) => {})
+      this.service.acceptUser(this.id).subscribe((data) => {},
+        error =>{
+          this.router.navigate(["/auth-error"]);
+        });
   }
 }

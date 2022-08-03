@@ -3,6 +3,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {RegisterService} from "../services/register.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,9 @@ export class RegisterComponent implements OnInit {
     email = new FormControl('', [Validators.email, Validators.required]);
     error = false;
     loading = false;
-  constructor(private http: HttpClient, private router: Router, private registerService: RegisterService) {
+  constructor(private http: HttpClient, private router: Router,
+              private registerService: RegisterService,
+              private snackBar:MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -43,6 +46,15 @@ export class RegisterComponent implements OnInit {
         .subscribe(() => {
           this.router.navigate(["/registered"]);
         }, err => {
+          if(err.status === 409){
+            this.snackBar.open("This user already exists", "", {
+              duration: 5*1000,
+              panelClass: ['error-snackbar'],
+              horizontalPosition: "end",
+              verticalPosition: "top",
+            });
+          }
+
             this.loading = false;
             this.error = true;
         });

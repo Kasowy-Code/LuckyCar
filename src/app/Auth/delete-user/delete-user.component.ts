@@ -24,6 +24,9 @@ export class DeleteUserComponent implements OnInit {
 
   deleteUser(){
       this.service.deleteUser(this.id).subscribe(
-        (data) => {});
+        (data) => {},
+        error => {
+          this.router.navigate(["/auth-error"]);
+        });
   }
 }

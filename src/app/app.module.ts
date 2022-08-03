@@ -42,13 +42,10 @@ import {
   SignUpToLotteryButtonComponent
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {SetPasswordErrorHandler} from "./errorhandler/SetPasswordErrorHandler";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
-import {AcceptUserErrorHandler} from "./errorhandler/AcceptUserErrorHandler";
 import {RoleGuard} from "./guards/role.guard";
-import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
 import { DialogComponent } from './account/dialog/dialog.component';
@@ -126,19 +123,7 @@ import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  },
-    {
-      provide: ErrorHandler,
-      useClass: SetPasswordErrorHandler
-    },
-    {
-      provide: ErrorHandler,
-      useClass: AcceptUserErrorHandler
-    },
-    {
-      provide: ErrorHandler,
-      useClass: DeleteUserErrorHandler
-    }
+  }
   ],
   bootstrap: [AppComponent]
 })
