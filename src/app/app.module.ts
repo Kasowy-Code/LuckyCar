@@ -50,7 +50,6 @@ import {RoleGuard} from "./guards/role.guard";
 import {DeleteUserErrorHandler} from "./errorhandler/DeleteUserErrorHandler";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatMenuModule} from "@angular/material/menu";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {
   ChangeLotterySettingsMenuComponent
 } from "./lottery/change-lottery-settings/change-lottery-settings-menu/change-lottery-settings-menu.component";
@@ -61,6 +60,13 @@ import {
   ChangeTemporaryLotteryDateFormComponent
 } from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
+import { DialogComponent } from './account/dialog/dialog.component';
+import { UsersComponent } from './account/users/users.component';
+import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
+import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -85,7 +91,13 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     DeleteUserComponent,
     ChangeRegularLotteryDateFormComponent,
     ChangeLotterySettingsMenuComponent,
-    ChangeTemporaryLotteryDateFormComponent
+    ChangeTemporaryLotteryDateFormComponent,
+    DeleteUserComponent,
+    RestartPasswordComponent,
+    DialogComponent,
+    UsersComponent,
+    UserDialogComponent,
+    AreYouSureDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +111,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatButtonModule,
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
@@ -107,7 +118,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatDividerModule,
     MatCheckboxModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
@@ -124,7 +134,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatToolbarModule,
+    MatButtonToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,

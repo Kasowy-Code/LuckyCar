@@ -14,14 +14,13 @@ export class RegisterComponent {
   name = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
   surname = new FormControl('', [Validators.minLength(2), Validators.required, Validators.pattern(this.NameSurnamePattern)]); //TODO: minimum field length = 2
   email = new FormControl('', [Validators.email, Validators.required]);
-  error = true;
-  loading = false;
-
+  error = false;
+    loading = false;
   constructor(private http: HttpClient, private router: Router, private registerService: RegisterService) {
   }
 
   getErrorMessage(item: any) {
-    this.error = true;
+    //this.error = true;
     if (item.hasError('email')) {
       return 'Not a valid email';
     }
@@ -37,13 +36,12 @@ export class RegisterComponent {
 
   register() {
     this.loading = true;
-    if (!this.error) {
       this.registerService.register(String(this.name.value), String(this.surname.value), String(this.email.value))
         .subscribe(() => {
           this.router.navigate(["/registered"]);
         }, err => {
-          this.loading = false;
+            this.loading = false;
+            this.error = true;
         });
     }
-  }
 }

@@ -1,0 +1,9 @@
+.no {
+  background-color: var(--mainColor);
+  color: white;
+  width: 60%;
+}
+.yes {
+  background-color: darkred;
+  color: white;
+}
