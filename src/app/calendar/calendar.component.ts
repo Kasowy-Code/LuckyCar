@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {HttpClient} from "@angular/common/http";
 import {CalendarParkingsService} from "./services/calendar-parkings.service";
+import {ParkingLot} from "../shared/dto/parking-lot";
 
 interface ParkingDateDTO {
   parkingLotId: number,
@@ -29,6 +30,7 @@ export class CalendarComponent implements OnInit {
   loaded = false;
   @Input() selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
+  currentParking = <ParkingLot>{};
 
   constructor(private http: HttpClient, private parkingService: CalendarParkingsService) {
     const currentDate = new Date();
@@ -86,4 +88,12 @@ export class CalendarComponent implements OnInit {
     }
     return "";
   };
+
+  //TODO Dominik, masz gotową funkcje
+  getClickedParking(parkingLot: ParkingLot) {
+
+    this.currentParking = parkingLot;
+
+    console.log(this.currentParking);
+  }
 }
