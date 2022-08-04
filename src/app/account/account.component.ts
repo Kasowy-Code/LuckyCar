@@ -13,12 +13,21 @@ import {DialogComponent} from "./dialog/dialog.component";
 })
 export class AccountComponent implements OnInit {
   loading = false;
+  delete = false;
 
   constructor(private logoutService:LogoutService, public roleService:RoleService,
               private accountService:AccountService, private router:Router,
               private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    this.accountService.adminAmount().subscribe(data=>{
+        if(data === 'true'){
+          this.delete = true;
+        }else {
+          this.delete = false;
+        }
+      }
+    )
   }
 
   logout(){
