@@ -21,6 +21,9 @@ export class AreYouSureDialogComponent implements OnInit {
     if(action === "DELETE"){
       this.delete(id);
     }
+    if(action ==="REMOVE"){
+      this.removeAdmin(id);
+    }
   }
 
   setAdmin(id:any){
@@ -31,4 +34,7 @@ export class AreYouSureDialogComponent implements OnInit {
     this.accountService.deleteAccountById(id).subscribe(()=>{});
   }
 
+  removeAdmin(id:any){
+    this.accountService.removeAdmin(id).subscribe(()=>{});
+  }
 }
