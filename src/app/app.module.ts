@@ -37,14 +37,11 @@ import {TokenInterceptorService} from "./shared/services/token-interceptor.servi
 import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
 import {ParkingComponent} from "./parkings/parking.component";
 import {MatListModule} from "@angular/material/list";
-import {MatTabsModule} from "@angular/material/tabs";
-import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatChipsModule} from "@angular/material/chips";
 import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
 import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
-import {SwiperModule} from "swiper/angular";
+
 
 
 
@@ -68,8 +65,7 @@ import {SwiperModule} from "swiper/angular";
     AccountComponent,
     ParkingLotDialogComponent,
     AcceptUserComponent,
-    AccountComponent,
-    AdminComponent
+
   ],
   imports: [
     BrowserModule,
