@@ -17,4 +17,12 @@ export class RoleService {
       return false;
     }
   }
+
+  getMyEmail(){
+    try {
+      return this.tokenService.getDecodedToken().sub;
+    } catch{
+      return false;
+    }
+  }
 }

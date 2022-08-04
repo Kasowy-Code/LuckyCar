@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {MatDialog} from "@angular/material/dialog";
 import {UserDialogComponent} from "../user-dialog/user-dialog.component";
+import {RoleService} from "../../role.service";
 
 interface User {
   name: string;
@@ -23,14 +24,16 @@ export class UsersComponent implements OnInit {
   filteredUsers: Observable<User[]> | any;
   employees = new FormControl('');
 
-  constructor(private http: HttpClient, private dialog:MatDialog) {
+  constructor(private http: HttpClient, private dialog:MatDialog, private roleService:RoleService) {
   }
 
   ngOnInit() {
     this.http.get<any>(`${environment.link}/api/user/getUsers`)
       .subscribe(Users => {
         for (let response of Users) {
-          this.users.push({name: response.name, surname: response.surname, email: response.email, id: response.id});
+          if(response.email !== "client@ncdc.pl" && response.email !== this.roleService.getMyEmail()) {
+            this.users.push({name: response.name, surname: response.surname, email: response.email, id: response.id});
+          }
         }
         this.filteredUsers = this.employees.valueChanges.pipe(
           startWith(''),

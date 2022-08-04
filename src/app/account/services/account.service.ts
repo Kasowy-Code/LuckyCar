@@ -64,5 +64,25 @@ export class AccountService {
       });
     }))
   }
+
+  adminAmount(){
+    return this.http.get(`${environment.link}/api/user/admins`, {responseType: 'text' as 'json'});
+  }
+
+  hasAdmin(id:any){
+    return this.http.get(`${environment.link}/api/user/has-admin-role/`+id, {responseType: 'text' as 'json'})
+  }
+
+  removeAdmin(id:any){
+    return this.http.delete(`${environment.link}/api/user/remove-admin-role/`+id, {responseType: 'text' as 'json'})
+      .pipe(tap(data => {
+        this.snackBar.open("Admin role removed", "", {
+          duration: 5*1000,
+          panelClass: ['good-snackbar'],
+          horizontalPosition: "end",
+          verticalPosition: "top",
+        });
+      }))
+  }
 }
 
