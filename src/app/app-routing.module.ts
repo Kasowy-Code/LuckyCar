@@ -4,6 +4,8 @@ import {CalendarComponent} from "./calendar/calendar.component";
 import {LotteryComponent} from "./lottery/lottery.component";
 import {CarsComponent} from "./cars/cars.component";
 import {AccountComponent} from "./account/account.component";
+import {ParkingComponent} from "./parkings/parking.component";
+
 import {LoginComponent} from "./Auth/login/login.component";
 import {RegisterComponent} from "./Auth/register/register.component";
 import {RegisterSuccessComponent} from "./Auth/register-success/register-success.component";
@@ -25,6 +27,7 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard, TokenGuard]},
   {path: "cars", component: CarsComponent},
   {path: "account", component: AccountComponent, canActivate: [AuthGuard, TokenGuard]},
+  {path: "Parkings", component: ParkingComponent},
   {path: "login", component: LoginComponent, canActivate: [LoginGuard]},
   {path: "register", component: RegisterComponent, canActivate: [LoginGuard]},
   {path: "registered", component: RegisterSuccessComponent},

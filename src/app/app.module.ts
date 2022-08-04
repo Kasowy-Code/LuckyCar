@@ -19,33 +19,26 @@ import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
+import { AdminComponent } from './admin/admin.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from './Auth/register/register.component';
 import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
 import {RegisterPasswordComponent} from './Auth/register-password/register-password.component';
 import {LoginService} from "./Auth/login/services/login.service";
 import {MatDialogModule} from "@angular/material/dialog";
-import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
-import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
 import {SelectUsersComponent} from './lottery/select-users/select-users.component';
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {AuthGuard} from "./guards/auth.guard";
-import {TokenInterceptorService} from "./shared/services/token/token-interceptor.service";
-import {AcceptUserComponent} from './Auth/accept-user/accept-user.component';
 import {DeleteUserComponent} from './Auth/delete-user/delete-user.component';
 import {LoginGuard} from "./guards/login.guard";
 import {
   SignUpToLotteryButtonComponent
 } from "./lottery/sign-up-to-lottery/sign-up-to-lottery-button/sign-up-to-lottery-button.component";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {
   ResigningFromLotteryDialogComponent
 } from "./lottery/sign-up-to-lottery/resigning-from-lottery-dialog/resigning-from-lottery-dialog.component";
 import {RoleGuard} from "./guards/role.guard";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatMenuModule} from "@angular/material/menu";
 import {
   ChangeLotterySettingsMenuComponent
@@ -77,6 +70,21 @@ import {
   FreePlaceAdminButtonComponent
 } from './calendar/calendar-button-toggle-group/free-place-admin-button/free-place-admin-button.component';
 import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.component';
+import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {AuthGuard} from "./guards/auth.guard";
+import {TokenInterceptorService} from "./shared/services/token/token-interceptor.service";
+import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import {ParkingComponent} from "./parkings/parking.component";
+import {MatListModule} from "@angular/material/list";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
+import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
+
+
 
 
 @NgModule({
@@ -87,17 +95,19 @@ import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.co
     LotteryComponent,
     CarsComponent,
     AccountComponent,
+    AdminComponent,
+    ParkingComponent,
+    ParkingDialogComponent,
+    LotteryDialogComponent,
     LoginComponent,
     RegisterComponent,
     RegisterSuccessComponent,
     RegisterPasswordComponent,
     AccountComponent,
-    ParkingLotDialogComponent,
     AcceptUserComponent,
     SelectUsersComponent,
     SignUpToLotteryButtonComponent,
     ResigningFromLotteryDialogComponent,
-    ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent,
     ChangeRegularLotteryDateFormComponent,
@@ -115,7 +125,8 @@ import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.co
     ReserveAdminButtonComponent,
     FreePlaceAdminButtonComponent,
     AuthErrorComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ParkingLotDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -147,6 +158,9 @@ import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.co
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    MatSlideToggleModule,
+    MatListModule,
+    MatProgressSpinnerModule,
     MatDividerModule,
     MatProgressSpinnerModule,
     MatIconModule,
@@ -163,5 +177,5 @@ import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.co
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+
+export class AppModule{ }
