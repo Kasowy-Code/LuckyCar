@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {LotterySettings} from "../dto/lottery-settings";
 
+
 @Injectable({
   providedIn: 'root'
 })

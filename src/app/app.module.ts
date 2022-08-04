@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -58,13 +58,25 @@ import {
 } from './lottery/change-lottery-settings/change-lottery-settings-dialog/change-temporary-lottery-date-form/change-temporary-lottery-date-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { RestartPasswordComponent } from './Auth/restart-password/restart-password.component';
-import { DialogComponent } from './account/dialog/dialog.component';
-import { UsersComponent } from './account/users/users.component';
-import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
-import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
-import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
-import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.component';
+import {RestartPasswordComponent} from './Auth/restart-password/restart-password.component';
+import {DialogComponent} from './account/dialog/dialog.component';
+import {UsersComponent} from './account/users/users.component';
+import {UserDialogComponent} from './account/user-dialog/user-dialog.component';
+import {AreYouSureDialogComponent} from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
+import {AuthErrorComponent} from './Auth/auth-error/auth-error.component';
+import {
+  CalendarButtonToggleGroupComponent
+} from './calendar/calendar-button-toggle-group/calendar-button-toggle-group.component';
+import {
+  FreeTakeButtonComponent
+} from './calendar/calendar-button-toggle-group/free-take-button/free-take-button.component';
+import {
+  ReserveAdminButtonComponent
+} from './calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button.component';
+import {
+  FreePlaceAdminButtonComponent
+} from './calendar/calendar-button-toggle-group/free-place-admin-button/free-place-admin-button.component';
+import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -97,6 +109,11 @@ import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.
     UsersComponent,
     UserDialogComponent,
     AreYouSureDialogComponent,
+    AuthErrorComponent,
+    CalendarButtonToggleGroupComponent,
+    FreeTakeButtonComponent,
+    ReserveAdminButtonComponent,
+    FreePlaceAdminButtonComponent,
     AuthErrorComponent,
     ForgotPasswordComponent
   ],
