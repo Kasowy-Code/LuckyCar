@@ -70,7 +70,7 @@ import {
   FreePlaceAdminButtonComponent
 } from './calendar/calendar-button-toggle-group/free-place-admin-button/free-place-admin-button.component';
 import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.component';
-import {ParkingLotDialogComponent} from './lottery/parking-lot-dialog/parking-lot-dialog/parking-lot-dialog.component';
+import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -83,7 +83,6 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
 import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
-
 
 
 
@@ -105,12 +104,10 @@ import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.
     RegisterSuccessComponent,
     RegisterPasswordComponent,
     AccountComponent,
-    ParkingLotDialogComponent,
     AcceptUserComponent,
     SelectUsersComponent,
     SignUpToLotteryButtonComponent,
     ResigningFromLotteryDialogComponent,
-    ParkingLotDialogComponent,
     AcceptUserComponent,
     DeleteUserComponent,
     ChangeRegularLotteryDateFormComponent,
@@ -128,7 +125,8 @@ import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.
     ReserveAdminButtonComponent,
     FreePlaceAdminButtonComponent,
     AuthErrorComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ParkingLotDialogComponent
   ],
   imports: [
     BrowserModule,
