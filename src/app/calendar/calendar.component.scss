@@ -29,3 +29,7 @@ button.disabled {
 .mat-button-toggle {
   flex-grow: 1 !important;
 }
+.mat-toolbar {
+  display: flex;
+  justify-content: center;
+}

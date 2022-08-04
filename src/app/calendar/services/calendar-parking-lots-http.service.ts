@@ -17,4 +17,8 @@ export class CalendarParkingLotsHttpService {
   getMyParkingPlaces() {
     return this.http.get(`${environment.link}/api/parking-places/me`);
   }
+
+  getAllParkingPlaces() {
+    return this.http.get(`${environment.link}/api/parking-places`);
+  }
 }

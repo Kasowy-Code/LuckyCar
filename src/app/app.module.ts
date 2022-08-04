@@ -68,6 +68,7 @@ import { CalendarButtonToggleGroupComponent } from './calendar/calendar-button-t
 import { FreeTakeButtonComponent } from './calendar/calendar-button-toggle-group/free-take-button/free-take-button.component';
 import { ReserveAdminButtonComponent } from './calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button.component';
 import { FreePlaceAdminButtonComponent } from './calendar/calendar-button-toggle-group/free-place-admin-button/free-place-admin-button.component';
+import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -105,6 +106,8 @@ import { FreePlaceAdminButtonComponent } from './calendar/calendar-button-toggle
     FreeTakeButtonComponent,
     ReserveAdminButtonComponent,
     FreePlaceAdminButtonComponent
+    AuthErrorComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
