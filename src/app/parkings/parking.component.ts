@@ -15,8 +15,8 @@ import {ParkingLot} from "../shared/dto/parking-lot";
 export class ParkingComponent implements OnInit {
   disabled = false;
   parkingLotsList: ParkingLot[] = [];
-    inputValue = new FormControl('');
-    numberInputValue = new FormControl('1');
+  inputValue = new FormControl('');
+  numberInputValue = new FormControl('1');
   parkingLot = <ParkingLot>{};
 
   constructor(public dialog: MatDialog,

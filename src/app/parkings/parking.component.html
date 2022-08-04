@@ -26,7 +26,7 @@
       <div class="column">
       <mat-card-actions>
         <p style="font-size: 25px">Add new parking</p>
-        <form  (ngSubmit)="addParkingLot()">
+        <form>
         <mat-form-field appearance="fill" id="nameInput">
           <mat-label>Enter a name</mat-label>
           <input matInput [formControl]="inputValue" required>
@@ -37,7 +37,7 @@
         <input number-input class="quantity"  [formControl]="numberInputValue"  value="1" min="1" type="number" required>
         <button mat-icon-button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" (click)="incrementParkingPlaceCount()" class="plus"></button>
         <br>
-        <button mat-raised-button>
+        <button mat-raised-button (click) = "addParkingLot()">
           Add parking
         </button>
         </form>
