@@ -22,6 +22,7 @@ interface ParkingDay {
 })
 export class CalendarComponent implements OnInit {
   parkingLots: any = [];
+  parkingLotsOnDay: any = [];
   hasParkingOnDays: ParkingDay[] = [];
   selected: Date | undefined;
   minDate: (Date & DateRange<Date>) | Date | null;
@@ -39,9 +40,40 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.parkingService.getParkings().subscribe(
       (data: any) => {
+        // console.log(data);
         data.forEach((el: any) => {
           this.parkingLots.push(el)
         });
+
+        this.parkingService.getAllParkingPlaces().subscribe(
+          (res: any) => {
+             // console.log(res);
+
+            res.forEach((el: ParkingDateDTO) => {
+              if(!this.parkingLotsOnDay.some((object: any) => {object.date == new Date(el.date)})) {
+                this.parkingLotsOnDay.push({parkingLots: JSON.parse(JSON.stringify(this.parkingLots)), date: new Date(el.date)});
+              }
+              // console.log(this.parkingLotsOnDay);
+              const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
+                return e.date.valueOf() === new Date(el.date).valueOf();
+              });
+
+              if(new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
+                ParkingDay.parkingLots[el.parkingLotId - 1].parkingPlaceCount -= 1;
+              }
+              // console.log(ParkingDay);
+            }
+            )
+             // console.log(this.parkingLotsOnDay);
+             // console.log(this.parkingLotsOnDay[0].parkingLots);
+            // res.forEach((el: any) => {
+            //
+            //   this.parkingLotsOnDay.parkingLots[el.parkingLotId].parkingPlaceCount -= 1;
+            //
+            // })
+             // console.log(this.parkingLotsOnDay);
+          }
+        )
       }
     )
     this.parkingService.getMyParkingPlaces().subscribe(
