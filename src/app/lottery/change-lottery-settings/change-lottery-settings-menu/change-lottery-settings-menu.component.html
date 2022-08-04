@@ -3,11 +3,13 @@
 </button>
 
 <mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="this.dateToChangeTypeEnumService.setRegular(); openChangeLotterySettingsDialog(); ">
+  <button mat-menu-item (click)="this.dateToChangeTypeEnumService.setRegular(); openChangeLotterySettingsDialog(); "
+          [disabled]="lotterySettings.isActive">
     <span class="menu-text">change regular lottery close date</span>
   </button>
 
-  <button mat-menu-item (click)="this.dateToChangeTypeEnumService.setTemporary(); openChangeLotterySettingsDialog();">
+  <button mat-menu-item (click)="this.dateToChangeTypeEnumService.setTemporary(); openChangeLotterySettingsDialog();"
+          [disabled]="lotterySettings.isActive">
     <span class="menu-text">set lottery close date for current month</span>
   </button>
 </mat-menu>

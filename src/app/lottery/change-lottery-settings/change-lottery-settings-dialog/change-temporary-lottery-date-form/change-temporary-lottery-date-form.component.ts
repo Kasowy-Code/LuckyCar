@@ -26,7 +26,7 @@ export class ChangeTemporaryLotteryDateFormComponent implements OnInit {
 
   setCalendarDateRange() {
     const currentDate = new Date();
-    this.minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    this.minDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
     this.maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
   }
 
