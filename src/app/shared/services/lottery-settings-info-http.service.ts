@@ -10,6 +10,7 @@ import {LotterySettings} from "../dto/lottery-settings";
 export class LotterySettingsInfoHttpService {
   private drawSettingsUrl = `${environment.link}/api/settings`;
 
+
   constructor(private http: HttpClient) {
   }
 

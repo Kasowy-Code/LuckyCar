@@ -3,5 +3,5 @@
 
                      (click)="confirmDateRange(); getClickedParking(parking)"
 
-                     [disabled]="">{{parking.name}}</mat-button-toggle>
+                     [disabled]=!parking.isAvailable>{{parking.name}}</mat-button-toggle>
 </mat-button-toggle-group>

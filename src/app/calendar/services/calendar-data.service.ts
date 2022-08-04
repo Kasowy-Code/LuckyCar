@@ -61,6 +61,7 @@ export class CalendarDataService {
               }
             )
             console.log(this.parkingLotsOnDay);
+            console.log(this.hasParkingOnDays);
           }
         )
       }
