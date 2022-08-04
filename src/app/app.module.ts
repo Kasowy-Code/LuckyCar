@@ -64,6 +64,7 @@ import { UsersComponent } from './account/users/users.component';
 import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
 import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
 import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
+import { ForgotPasswordComponent } from './Auth/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
     UsersComponent,
     UserDialogComponent,
     AreYouSureDialogComponent,
-    AuthErrorComponent
+    AuthErrorComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ import {SelectUsersComponent} from "./lottery/select-users/select-users.componen
 import {RestartPasswordComponent} from "./Auth/restart-password/restart-password.component";
 import {UsersComponent} from "./account/users/users.component";
 import {AuthErrorComponent} from "./Auth/auth-error/auth-error.component";
+import {ForgotPasswordComponent} from "./Auth/forgot-password/forgot-password.component";
 
 const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "lottery/selectUsers", component: SelectUsersComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   {path: "changePassword/:id", component: RestartPasswordComponent},
   {path: "users", component: UsersComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
   {path: "auth-error", component: AuthErrorComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
+  {path: "forgot-password", component: ForgotPasswordComponent},
   {path: "", pathMatch: "full", redirectTo: "login"}
 ];
 
