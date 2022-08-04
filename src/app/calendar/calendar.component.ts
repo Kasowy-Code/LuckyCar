@@ -16,6 +16,7 @@ export class CalendarComponent implements OnInit {
   parkingLots: ParkingLot[] = [];
   hasParkingOnDays: ParkingDay[] = [];
   selected: Date | undefined;
+  parkingLotsOnDay: any = [];
 
   minDate: (Date & DateRange<Date>) | Date | null;
   maxDate: (Date & DateRange<Date>) | Date | null;
@@ -41,31 +42,27 @@ export class CalendarComponent implements OnInit {
 
         this.parkingService.getAllParkingPlaces().subscribe(
           (res: any) => {
-             // console.log(res);
 
             res.forEach((el: ParkingDateDTO) => {
-              if(!this.parkingLotsOnDay.some((object: any) => {object.date == new Date(el.date)})) {
-                this.parkingLotsOnDay.push({parkingLots: JSON.parse(JSON.stringify(this.parkingLots)), date: new Date(el.date)});
-              }
-              // console.log(this.parkingLotsOnDay);
-              const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
-                return e.date.valueOf() === new Date(el.date).valueOf();
-              });
+                if (!this.parkingLotsOnDay.some((object: any) => {
+                  object.date == new Date(el.date)
+                })) {
+                  this.parkingLotsOnDay.push({
+                    parkingLots: JSON.parse(JSON.stringify(this.parkingLots)),
+                    date: new Date(el.date)
+                  });
+                }
+                // console.log(this.parkingLotsOnDay);
+                const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
+                  return e.date.valueOf() === new Date(el.date).valueOf();
+                });
 
-              if(new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
-                ParkingDay.parkingLots[el.parkingLotId - 1].parkingPlaceCount -= 1;
+                if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
+                  ParkingDay.parkingLots[el.parkingLotId - 1].parkingPlaceCount -= 1;
+                }
               }
-              // console.log(ParkingDay);
-            }
             )
-             // console.log(this.parkingLotsOnDay);
-             // console.log(this.parkingLotsOnDay[0].parkingLots);
-            // res.forEach((el: any) => {
-            //
-            //   this.parkingLotsOnDay.parkingLots[el.parkingLotId].parkingPlaceCount -= 1;
-            //
-            // })
-             // console.log(this.parkingLotsOnDay);
+            console.log(this.parkingLotsOnDay);
           }
         )
       }
@@ -113,10 +110,11 @@ export class CalendarComponent implements OnInit {
     return "";
   };
 
-  //TODO Dominik, masz gotową funkcje
   getClickedParking(parkingLot: ParkingLot) {
 
     this.currentParking = parkingLot;
+
+    //wysyła dane do serwisu
 
     console.log(this.currentParking);
   }
