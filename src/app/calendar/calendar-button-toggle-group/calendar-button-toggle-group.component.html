@@ -1,7 +1,5 @@
 <mat-button-toggle-group [disabled]="!calendarDataService.selectedRangeValue.start">
   <mat-button-toggle *ngFor="let parking of calendarDataService.parkingLotsList"
-
                      (click)="confirmDateRange(); getClickedParking(parking)"
-
                      [disabled]=!parking.isAvailable>{{parking.name}}</mat-button-toggle>
 </mat-button-toggle-group>

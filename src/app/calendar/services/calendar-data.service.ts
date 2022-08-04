@@ -33,39 +33,35 @@ export class CalendarDataService {
   }
 
   setParkingLotsOnDay() {
-    this.calendarParkingLotsHttpService.getParkingLots().subscribe(
-      (data: any) => {
-        data.forEach((el: any) => {
-          this.parkingLotsList.push(el)
-        });
+    this.calendarParkingLotsHttpService.getParkingLots().subscribe(data => {
+      this.parkingLotsList = data.filter(value => value.isAvailable);
 
-        this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
-          (res: any) => {
 
-            res.forEach((el: ParkingDateDTO) => {
-                if (!this.parkingLotsOnDay.some((object: any) => {
-                  object.date == new Date(el.date)
-                })) {
-                  this.parkingLotsOnDay.push({
-                    parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
-                    date: new Date(el.date)
-                  });
-                }
-                const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
-                  return e.date.valueOf() === new Date(el.date).valueOf();
+      this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe((res: any) => {
+
+          res.forEach((el: ParkingDateDTO) => {
+              if (!this.parkingLotsOnDay.some((object: any) => {
+                object.date == new Date(el.date)
+              })) {
+                this.parkingLotsOnDay.push({
+                  parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
+                  date: new Date(el.date)
                 });
-
-                if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
-                  ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
-                }
               }
-            )
-            console.log(this.parkingLotsOnDay);
-            console.log(this.hasParkingOnDays);
-          }
-        )
-      }
-    )
+              const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
+                return e.date.valueOf() === new Date(el.date).valueOf();
+              });
+
+              if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
+                ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
+              }
+            }
+          )
+          console.log(this.parkingLotsOnDay);
+          console.log(this.hasParkingOnDays);
+        }
+      )
+    })
     this.setMyParkingPlaces();
   }
 }

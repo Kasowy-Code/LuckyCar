@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {ParkingLot} from "../../shared/dto/parking-lot";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CalendarParkingLotsHttpService {
   }
 
   getParkingLots() {
-    return this.http.get(`${environment.link}/api/parking-lots`);
+    return this.http.get<ParkingLot[]>(`${environment.link}/api/parking-lots`);
   }
 
   getMyParkingPlaces() {
