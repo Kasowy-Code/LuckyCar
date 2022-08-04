@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {TokenService} from "./shared/services/token.service";
+import {Injectable} from '@angular/core';
+import {TokenService} from "./shared/services/token/token.service";
 import {RoleEnum} from "./role-enum";
 
 @Injectable({
@@ -7,9 +7,22 @@ import {RoleEnum} from "./role-enum";
 })
 export class RoleService {
 
-  constructor(private tokenService:TokenService) { }
+  constructor(private tokenService: TokenService) {
+  }
 
-  isAdmin(){
-    return this.tokenService.getDecodedToken().roles.some(role => role===RoleEnum.ADMIN);
+  isAdmin() {
+    try {
+      return this.tokenService.getDecodedToken().roles.some(role => role === RoleEnum.ADMIN);
+    } catch {
+      return false;
+    }
+  }
+
+  getMyEmail(){
+    try {
+      return this.tokenService.getDecodedToken().sub;
+    } catch{
+      return false;
+    }
   }
 }

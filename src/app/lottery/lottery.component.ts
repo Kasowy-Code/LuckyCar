@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import {LotteryDialogComponent} from "./lottery-dialog/lottery-dialog.component";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {Component, OnInit} from '@angular/core';
+import {LotterySettingsInfoHttpService} from "../shared/services/lottery-settings-info-http.service";
+import {RoleService} from "../role.service";
 
 @Component({
   selector: 'app-lottery',
   templateUrl: './lottery.component.html',
-  styleUrls: ['./lottery.component.css'],
+  styleUrls: ['./lottery.component.scss'],
 })
 export class LotteryComponent implements OnInit {
-  user: any;
-  lottery: any;
-  ngOnInit(): void {}
+  lotteryMonth = '';
 
-  constructor(private dialog: MatDialog) {}
-
-  openDialog() {
-    this.dialog.open(LotteryDialogComponent);
+  constructor(private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService,
+              public roleService: RoleService) {
   }
+
+  ngOnInit(): void {
+    this.lotterySettingsInfoHttpService.getLotteryMonth().subscribe(lotteryMonth => {
+      this.lotteryMonth = lotteryMonth;
+    });
+  }
+
 
 }

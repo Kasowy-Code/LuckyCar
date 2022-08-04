@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+
+}
+
+.main {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  /*background-image: url("https://wallpaperaccess.com/full/2030997.jpg");*/
+}
+
+h1 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+.box {
+  background-color: limegreen;
+  color: white;
+  width: 80%;
+  margin: 0 auto;
+  border: 2px solid black;
+  padding: 20px;
+  border-radius: 15px;
+}

@@ -1,0 +1,26 @@
+.cancel {
+  background-color: var(--mainColor);
+  color: white;
+}
+
+.giveAdmin {
+  background-color: darkred;
+  color:white;
+}
+
+.delete {
+  background-color: darkred;
+  color:white;
+}
+
+.mat-raised-button {
+  width: 250px;
+  margin-top: 15px;
+}
+h1 {
+  text-align: center;
+}
+
+.mat-dialog-content {
+  text-align: center;
+}

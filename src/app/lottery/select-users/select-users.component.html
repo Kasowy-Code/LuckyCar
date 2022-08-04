@@ -1,0 +1,38 @@
+<div class="main">
+  <div class="content">
+    <div class="header">
+      <mat-checkbox
+        [checked]="allComplete"
+        color="primary"
+        [indeterminate]="someComplete()"
+        (change)="setAll($event.checked)" class="select-all">Select All</mat-checkbox>
+      <mat-form-field class="search" appearance="legacy">
+        <mat-label>Search</mat-label>
+        <input matInput [formControl]="employees">
+        <span matPrefix><mat-icon>search</mat-icon></span>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="users-list">
+
+        <div *ngFor="let employee of filteredUsers | async" class="user-field">
+          <mat-checkbox [(ngModel)]="employee.completed"
+                        color="primary"
+                        (ngModelChange)="updateAllComplete()">
+            {{employee.name}} {{employee.surname}}
+          </mat-checkbox>
+        </div>
+
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="btns-wrapper">
+    <div class="user-btns">
+      <div class="user-select-btns">
+        <button mat-raised-button routerLink="/lottery">Close <mat-icon>close</mat-icon></button>
+        <button mat-raised-button color="primary" (click)="startDraw()">Draw <mat-icon>casino</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>

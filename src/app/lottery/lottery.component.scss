@@ -1,0 +1,37 @@
+$globalWidth: 350px;
+$globalHeight: 70px;
+
+//obczaić jak działa grid
+
+#main-window {
+  display: grid;
+  justify-content: center;
+  height: 80%;
+  padding: 2rem
+}
+
+.mat-toolbar {
+  height: 50px;
+  background-color: var(--mainColor);
+}
+
+.mat-raised-button {
+  width: $globalWidth;
+  height: $globalHeight;
+  position: sticky;
+  bottom: 4rem;
+  order: 1;
+  background-color: var(--mainColor);
+  color: white;
+}
+
+.app-sign-up-to-lottery-button {
+  order: 2;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  flex: 1 1 auto;
+}
+

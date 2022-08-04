@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Choose Parking Lot</h2>
+<form>
+  <mat-radio-group (change)="setChosenParkingLot($event.value)" color="primary">
+    <div *ngFor=" let parkingLot of parkingLots">
+      <mat-radio-button
+        [value]="parkingLot">{{parkingLot.name}}
+      </mat-radio-button>
+    </div>
+  </mat-radio-group>
+  <br>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button type="button" color="primary" (click)='onSubmit()' [disabled]="!choiceChanged">Submit
+    </button>
+  </mat-dialog-actions>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button (click)='onCancelClick()'>Cancel</button>
+  </mat-dialog-actions>
+</form>

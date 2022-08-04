@@ -1,5 +1,13 @@
-<div style="display: grid; justify-content: center; padding-top: 10rem">
-  <h1>Work in progress!</h1>
-  <br>
-  <mat-spinner></mat-spinner>
-</div>
+<mat-toolbar>
+  Account
+</mat-toolbar>
+<section class="main">
+    <button class ="changePass" mat-raised-button [class.spinner]="loading" [disabled]="loading" (click)="changePassword()">
+      Change password
+    </button>
+    <button class ="users" *ngIf="this.roleService.isAdmin()" (click)="getUsers()" mat-raised-button>Users</button>
+    <button class ="logout" mat-raised-button (click)="logout()">Logout</button>
+    <div class="delete-wrapper">
+      <button class ="delete" mat-raised-button (click)="deleteAccountDialog()" [disabled]="delete">Delete account</button>
+    </div>
+</section>

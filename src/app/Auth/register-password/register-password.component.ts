@@ -1,38 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import {environment} from "../../../environments/environment";
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {RegisterService} from "../services/register.service";
 
 @Component({
   selector: 'app-register-password',
   templateUrl: './register-password.component.html',
-  styleUrls: ['./register-password.component.css']
+  styleUrls: ['./register-password.component.scss']
 })
 export class RegisterPasswordComponent implements OnInit {
-  RegisterForm = new FormGroup({
-    password: new FormControl(''),
-    repeat_password: new FormControl('')
 
-  });
+  pass = new FormControl('', [Validators.minLength(8), Validators.required]);
+  repeat_password = new FormControl('', [Validators.minLength(8), Validators.required]);
+
   error = false;
   passwordError: boolean = false;
-  password:string = "";
+  password: string = "";
   id = this.route.snapshot.params['id'];
 
-  constructor(private http: HttpClient, private router: Router, private registerService:RegisterService, private route:ActivatedRoute) { }
+  constructor(private http: HttpClient, private router: Router, private registerService: RegisterService,
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
   }
 
+  clearErrors() {
+    this.passwordError = false;
+    this.error = false;
+  }
 
-  //TODO MACIEK WES SPRAWDZ CZY HASLA SA IDENTYCZNE :)
-  // JAK NIE TO WYSWIETL TO err => "cos"
-  setPassword(){
+  getErrorMessage(item: any) {
+    if (item.hasError('minlength')) {
+      return 'Must be at least 8 characters long';
+    }
+    return item.hasError('required') ? 'You must enter a value' : '';
+  }
+
+  setPassword() {
+    if (this.pass.value === this.repeat_password.value && this.password.length >= 8) {
       this.registerService.setPassword(this.password, this.id)
-        .subscribe(()=>{
+        .subscribe(() => {
             this.router.navigate(["/login"]);
-        });
+          },
+          () => {
+            this.error = true;
+          });
+    } else {
+      this.passwordError = true;
+    }
   }
 }

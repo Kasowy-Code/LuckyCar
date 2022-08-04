@@ -1,22 +1,20 @@
-<div id="body">
-    <form action="">
-      <mat-form-field appearance="fill">
-        <mat-label>Wybierz termin zgłoszeń</mat-label>
-        <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <br>
-      <br>
-      <button mat-raised-button (click)="openDialog()">Zapisz</button>
-      <br>
-      <button mat-raised-button style="background-color: darkgray">Anuluj</button>
-    </form>
-</div>
-<div>
-  <h1 *ngIf="user&&lottery">Bierzesz już udział w tym losowaniu</h1>
-  <h1 *ngIf="!lottery">W tej chwili nie ma dostępnego losowania</h1>
+<mat-toolbar>
+  <button *ngIf="this.roleService.isAdmin()" mat-icon-button disabled="true">
+    <mat-icon style="color: var(--mainColor)">settings</mat-icon>
+  </button>
+
+  <h1 class="title">LOTTERY FOR {{lotteryMonth}}</h1>
+
+  <app-change-lottery-settings-menu *ngIf="this.roleService.isAdmin()"></app-change-lottery-settings-menu>
+</mat-toolbar>
+
+
+<div id="main-window">
+  <app-sign-up-to-lottery-button></app-sign-up-to-lottery-button>
+
+  <button *ngIf="this.roleService.isAdmin()" mat-raised-button routerLink="/lottery/selectUsers">
+    <h2>
+      Start lottery
+    </h2>
+  </button>
 </div>

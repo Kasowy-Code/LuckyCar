@@ -1,0 +1,35 @@
+.mat-form-field {
+  padding-bottom: 3rem;
+}
+.main {
+  padding-top: 5vh;
+  display: grid;
+  justify-content: center;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+.demo-inline-calendar-card {
+  margin-bottom: 2rem;
+  width: 18rem;
+}
+.have-parking {
+  border-bottom: 2px solid #064dd6 !important;
+}
+.available-parking {
+  border-bottom: 2px solid limegreen !important;
+}
+button.disabled {
+  background-color: #3c3c3b !important;
+}
+
+.mat-button-toggle-group {
+  display: flex !important;
+  justify-content: space-evenly !important;
+}
+.mat-button-toggle {
+  flex-grow: 1 !important;
+}
+.mat-toolbar {
+  display: flex;
+  justify-content: center;
+}

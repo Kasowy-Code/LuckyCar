@@ -1,0 +1,47 @@
+<form [formGroup]="dateForm"
+      (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label for="week">Week:</mat-label>
+    <mat-select id="week" formControlName="week">
+      <mat-option *ngFor="let registrationEndWeek of registrationEndWeekList" [value]="registrationEndWeek">
+        {{ registrationEndWeek }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label for="day">Day:</mat-label>
+    <mat-select id="day" formControlName="day">
+      <mat-option *ngFor="let registrationEndDay of registrationEndDayList" [value]="registrationEndDay">
+        {{ registrationEndDay }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label for="hour">Hour:</mat-label>
+    <mat-select id="hour" formControlName="hour" required>
+      <mat-option *ngFor="let registrationEndHour of registrationEndHourList" [value]="registrationEndHour">
+        {{ registrationEndHour }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-dialog-actions align="center">
+    <button mat-raised-button
+            type="submit"
+            [disabled]="!dateForm.valid"
+            class="submit-button">Submit
+    </button>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions align="center">
+    <button mat-raised-button (click)='onCancelClick()'>Cancel</button>
+  </mat-dialog-actions>
+</form>
+

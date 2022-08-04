@@ -1,0 +1,84 @@
+@use "sass:string";
+
+$userIsSignedUpToLotteryMessage: 'You are signed up to lottery';
+$lotteryIsClosedMessage: 'Lottery is closed';
+$youCanSignUpToLotteryMessage: 'You can sign up to lottery';
+$globalWidth: 350px;
+$globalHeight: 50px;
+
+.userIsSignedUpToLottery {
+  width: $globalWidth;
+
+  .mat-flat-button:disabled {
+    width: $globalWidth;
+    background-color: green;
+    color: white;
+  }
+
+  .mat-raised-button {
+    width: $globalWidth;
+    color: white;
+    background-color: var(--mainColor);
+  }
+
+
+}
+
+.youCanSignUpToLottery {
+  width: $globalWidth;
+
+  .mat-raised-button {
+    width: $globalWidth;
+    color: white;
+    background-color: var(--mainColor);
+  }
+}
+
+.lotteryIsClosed {
+  width: $globalWidth;
+
+  .mat-flat-button:disabled {
+    width: $globalWidth;
+    background-color: darkred;
+    color: white;
+  }
+
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  height: 100px;
+  width: $globalWidth;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+

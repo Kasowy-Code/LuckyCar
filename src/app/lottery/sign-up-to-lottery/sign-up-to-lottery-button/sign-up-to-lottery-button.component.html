@@ -1,0 +1,49 @@
+<div [ngSwitch]="lotteryStateEnumService.lotteryState">
+
+  <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
+    <h1>
+      <mat-icon class="material-icons">accessibility_new</mat-icon>
+      <p>lottery is open!</p>
+    </h1>
+    <button
+      (click)="loadChosingParkingLotForm()"
+      mat-raised-button>
+      <h2>sign up!</h2>
+    </button>
+  </div>
+
+  <div class="lotteryIsClosed" *ngSwitchCase="LotteryStateEnum.INACTIVE">
+    <h1>
+      <mat-icon class="material-icons">lock</mat-icon>
+      <p>lottery is closed</p>
+    </h1>
+    <button
+      [disabled]="true"
+      mat-flat-button>
+      <h2>you can't sign up</h2>
+    </button>
+  </div>
+
+  <div class="userIsSignedUpToLottery" *ngSwitchCase="LotteryStateEnum.REGISTERED">
+    <h1>
+      <mat-icon class="material-icons">done</mat-icon>
+      <p>success!</p>
+    </h1>
+    <button
+      [disabled]="true"
+      mat-flat-button>
+      <h2>You've chosen {{chosenParkingLotName}}</h2>
+    </button>
+    <br>
+    <br>
+    <button (click)="openResigningFromLotteryDialog()"
+            mat-raised-button>
+      <h2>Resign</h2>
+    </button>
+  </div>
+  <div *ngSwitchCase="LotteryStateEnum.NOT_LOADED">
+    <h1>LOADING...</h1>
+    <mat-spinner>
+    </mat-spinner>
+  </div>
+</div>

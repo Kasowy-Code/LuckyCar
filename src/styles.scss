@@ -8,3 +8,17 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error-snackbar {
+  background: indianred;
+  color: white;
+}
+.good-snackbar {
+  background-color: limegreen;
+  color: white;
+}
+.mat-toolbar {
+  background-color: var(--mainColor);
+  height: 50px;
+  color: white;
+}
