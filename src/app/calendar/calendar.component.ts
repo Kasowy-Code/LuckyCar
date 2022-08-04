@@ -1,19 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {HttpClient} from "@angular/common/http";
-import {CalendarParkingsService} from "./services/calendar-parkings.service";
 import {ParkingLot} from "../shared/dto/parking-lot";
-
-interface ParkingDateDTO {
-  parkingLotId: number,
-  userId: number,
-  date: Date
-}
-
-interface ParkingDay {
-  day: number,
-  month: number
-}
+import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
+import {ParkingDay} from "./interfaces/parking-day-interface";
+import {ParkingDateDTO} from "./interfaces/parking-date-dto";
 
 @Component({
   selector: 'app-calendar',
@@ -22,24 +13,27 @@ interface ParkingDay {
   encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit {
-  parkingLots: any = [];
+  parkingLots: ParkingLot[] = [];
   hasParkingOnDays: ParkingDay[] = [];
   selected: Date | undefined;
+
   minDate: (Date & DateRange<Date>) | Date | null;
   maxDate: (Date & DateRange<Date>) | Date | null;
+
   loaded = false;
-  @Input() selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
-  @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
   currentParking = <ParkingLot>{};
 
-  constructor(private http: HttpClient, private parkingService: CalendarParkingsService) {
+  @Input() selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
+  @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
+
+  constructor(private http: HttpClient, private parkingService: CalendarParkingLotsHttpService) {
     const currentDate = new Date();
     this.minDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
     this.maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
   }
 
   ngOnInit() {
-    this.parkingService.getParkings().subscribe(
+    this.parkingService.getParkingLots().subscribe(
       (data: any) => {
         data.forEach((el: any) => {
           this.parkingLots.push(el)
@@ -50,10 +44,8 @@ export class CalendarComponent implements OnInit {
       (date: any) => {
         date.forEach((el: ParkingDateDTO) => {
           const tempDate = new Date(el.date);
-          const day: ParkingDay = {day: tempDate.getDate(), month: tempDate.getMonth()}
+          const day: ParkingDay = {day: tempDate.getDate(), month: tempDate.getMonth(), parkingLotId: el.parkingLotId}
           this.hasParkingOnDays.push(day);
-
-
         });
         this.loaded = true;
       }

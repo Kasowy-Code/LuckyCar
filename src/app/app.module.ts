@@ -64,6 +64,10 @@ import { UsersComponent } from './account/users/users.component';
 import { UserDialogComponent } from './account/user-dialog/user-dialog.component';
 import { AreYouSureDialogComponent } from './account/user-dialog/are-you-sure-dialog/are-you-sure-dialog.component';
 import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
+import { CalendarButtonToggleGroupComponent } from './calendar/calendar-button-toggle-group/calendar-button-toggle-group.component';
+import { FreeTakeButtonComponent } from './calendar/calendar-button-toggle-group/free-take-button/free-take-button.component';
+import { ReserveAdminButtonComponent } from './calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button.component';
+import { FreePlaceAdminButtonComponent } from './calendar/calendar-button-toggle-group/free-place-admin-button/free-place-admin-button.component';
 
 
 @NgModule({
@@ -96,7 +100,11 @@ import { AuthErrorComponent } from './Auth/auth-error/auth-error.component';
     UsersComponent,
     UserDialogComponent,
     AreYouSureDialogComponent,
-    AuthErrorComponent
+    AuthErrorComponent,
+    CalendarButtonToggleGroupComponent,
+    FreeTakeButtonComponent,
+    ReserveAdminButtonComponent,
+    FreePlaceAdminButtonComponent
   ],
   imports: [
     BrowserModule,
