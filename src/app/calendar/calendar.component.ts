@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {HttpClient} from "@angular/common/http";
 import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
@@ -10,7 +10,7 @@ import {CalendarDataService} from "./services/calendar-data.service";
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   selected: Date | undefined;
 
   minDate: (Date & DateRange<Date>) | Date | null;
@@ -30,6 +30,10 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.calendarDataService.setParkingLotsOnDay();
+  }
+
+  ngOnDestroy() {
+    this.calendarDataService.parkingLotsList.splice(0);
   }
 
   selectedRangeChange(m: any) {
