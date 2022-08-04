@@ -9,6 +9,7 @@ import {
 import {
   ChangeRegularLotteryDateFormComponent
 } from "../change-lottery-settings-dialog/change-regular-lottery-date-form/change-regular-lottery-date-form.component";
+import {LotterySettingsInfoHttpService} from "../../../shared/services/lottery-settings-info-http.service";
 
 
 @Component({
@@ -17,13 +18,17 @@ import {
   styleUrls: ['./change-lottery-settings-menu.component.scss']
 })
 export class ChangeLotterySettingsMenuComponent implements OnInit {
-  lotterySettings = <LotterySettings>{};
+  public lotterySettings = <LotterySettings>{};
 
   constructor(public dateToChangeTypeEnumService: DateToChangeTypeEnumService,
-              private changeLotterySettingsDialog: MatDialog,) {
+              private changeLotterySettingsDialog: MatDialog,
+              private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService) {
   }
 
   ngOnInit(): void {
+    this.lotterySettingsInfoHttpService.getLotterySettings().subscribe(response => {
+      this.lotterySettings = response;
+    });
   }
 
   public openChangeLotterySettingsDialog() {
