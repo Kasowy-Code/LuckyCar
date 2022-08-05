@@ -1,12 +1,13 @@
 <mat-button-toggle-group [disabled]="!calendarDataService.selectedRangeValue.start">
   <mat-button-toggle *ngFor="let parking of calendarDataService.parkingLotsList"
-                     (click)="calendarDataService.confirmDateRange(); getClickedParking(parking)"
-                     [id]=parking.parkingLotButtonStyleEnum>
+                     (click)="calendarDataService.confirmDateRange(parking); setClickedParking(parking)"
+                     [id]=parking.parkingLotButtonStyleEnum
+                     [disabled]="parking.parkingLotButtonStyleEnum === 'NOTHING_INTERESTING'">
     <h3>{{parking.name}}</h3>
-    <h3 id="parking-">{{parking.id}}</h3>
+    <h3 id="parking-id">{{parking.id}}</h3>
     <h5>free places {{parking.freeParkingPlaces}}</h5>
 
   </mat-button-toggle>
 </mat-button-toggle-group>
 
-<mat-button-toggle disabled (click)="click()"></mat-button-toggle>
+{{calendarDataService.selectedParkingLot.name}}

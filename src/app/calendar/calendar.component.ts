@@ -49,8 +49,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
     }
     this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue);
-
-    console.log(this.calendarDataService.selectedRangeValue);
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {

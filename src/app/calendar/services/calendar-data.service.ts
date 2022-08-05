@@ -4,7 +4,7 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
-import {ParkingLotButtonStyleEnum} from "../parking-lot-button-style-enum";
+import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
 
 
 @Injectable({
@@ -16,16 +16,17 @@ export class CalendarDataService {
   selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
   parkingLotsList: ParkingLot[] = [];
   loaded = false;
-  clickedParkingLot = <ParkingLot>{};
+  selectedParkingLot = <ParkingLot>{};
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
   }
 
-  confirmDateRange() {
-    if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
-      this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
+  confirmDateRange(parkingLot: ParkingLot) {
+    if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
 
-      console.log(this.selectedRangeValue)
+      if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
+        this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
+      }
     }
   }
 
@@ -78,8 +79,6 @@ export class CalendarDataService {
                 }
               }
             )
-            console.log(this.parkingLotsOnDay);
-            console.log(this.hasParkingOnDays);
           }
         )
       }
@@ -92,17 +91,12 @@ export class CalendarDataService {
   }
 
   setParkingLotsButtonStyle() {
-    console.log("wszedlem do setParking...")
-
     this.parkingLotsList.forEach(parkingLot => {
-
-      console.log(this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot));
 
       if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
         parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
       } else {
         parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
-
       }
     })
   }
@@ -110,16 +104,12 @@ export class CalendarDataService {
   checkIfUserHasParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
 
     let userHasParkingPlaceOnRange = true;
-
     let start = this.selectedRangeValue.start;
     let end = this.selectedRangeValue.end;
 
-    if(end === null) {
+    if (end === null) {
       end = start;
     }
-
-    console.log('start ' + start + 'end ' + end)
-
     if (start !== null && end !== null) {
       let currentIteratedDate = new Date(start);
 
@@ -127,7 +117,6 @@ export class CalendarDataService {
         let userHasParkingPlaceOnDay = false;
 
         this.hasParkingOnDays.forEach(element => {
-
           if (element.parkingLotId === parkingLot.id) {
             if (element.day === currentIteratedDate.getDate() && element.month === currentIteratedDate.getMonth()) {
               userHasParkingPlaceOnDay = true;
@@ -142,11 +131,13 @@ export class CalendarDataService {
 
         let newDate = currentIteratedDate.setDate(currentIteratedDate.getDate() + 1);
         currentIteratedDate = new Date(newDate);
-
       }
     }
 
     return userHasParkingPlaceOnRange;
+  }
 
+  clearSelectedParkingLot() {
+    this.selectedParkingLot = <ParkingLot>{};
   }
 }

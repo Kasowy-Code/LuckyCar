@@ -5,7 +5,7 @@
   <div *ngIf="calendarDataService.loaded">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
-                    (click)="calendarDataService.setParkingLotsButtonStyle()"
+                    (click)="calendarDataService.setParkingLotsButtonStyle(); calendarDataService.clearSelectedParkingLot()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
     </mat-card>
 
