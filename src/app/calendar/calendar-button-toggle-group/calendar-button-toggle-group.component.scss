@@ -1,0 +1,26 @@
+h3 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  line-height: 24px;
+}
+h5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  line-height: 24px;
+}
+
+#YOU_HAVE_PARKING_PLACE{
+  background: var(--mainColor);
+  color: white;
+}
+
+#THERE_IS_FREE_PLACE    {
+  background: green;
+  color: white;
+}
+#NOTHING_INTERESTING {
+  background: grey;
+  color: white;
+}
