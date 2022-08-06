@@ -94,8 +94,23 @@ export class CalendarDataService {
     })
   }
 
+  ifShouldShowFreeParkingPlaces(){
+    if(this.selectedRangeValue.start){
+
+      if(this.selectedRangeValue.end === null) {
+        return true;
+      } else if (this.selectedRangeValue.end.getMonth() === this.selectedRangeValue.start.getMonth() && this.selectedRangeValue.end.getDate() === this.selectedRangeValue.start.getDate()){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   countFreeParkingPlacesOnEachParkingLot() {
-    if (this.selectedRangeValue.end === null && this.selectedRangeValue.start !== null) {
+    if (this.ifShouldShowFreeParkingPlaces()) {
       this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
         // console.log(response);
         // console.log(this.selectedRangeValue);
@@ -124,7 +139,7 @@ export class CalendarDataService {
   }
 
   checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
-    if (this.selectedRangeValue.end === null) {
+    if (this.ifShouldShowFreeParkingPlaces()) {
       if (parkingLot.freeParkingPlaces > 0) {
         return true;
       }
@@ -169,14 +184,21 @@ export class CalendarDataService {
   }
 
   setParkingLotsButtonStyle() {
+    let hasParking = false;
+
     this.parkingLotsList.forEach(parkingLot => {
 
       if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
         parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+        hasParking = true;
       } else {
-        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
+        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot) && !hasParking) {
+          console.log(parkingLot);
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE;
         } else {
+
+          console.log("dupa")
+          console.log(parkingLot)
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
         }
       }
