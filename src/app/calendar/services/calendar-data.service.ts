@@ -5,6 +5,7 @@ import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
 import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
+import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
 
 
 @Injectable({
@@ -14,8 +15,11 @@ export class CalendarDataService {
   hasParkingOnDays: ParkingDay[] = [];
   parkingLotsOnDay: any = [];
   selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
-  parkingLotsList: ParkingLot[] = [];
   loaded = false;
+  allParkingPlaceList = <ParkingPlaceDay[]>[];
+
+  //TODO dane potrzebne Domino
+  parkingLotsList: ParkingLot[] = [];
   selectedParkingLot = <ParkingLot>{};
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
@@ -48,11 +52,7 @@ export class CalendarDataService {
         this.parkingLotsList = data.filter(value => value.isAvailable)
 
         this.parkingLotsList.forEach(parkingLot => {
-          if (parkingLot.id === 2) {
-            parkingLot.freeParkingPlaces = 1;
-          } else {
-            parkingLot.freeParkingPlaces = 0;
-          }
+          parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
 
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
         })
@@ -86,19 +86,50 @@ export class CalendarDataService {
     this.setMyParkingPlaces();
   }
 
-  calculateFreeParkingPlacesForParking() {
+  setParkingLotsFreePlacesToMax(){
+    this.parkingLotsList.forEach(parkingLot => {
+      parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
 
+      parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+    })
   }
 
-  setParkingLotsButtonStyle() {
-    this.parkingLotsList.forEach(parkingLot => {
+  countFreeParkingPlacesOnEachParkingLot() {
+    if (this.selectedRangeValue.end === null && this.selectedRangeValue.start !== null) {
+      this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
+        // console.log(response);
+        // console.log(this.selectedRangeValue);
 
-      if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
-        parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
-      } else {
-        parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+        this.allParkingPlaceList = response;
+        // console.log(this.allParkingPlaceList[0].date);
+
+        this.allParkingPlaceList.forEach(parkingPlace => {
+
+          let dateToCompare = new Date(parkingPlace.date)
+
+          this.parkingLotsList.forEach(parkingLot => {
+
+            // console.log("their parkingLot id " + parkingPlace.parkingLotId)
+            // console.log("ours parkingLot id  " + parkingLot.id)
+
+            // @ts-ignore
+            if(parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
+              parkingLot.freeParkingPlaces --;
+            }
+
+          });
+        });
+      });
+    }
+  }
+
+  checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
+    if (this.selectedRangeValue.end === null) {
+      if (parkingLot.freeParkingPlaces > 0) {
+        return true;
       }
-    })
+    }
+    return false;
   }
 
   checkIfUserHasParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
@@ -135,6 +166,21 @@ export class CalendarDataService {
     }
 
     return userHasParkingPlaceOnRange;
+  }
+
+  setParkingLotsButtonStyle() {
+    this.parkingLotsList.forEach(parkingLot => {
+
+      if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
+        parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+      } else {
+        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE;
+        } else {
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+        }
+      }
+    })
   }
 
   clearSelectedParkingLot() {

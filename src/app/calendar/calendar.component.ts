@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
-import {HttpClient} from "@angular/common/http";
-import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
 import {CalendarDataService} from "./services/calendar-data.service";
+
+//TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
 
 @Component({
   selector: 'app-calendar',
@@ -18,9 +18,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
 
-  constructor(private http: HttpClient,
-              private calendarParkingLotsHttpService: CalendarParkingLotsHttpService,
-              public calendarDataService: CalendarDataService) {
+  constructor(public calendarDataService: CalendarDataService) {
 
     const currentDate = new Date();
     //TODO zmienić na pobiernaie miesiąca z bazy

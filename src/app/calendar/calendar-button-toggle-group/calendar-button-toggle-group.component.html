@@ -5,9 +5,13 @@
                      [disabled]="parking.parkingLotButtonStyleEnum === 'NOTHING_INTERESTING'">
     <h3>{{parking.name}}</h3>
     <h3 id="parking-id">{{parking.id}}</h3>
-    <h5>free places {{parking.freeParkingPlaces}}</h5>
+<!--    wolne miejsca wyświetlamy tylko jeśli jest wybrana pojedyncza data-->
+    <h5 *ngIf="calendarDataService.selectedRangeValue.start && !calendarDataService.selectedRangeValue.end">free places {{parking.freeParkingPlaces}}</h5>
+    <h5 *ngIf="!calendarDataService.selectedRangeValue.start || calendarDataService.selectedRangeValue.end">----------</h5>
 
   </mat-button-toggle>
 </mat-button-toggle-group>
 
 {{calendarDataService.selectedParkingLot.name}}
+
+
