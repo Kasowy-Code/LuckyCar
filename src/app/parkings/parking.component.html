@@ -1,0 +1,50 @@
+<section class = "main">
+     <mat-card *ngFor="let parking of this.parkingLotsList let i = index">
+    <mat-list-item>
+      <p style="font-size: 25px">{{parking.name}}</p>
+      <mat-card-actions>
+        <p style="font-size: 15px">Number of parking spaces</p>
+        <button mat-icon-button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                (click) = subtractParkingPlaceToParkingLot(parking.id)></button>
+
+        <input number-input class="quantity" min="1" id="{{parking.id}}" value="{{parking.parkingPlaceCount}}" (change)="changeNumberOfParkingLots(parking)" type="number">
+
+        <button mat-icon-button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"
+                (click) = addParkingPlaceToParkingLot(parking.id)></button>
+        <mat-slide-toggle (change)="changeStatus(parking)" [checked]="!parking.isAvailable"
+          color="primary">
+          Disable parking lot
+        </mat-slide-toggle>
+        <br>
+        <br>
+        <button mat-button (click)="openDialog(parking.id)">Remove parking</button>
+    </mat-card-actions>
+   </mat-list-item>
+    </mat-card>
+
+    <mat-card>
+      <div class="column">
+      <mat-card-actions>
+        <p style="font-size: 25px">Add new parking</p>
+        <form>
+        <mat-form-field appearance="fill" id="nameInput">
+          <mat-label>Enter a name</mat-label>
+          <input matInput [formControl]="inputValue" required>
+        </mat-form-field>
+        <br>
+        <br>
+        <button mat-icon-button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" (click)="decrementParkingPlaceCount()" ></button>
+        <input number-input class="quantity"  [formControl]="numberInputValue"  value="1" min="1" type="number" required>
+        <button mat-icon-button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" (click)="incrementParkingPlaceCount()" class="plus"></button>
+        <br>
+        <button mat-raised-button (click) = "addParkingLot()">
+          Add parking
+        </button>
+        </form>
+      </mat-card-actions>
+      </div>
+    </mat-card>
+    <br>
+    <br>
+</section>
+
