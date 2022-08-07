@@ -7,7 +7,6 @@
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
                     (click)="
                     calendarDataService.setParkingLotsFreePlacesToMax();
-                    calendarDataService.countFreeParkingPlacesOnEachParkingLot();
                     calendarDataService.setParkingLotsButtonStyle();
                     calendarDataService.clearSelectedParkingLot()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>

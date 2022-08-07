@@ -184,6 +184,7 @@ export class CalendarDataService {
   }
 
   setParkingLotsButtonStyle() {
+    // if data sie nie zgadza, then nothing interesting
     let hasParking = false;
 
     this.parkingLotsList.forEach(parkingLot => {
@@ -192,6 +193,8 @@ export class CalendarDataService {
         hasParking = true;
       }
     })
+
+    this.countFreeParkingPlacesOnEachParkingLot()
 
     if (!hasParking) {
       this.parkingLotsList.forEach(parkingLot => {

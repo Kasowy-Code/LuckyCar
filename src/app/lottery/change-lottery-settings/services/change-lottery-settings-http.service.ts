@@ -34,7 +34,6 @@ export class ChangeLotterySettingsHttpService {
       "temporaryDrawDate": this.selectedDate.toISOString()
     };
 
-
     return this.http.patch(`${this.drawSettingsUrl}`, body);
   }
 
