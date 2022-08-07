@@ -3,6 +3,7 @@ import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepic
 import {CalendarDataService} from "./services/calendar-data.service";
 
 //TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
+//i zrobimy to tak, że jeżeli wybrałes date inną niż powinieneś to parkingi się nie podświetlają
 
 @Component({
   selector: 'app-calendar',
@@ -55,6 +56,4 @@ export class CalendarComponent implements OnInit, OnDestroy {
     }
     return "";
   };
-
-
 }

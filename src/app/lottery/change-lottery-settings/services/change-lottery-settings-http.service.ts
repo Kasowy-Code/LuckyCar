@@ -12,7 +12,6 @@ export class ChangeLotterySettingsHttpService {
   selectedDate = <Date>{};
   selectedHour = <Time>{};
 
-
   constructor(private http: HttpClient) {
   }
 
@@ -28,7 +27,6 @@ export class ChangeLotterySettingsHttpService {
   changeTemporaryLotteryDate(selectedDate: Date, selectedHour: Time) {
     this.selectedDate = selectedDate;
     this.selectedHour = selectedHour;
-
 
     this.setSelectedDateHoursAndMinutes();
 
