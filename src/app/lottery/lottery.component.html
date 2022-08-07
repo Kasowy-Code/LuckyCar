@@ -12,7 +12,8 @@
 <div id="main-window">
   <app-sign-up-to-lottery-button></app-sign-up-to-lottery-button>
 
-  <button *ngIf="this.roleService.isAdmin()" mat-raised-button routerLink="/lottery/selectUsers">
+  <button *ngIf="this.roleService.isAdmin()" [disabled]="!lotterySettings.isActive" mat-raised-button
+          routerLink="/lottery/selectUsers">
     <h2>
       Start lottery
     </h2>

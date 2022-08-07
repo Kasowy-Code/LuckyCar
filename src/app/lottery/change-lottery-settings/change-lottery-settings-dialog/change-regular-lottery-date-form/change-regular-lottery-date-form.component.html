@@ -26,7 +26,7 @@
     <mat-label for="hour">Hour:</mat-label>
     <mat-select id="hour" formControlName="hour" required>
       <mat-option *ngFor="let registrationEndHour of registrationEndHourList" [value]="registrationEndHour">
-        {{ registrationEndHour }}
+        {{ registrationEndHour }}:00
       </mat-option>
     </mat-select>
   </mat-form-field>

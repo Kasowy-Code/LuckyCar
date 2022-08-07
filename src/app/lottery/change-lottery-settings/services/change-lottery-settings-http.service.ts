@@ -12,7 +12,6 @@ export class ChangeLotterySettingsHttpService {
   selectedDate = <Date>{};
   selectedHour = <Time>{};
 
-
   constructor(private http: HttpClient) {
   }
 
@@ -29,12 +28,12 @@ export class ChangeLotterySettingsHttpService {
     this.selectedDate = selectedDate;
     this.selectedHour = selectedHour;
 
-
     this.setSelectedDateHoursAndMinutes();
 
     let body = {
       "temporaryDrawDate": this.selectedDate.toISOString()
     };
+
 
     return this.http.patch(`${this.drawSettingsUrl}`, body);
   }
