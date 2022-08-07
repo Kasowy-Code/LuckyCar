@@ -86,7 +86,7 @@ export class CalendarDataService {
     this.setMyParkingPlaces();
   }
 
-  setParkingLotsFreePlacesToMax(){
+  setParkingLotsFreePlacesToMax() {
     this.parkingLotsList.forEach(parkingLot => {
       parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
 
@@ -94,12 +94,12 @@ export class CalendarDataService {
     })
   }
 
-  ifShouldShowFreeParkingPlaces(){
-    if(this.selectedRangeValue.start){
+  ifShouldShowFreeParkingPlaces() {
+    if (this.selectedRangeValue.start) {
 
-      if(this.selectedRangeValue.end === null) {
+      if (this.selectedRangeValue.end === null) {
         return true;
-      } else if (this.selectedRangeValue.end.getMonth() === this.selectedRangeValue.start.getMonth() && this.selectedRangeValue.end.getDate() === this.selectedRangeValue.start.getDate()){
+      } else if (this.selectedRangeValue.end.getMonth() === this.selectedRangeValue.start.getMonth() && this.selectedRangeValue.end.getDate() === this.selectedRangeValue.start.getDate()) {
         return true;
       } else {
         return false;
@@ -128,8 +128,8 @@ export class CalendarDataService {
             // console.log("ours parkingLot id  " + parkingLot.id)
 
             // @ts-ignore
-            if(parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
-              parkingLot.freeParkingPlaces --;
+            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
+              parkingLot.freeParkingPlaces--;
             }
 
           });
@@ -187,22 +187,25 @@ export class CalendarDataService {
     let hasParking = false;
 
     this.parkingLotsList.forEach(parkingLot => {
-
       if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
         parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
         hasParking = true;
-      } else {
-        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot) && !hasParking) {
+      }
+    })
+
+    if (!hasParking) {
+      this.parkingLotsList.forEach(parkingLot => {
+        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
           console.log(parkingLot);
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE;
+          console.log("dupa")
         } else {
 
-          console.log("dupa")
           console.log(parkingLot)
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
         }
-      }
-    })
+      })
+    }
   }
 
   clearSelectedParkingLot() {
