@@ -4,6 +4,7 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
+import {UserPossibleAction} from "../user-possible-action";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class CalendarDataService {
   parkingLotsList: ParkingLot[] = [];
   loaded = false;
   clickedParkingLot = <ParkingLot>{};
+
+  //DOMINO VARIABLE
+  action = UserPossibleAction.FREE_PLACE;
+  parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
   }
@@ -67,4 +72,43 @@ export class CalendarDataService {
     )
     this.setMyParkingPlaces();
   }
+
+  //DOMINO
+  getData(){
+    return {
+      "action": this.action
+    }
+  }
+
+  //TO USTAWIA DOMINIK
+  setData(action:any, parkingId:number){
+    this.action = action;
+    this.parkingId = parkingId;
+  }
+
+  freePlace(){
+    const days = [];
+    // @ts-ignore
+    const start = new Date(this.selectedRangeValue.start);
+    // @ts-ignore
+    const end = new Date(this.selectedRangeValue.end);
+
+    let loop = new Date(start);
+    while (loop <= end) {
+      days.push(loop.toISOString().substring(0,19))
+      let newDate = loop.setDate(loop.getDate() + 1);
+      loop = new Date(newDate);
+    }
+    // console.log(days);
+    this.calendarParkingLotsHttpService.freePlace(days).subscribe(()=>{});
+  }
+
+  takePlace(){
+    //@ts-ignore
+    const day = new Date(this.selectedRangeValue.start);
+    const parkingId = this.parkingId;
+
+    this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0,16), parkingId).subscribe(()=>{});
+  }
 }
+
