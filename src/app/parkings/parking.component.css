@@ -1,4 +1,7 @@
-
+.header {
+  width: 100%;
+  text-align: center;
+}
 .main {
   display: grid;
   justify-content: center;
@@ -27,7 +30,7 @@
 }
 .mat-button {
   font-size: 12px;
-  margin-left: 4rem;
+  margin: auto;
   color: white;
   background: red;
   width: 8rem;
