@@ -1,5 +1,6 @@
 <mat-toolbar>
-  Account
+  <img class="logo" src="assets/logo.svg" alt="logo">
+  <h1 class="header">ACCOUNT</h1>
 </mat-toolbar>
 <section class="main">
     <button class ="changePass" mat-raised-button [class.spinner]="loading" [disabled]="loading" (click)="changePassword()">
