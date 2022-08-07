@@ -25,7 +25,7 @@ export class CalendarParkingLotsHttpService {
   freePlace(days:any) {
     console.log(days);
     return this.http.patch(`${environment.link}/api/parking-places/free`,
-      {days},
+      days,
       {responseType: 'text' as 'json'});
   }
 
