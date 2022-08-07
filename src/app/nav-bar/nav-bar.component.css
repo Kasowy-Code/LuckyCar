@@ -18,6 +18,8 @@ font-size: 70%;
 
 .active-menu-item {
   color: var(--mainColor);
+  border-bottom: 2px solid var(--mainColor);
+  border-radius: 0;
 }
 .mat-toolbar {
   background-color: white;

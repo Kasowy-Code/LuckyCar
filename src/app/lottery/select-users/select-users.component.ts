@@ -3,6 +3,8 @@ import {map, Observable, startWith} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 interface User {
@@ -30,7 +32,7 @@ export class SelectUsersComponent implements OnInit{
   allComplete: boolean = false;
   employees = new FormControl('');
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router, private snackbar: MatSnackBar) {}
   ngOnInit() {
       this.http.get<any>(`${environment.link}/api/userdraw/users`)
         .subscribe(Users=>{
@@ -54,10 +56,32 @@ export class SelectUsersComponent implements OnInit{
           this.http.patch(`${environment.link}/api/draw`, {})
             .subscribe(
               () => {
-                console.log("wylosowano");
+                this.snackbar.open('Lottery started successfully!', 'OK', {
+                  duration: 5000,
+                  verticalPosition: "top",
+                  horizontalPosition: "right",
+                  panelClass: ["lottery-success"]
+                });
+                this.router.navigate(["/lottery"]);
+              },
+              () => {
+                this.snackbar.open('Something went wrong!', 'OK', {
+                  duration: 5000,
+                  verticalPosition: "top",
+                  horizontalPosition: "right",
+                  panelClass: ["lottery-error"]
+                });
               }
             )
-      })
+      },
+        () => {
+          this.snackbar.open('Something went wrong!', 'OK', {
+
+            verticalPosition: "top",
+            horizontalPosition: "right",
+            panelClass: ['lottery-error']
+          });
+        })
   }
 
   private filter(value: string) {

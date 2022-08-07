@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {HttpClient} from "@angular/common/http";
+import {ParkingLot} from "../shared/dto/parking-lot";
 import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
 import {CalendarDataService} from "./services/calendar-data.service";
 
