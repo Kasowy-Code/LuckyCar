@@ -4,9 +4,9 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
-import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
+import { ParkingLotButtonStyleEnum } from '../calendar-button-toggle-group/enums/parking-lot-button-style-enum';
 import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
-
+import {UserPossibleAction} from "../calendar-button-toggle-group/enums/user-possible-action-enum";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class CalendarDataService {
   //TODO dane potrzebne Domino
   parkingLotsList: ParkingLot[] = [];
   selectedParkingLot = <ParkingLot>{};
+
+  //DOMINO VARIABLE
+  action = UserPossibleAction.TAKE_PLACE;
+  parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
   }
@@ -79,11 +83,43 @@ export class CalendarDataService {
                 }
               }
             )
+            console.log(this.parkingLotsOnDay);
           }
         )
       }
     )
     this.setMyParkingPlaces();
+  }
+
+  //DOMINO
+  getData() {
+    return {
+      "action": this.action
+    }
+  }
+
+  //TO USTAWIA DOMINIK
+  setData(action: any, parkingId: number) {
+    this.action = action;
+    this.parkingId = parkingId;
+  }
+
+  freePlace() {
+    const days = [];
+    // @ts-ignore
+    const start = new Date(this.selectedRangeValue.start);
+    // @ts-ignore
+    const end = new Date(this.selectedRangeValue.end);
+    let loop = new Date(start);
+    loop.setDate(loop.getDate() + 1);
+    while (loop <= end) {
+      days.push(loop.toISOString().substring(0, 16));
+      let newDate = loop.setDate(loop.getDate() + 1);
+      loop = new Date(newDate);
+    }
+    days.push(loop.toISOString().substring(0, 16));
+    this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
+    });
   }
 
   setParkingLotsFreePlacesToMax() {
@@ -211,4 +247,17 @@ export class CalendarDataService {
   clearSelectedParkingLot() {
     this.selectedParkingLot = <ParkingLot>{};
   }
+
+  takePlace() {
+    //@ts-ignore
+    let day = new Date(this.selectedRangeValue.start);
+    day.setDate(day.getDate() + 1);
+    const parkingId = this.parkingId;
+
+    this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
+    });
+  }
 }
+
+
+
