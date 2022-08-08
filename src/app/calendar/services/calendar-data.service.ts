@@ -18,7 +18,7 @@ export class CalendarDataService {
   clickedParkingLot = <ParkingLot>{};
 
   //DOMINO VARIABLE
-  action = UserPossibleAction.FREE_PLACE;
+  action = UserPossibleAction.TAKE_PLACE;
   parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
@@ -92,20 +92,21 @@ export class CalendarDataService {
     const start = new Date(this.selectedRangeValue.start);
     // @ts-ignore
     const end = new Date(this.selectedRangeValue.end);
-
     let loop = new Date(start);
+    loop.setDate(loop.getDate()+1);
     while (loop <= end) {
-      days.push(loop.toISOString().substring(0,19))
+      days.push(loop.toISOString().substring(0,16));
       let newDate = loop.setDate(loop.getDate() + 1);
       loop = new Date(newDate);
     }
-    // console.log(days);
+    days.push(loop.toISOString().substring(0,16));
     this.calendarParkingLotsHttpService.freePlace(days).subscribe(()=>{});
   }
 
   takePlace(){
     //@ts-ignore
-    const day = new Date(this.selectedRangeValue.start);
+    let day = new Date(this.selectedRangeValue.start);
+    day.setDate(day.getDate()+1);
     const parkingId = this.parkingId;
 
     this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0,16), parkingId).subscribe(()=>{});
