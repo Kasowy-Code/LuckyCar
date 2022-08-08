@@ -8,10 +8,10 @@
 .content {
   padding: 0.5rem 2rem;
 }
-.header {
+#header {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 3rem;
+  grid-template-rows: 3rem;
   width: 100%;
 }
 .select-all {
@@ -50,3 +50,5 @@
   grid-gap: 1.5rem;
   padding: 0 1rem;
 }
+
+

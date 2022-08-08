@@ -46,7 +46,7 @@ export class AccountComponent implements OnInit {
   }
 
   getUsers(){
-    this.router.navigate(["/users"]);
+    this.router.navigate(["/account/users"]);
   }
 }
 

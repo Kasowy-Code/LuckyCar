@@ -9,9 +9,12 @@
   //height: 85vh;
   align-items: end;
 }
+.header {
+  width: 100%;
+  text-align: center;
+}
 
 mat-toolbar {
-  display: grid;
   background-color: var(--mainColor);
   color: white;
   font-size: 25px;

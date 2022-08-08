@@ -1,4 +1,7 @@
-
+.header {
+  width: 100%;
+  text-align: center;
+}
 .main {
   display: grid;
   justify-content: center;

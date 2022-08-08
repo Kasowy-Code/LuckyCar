@@ -18,6 +18,8 @@ export class RestartPasswordComponent implements OnInit {
   passwordError: boolean = false;
   password:string = "";
   id = this.route.snapshot.params['id'];
+  hide1: boolean = true;
+  hide2: boolean = true;
 
   constructor(private route:ActivatedRoute, private restartService:RestartPasswordService,
               private router:Router, private snackBar:MatSnackBar) { }
