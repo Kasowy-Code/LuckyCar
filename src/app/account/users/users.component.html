@@ -1,8 +1,10 @@
 <section class="main">
   <mat-toolbar>
-    <mat-form-field class="search" appearance="legacy">
-      <mat-label>Search</mat-label>
-      <input matInput [formControl]="employees">
+    <img src="assets/logo.svg" class="logo" alt="logo">
+    <h1 class="header">USERS</h1>
+    <mat-form-field class="search" appearance="standard">
+      <mat-label id>Search</mat-label>
+      <input id="input" matInput [formControl]="employees">
       <span matPrefix><mat-icon>search</mat-icon></span>
     </mat-form-field>
   </mat-toolbar>

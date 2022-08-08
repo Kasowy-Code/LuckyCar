@@ -1,4 +1,7 @@
-<mat-toolbar><h1>CALENDAR</h1></mat-toolbar>
+<mat-toolbar>
+  <img src="assets/logo.svg" alt="logo" class="logo">
+  <h1 class="header">CALENDAR</h1>
+</mat-toolbar>
 <div class="main">
 
   <mat-spinner *ngIf="!calendarDataService.loaded"></mat-spinner>
@@ -13,7 +16,7 @@
     </mat-card>
 
     <app-calendar-button-toggle-group></app-calendar-button-toggle-group>
-  </div>
 
-  <app-free-take-button></app-free-take-button>
+    <app-free-take-button *ngIf="true"></app-free-take-button>
+  </div>
 </div>

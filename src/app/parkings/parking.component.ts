@@ -4,6 +4,8 @@ import {ParkingDialogComponent} from "./dialog/parking-dialog.component";
 import {ParkingLotsListService} from "../shared/services/parking-lots-list.service";
 import {FormControl, Validators} from "@angular/forms";
 import {ParkingLot} from "../shared/dto/parking-lot";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AddParkingSnackBarComponent} from "../add-parking-snack-bar/add-parking-snack-bar.component";
 
 
 @Component({
@@ -13,14 +15,17 @@ import {ParkingLot} from "../shared/dto/parking-lot";
 })
 
 export class ParkingComponent implements OnInit {
-  disabled = false;
+  text: string = "";
   parkingLotsList: ParkingLot[] = [];
   inputValue = new FormControl('');
   numberInputValue = new FormControl('1');
   parkingLot = <ParkingLot>{};
+  durationInSeconds = 2;
+
 
   constructor(public dialog: MatDialog,
-              private parkingService: ParkingLotsListService) {
+              private parkingService: ParkingLotsListService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -44,7 +49,7 @@ export class ParkingComponent implements OnInit {
 
   addParkingLot() {
     // @ts-ignore
-    if (this.inputValue.value != null && this.numberInputValue.value > 0 && this.inputValue.value != '') {
+    if (this.inputValue.value != null && this.numberInputValue.value > 0 && this.inputValue.value != "\u0020" && this.inputValue.value != '') {
       this.parkingLot.name = this.inputValue.value;
       this.parkingLot.parkingPlaceCount = Number(this.numberInputValue.value);
 
@@ -53,6 +58,7 @@ export class ParkingComponent implements OnInit {
     console.log(this.parkingLot)
       this.parkingService.addParkingLot(this.parkingLot).subscribe((data) => {
         this.getParkingLotsList();
+        this.openSnackBar();
         this.inputValue.reset();
         this.numberInputValue.reset();
         this.numberInputValue = new FormControl('1');
@@ -120,6 +126,21 @@ export class ParkingComponent implements OnInit {
     } else {
       this.getParkingLotsList();
     }
+  }
+
+  changeIsAvailableState(parking: ParkingLot){
+    if(parking.isAvailable == true){
+      return this.text = "Disable parking lot";
+    }
+    else {
+      return this.text = "Enable parking lot"
+    }
+  }
+
+  openSnackBar(){
+    this.snackBar.openFromComponent(AddParkingSnackBarComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 
 }

@@ -2,7 +2,12 @@
   margin: 0;
   padding: 0;
 }
-
+.content {
+  display: grid;
+  justify-content: center;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
 .main {
   display: grid;
   justify-content: center;

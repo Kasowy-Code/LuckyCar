@@ -82,7 +82,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {ParkingDialogComponent} from './parkings/dialog/parking-dialog.component';
 import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.component';
-
+import {ParkingDialogComponent} from './parkings/dialog/parking-dialog.component';
+import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.co
     FreePlaceAdminButtonComponent,
     AuthErrorComponent,
     ForgotPasswordComponent,
-    ParkingLotDialogComponent
+    ParkingLotDialogComponent,
+    AddParkingSnackBarComponent
   ],
   imports: [
     BrowserModule,
