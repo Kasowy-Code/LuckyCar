@@ -1,10 +1,18 @@
-<mat-toolbar><h1>CALENDAR</h1></mat-toolbar>
+<mat-toolbar>
+  <img src="assets/logo.svg" alt="logo" class="logo">
+  <h1 class="header">CALENDAR</h1>
+</mat-toolbar>
 <div class="main">
 
   <mat-spinner *ngIf="!calendarDataService.loaded"></mat-spinner>
   <div *ngIf="calendarDataService.loaded">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
+                    (click)="
+                    calendarDataService.setParkingLotsFreePlacesToMax();
+                    calendarDataService.countFreeParkingPlacesOnEachParkingLot();
+                    calendarDataService.setParkingLotsButtonStyle();
+                    calendarDataService.clearSelectedParkingLot()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
     </mat-card>
 
@@ -12,4 +20,6 @@
 
     <app-free-take-button *ngIf="true"></app-free-take-button>
   </div>
+
+  <app-free-take-button></app-free-take-button>
 </div>

@@ -2,23 +2,29 @@
   margin: 0;
   padding: 0;
 }
-
+.header {
+  width: 100%;
+  text-align: center;
+}
 .main {
   display: grid;
   justify-content: center;
-//height: 85vh;
   align-items: end;
 }
 
 .search {
   color: white;
-  width: 100%;
+  width: clamp(6rem,20vw,10rem);
   font-size: 20px;
-  margin-top: 20px;
+  position: absolute;
+  right: 5vw;
 }
 
+.mat-form-field-underline {
+  display: none !important;
+}
 .mat-raised-button {
-  width: 350px;
+  width: clamp(20ch, 90vw, 350px);
   height: 50px;
   background-color: var(--mainColor);
   color: white;
@@ -32,7 +38,10 @@
 .mat-toolbar {
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 100;
   background-color: var(--mainColor);
-  padding: 1rem;
+  height: 50px;
+}
+.header, .logo, .search {
+  justify-self: center;
 }

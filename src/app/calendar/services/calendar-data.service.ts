@@ -4,7 +4,7 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
-import {UserPossibleAction} from "../user-possible-action";
+import { ParkingLotButtonStyleEnum } from '../calendar-button-toggle-group/enums/parking-lot-button-style-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +13,27 @@ export class CalendarDataService {
   hasParkingOnDays: ParkingDay[] = [];
   parkingLotsOnDay: any = [];
   selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
-  parkingLotsList: ParkingLot[] = [];
   loaded = false;
-  clickedParkingLot = <ParkingLot>{};
+  allParkingPlaceList = <ParkingPlaceDay[]>[];
+
+  //TODO dane potrzebne Domino
+  parkingLotsList: ParkingLot[] = [];
+  selectedParkingLot = <ParkingLot>{};
 
   //DOMINO VARIABLE
   action = UserPossibleAction.TAKE_PLACE;
   parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
+  }
+
+  confirmDateRange(parkingLot: ParkingLot) {
+    if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
+
+      if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
+        this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
+      }
+    }
   }
 
   setMyParkingPlaces() {
@@ -38,11 +50,15 @@ export class CalendarDataService {
   }
 
   setParkingLotsOnDay() {
-    this.calendarParkingLotsHttpService.getParkingLots().subscribe(
-      (data: any) => {
-        data.forEach((el: any) => {
-          this.parkingLotsList.push(el)
-        });
+    this.calendarParkingLotsHttpService.getParkingLots().subscribe(data => {
+        this.parkingLotsList = data.filter(value => value.isAvailable)
+
+        this.parkingLotsList.forEach(parkingLot => {
+          parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
+
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+        })
+
 
         this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
           (res: any) => {
@@ -74,42 +90,172 @@ export class CalendarDataService {
   }
 
   //DOMINO
-  getData(){
+  getData() {
     return {
       "action": this.action
     }
   }
 
   //TO USTAWIA DOMINIK
-  setData(action:any, parkingId:number){
+  setData(action: any, parkingId: number) {
     this.action = action;
     this.parkingId = parkingId;
   }
 
-  freePlace(){
+  freePlace() {
     const days = [];
     // @ts-ignore
     const start = new Date(this.selectedRangeValue.start);
     // @ts-ignore
     const end = new Date(this.selectedRangeValue.end);
     let loop = new Date(start);
-    loop.setDate(loop.getDate()+1);
+    loop.setDate(loop.getDate() + 1);
     while (loop <= end) {
-      days.push(loop.toISOString().substring(0,16));
+      days.push(loop.toISOString().substring(0, 16));
       let newDate = loop.setDate(loop.getDate() + 1);
       loop = new Date(newDate);
     }
-    days.push(loop.toISOString().substring(0,16));
-    this.calendarParkingLotsHttpService.freePlace(days).subscribe(()=>{});
+    days.push(loop.toISOString().substring(0, 16));
+    this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
+    });
   }
 
-  takePlace(){
+  setParkingLotsFreePlacesToMax() {
+    this.parkingLotsList.forEach(parkingLot => {
+      parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
+
+      parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+    })
+  }
+
+  ifShouldShowFreeParkingPlaces() {
+    if (this.selectedRangeValue.start) {
+
+      if (this.selectedRangeValue.end === null) {
+        return true;
+      } else if (this.selectedRangeValue.end.getMonth() === this.selectedRangeValue.start.getMonth() && this.selectedRangeValue.end.getDate() === this.selectedRangeValue.start.getDate()) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  countFreeParkingPlacesOnEachParkingLot() {
+    if (this.ifShouldShowFreeParkingPlaces()) {
+      this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
+        // console.log(response);
+        // console.log(this.selectedRangeValue);
+
+        this.allParkingPlaceList = response;
+        // console.log(this.allParkingPlaceList[0].date);
+
+        this.allParkingPlaceList.forEach(parkingPlace => {
+
+          let dateToCompare = new Date(parkingPlace.date)
+
+          this.parkingLotsList.forEach(parkingLot => {
+
+            // console.log("their parkingLot id " + parkingPlace.parkingLotId)
+            // console.log("ours parkingLot id  " + parkingLot.id)
+
+            // @ts-ignore
+            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
+              parkingLot.freeParkingPlaces--;
+            }
+
+          });
+        });
+      });
+    }
+  }
+
+  checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
+    if (this.ifShouldShowFreeParkingPlaces()) {
+      if (parkingLot.freeParkingPlaces > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkIfUserHasParkingPlaceOnParkingLot(parkingLot: ParkingLot) {
+
+    let userHasParkingPlaceOnRange = true;
+    let start = this.selectedRangeValue.start;
+    let end = this.selectedRangeValue.end;
+
+    if (end === null) {
+      end = start;
+    }
+    if (start !== null && end !== null) {
+      let currentIteratedDate = new Date(start);
+
+      while (currentIteratedDate <= end) {
+        let userHasParkingPlaceOnDay = false;
+
+        this.hasParkingOnDays.forEach(element => {
+          if (element.parkingLotId === parkingLot.id) {
+            if (element.day === currentIteratedDate.getDate() && element.month === currentIteratedDate.getMonth()) {
+              userHasParkingPlaceOnDay = true;
+            }
+          }
+        })
+
+        if (!userHasParkingPlaceOnDay) {
+          userHasParkingPlaceOnRange = false;
+          return userHasParkingPlaceOnRange;
+        }
+
+        let newDate = currentIteratedDate.setDate(currentIteratedDate.getDate() + 1);
+        currentIteratedDate = new Date(newDate);
+      }
+    }
+
+    return userHasParkingPlaceOnRange;
+  }
+
+  setParkingLotsButtonStyle() {
+    let hasParking = false;
+
+    this.parkingLotsList.forEach(parkingLot => {
+      if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
+        parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+        hasParking = true;
+      }
+    })
+
+    if (!hasParking) {
+      this.parkingLotsList.forEach(parkingLot => {
+        if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
+          console.log(parkingLot);
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE;
+          console.log("dupa")
+        } else {
+
+          console.log(parkingLot)
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+        }
+      })
+    }
+  }
+
+  clearSelectedParkingLot() {
+    this.selectedParkingLot = <ParkingLot>{};
+  }
+
+  takePlace() {
     //@ts-ignore
     let day = new Date(this.selectedRangeValue.start);
-    day.setDate(day.getDate()+1);
+    day.setDate(day.getDate() + 1);
     const parkingId = this.parkingId;
 
-    this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0,16), parkingId).subscribe(()=>{});
+    this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
+    });
   }
 }
+
+
 

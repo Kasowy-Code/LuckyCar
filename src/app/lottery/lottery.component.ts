@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LotterySettingsInfoHttpService} from "../shared/services/lottery-settings-info-http.service";
 import {RoleService} from "../role.service";
+import {LotterySettings} from "../shared/dto/lottery-settings";
 
 @Component({
   selector: 'app-lottery',
@@ -9,6 +10,7 @@ import {RoleService} from "../role.service";
 })
 export class LotteryComponent implements OnInit {
   lotteryMonth = '';
+  lotterySettings = <LotterySettings>{};
 
   constructor(private lotterySettingsInfoHttpService: LotterySettingsInfoHttpService,
               public roleService: RoleService) {
@@ -18,6 +20,11 @@ export class LotteryComponent implements OnInit {
     this.lotterySettingsInfoHttpService.getLotteryMonth().subscribe(lotteryMonth => {
       this.lotteryMonth = lotteryMonth;
     });
+
+    this.lotterySettingsInfoHttpService.getLotterySettings().subscribe(response => {
+      this.lotterySettings = response;
+    })
+
   }
 
 

@@ -22,3 +22,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 50px;
   color: white;
 }
+.logo {
+  height: 45px;
+  position: absolute;
+  left: 5vw;
+}
+.logo-color {
+  height: 60px;
+  position: fixed;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lottery-success {
+  background-color: green;
+  color: white;
+}
+.lottery-error {
+  background-color: red;
+  color: white;
+}
+.mat-simple-snackbar-action {
+  color: white;
+}
