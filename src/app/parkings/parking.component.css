@@ -30,6 +30,7 @@
   color: white;
   background: red;
   width: 60%;
+  margin-top: 2rem !important;
 }
 .mat-raised-button {
   background-color: #064dd6;
@@ -75,7 +76,7 @@ input[type="number"] {
   width: 1rem;
   height: 2rem;
   cursor: pointer;
-  margin: 1rem;
+  margin: 0 1rem;
   position: relative;
   box-shadow: #474747;
   border-radius: 50%;
@@ -109,3 +110,9 @@ input[type="number"] {
   height: 1.5rem;
 }
 
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
