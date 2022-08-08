@@ -4,6 +4,7 @@ import {CalendarDataService} from "./services/calendar-data.service";
 
 //TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
 //i zrobimy to tak, że jeżeli wybrałes date inną niż powinieneś to parkingi się nie podświetlają
+// jeśli nie ma losowania, to też nie można klikać
 
 @Component({
   selector: 'app-calendar',

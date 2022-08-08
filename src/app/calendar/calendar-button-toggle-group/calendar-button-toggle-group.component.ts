@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ParkingLot} from "../../shared/dto/parking-lot";
 import {CalendarDataService} from "../services/calendar-data.service";
-import {ParkingLotButtonStyleEnum} from "./enums/parking-lot-button-style-enum";
+import {ParkingLotButtonStyleEnum} from "../enums/parking-lot-button-style-enum";
 
 @Component({
   selector: 'app-calendar-button-toggle-group',
@@ -17,7 +17,7 @@ export class CalendarButtonToggleGroupComponent implements OnInit {
   }
 
   setClickedParking(parkingLot: ParkingLot) {
-    if(parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
+    if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
       this.calendarDataService.selectedParkingLot = parkingLot;
     }
   }
