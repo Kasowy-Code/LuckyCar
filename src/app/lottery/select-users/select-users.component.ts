@@ -60,7 +60,7 @@ export class SelectUsersComponent implements OnInit{
                   duration: 5000,
                   verticalPosition: "top",
                   horizontalPosition: "right",
-                  panelClass: ["lottery-success"]
+                  panelClass: ["good-snackbar"]
                 });
                 this.router.navigate(["/lottery"]);
               },
@@ -69,7 +69,7 @@ export class SelectUsersComponent implements OnInit{
                   duration: 5000,
                   verticalPosition: "top",
                   horizontalPosition: "right",
-                  panelClass: ["lottery-error"]
+                  panelClass: ["error-snackbar"]
                 });
               }
             )

@@ -23,4 +23,8 @@ export class CalendarParkingLotsHttpService {
   getAllParkingPlaces() {
     return this.http.get<ParkingPlaceDay[]>(`${environment.link}/api/parking-places`);
   }
+
+  getDrawEndDate() {
+    return this.http.get(`${environment.link}/api/settings`);
+  }
 }

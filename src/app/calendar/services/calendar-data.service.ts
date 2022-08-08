@@ -60,11 +60,8 @@ export class CalendarDataService {
 
         this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
           (res: any) => {
-
             res.forEach((el: ParkingDateDTO) => {
-                if (!this.parkingLotsOnDay.some((object: any) => {
-                  object.date == new Date(el.date)
-                })) {
+                if (!this.parkingLotsOnDay.some((object: any) =>  object.date.valueOf() == new Date(el.date).valueOf())) {
                   this.parkingLotsOnDay.push({
                     parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
                     date: new Date(el.date)
@@ -126,6 +123,7 @@ export class CalendarDataService {
 
             // console.log("their parkingLot id " + parkingPlace.parkingLotId)
             // console.log("ours parkingLot id  " + parkingLot.id)
+
 
             // @ts-ignore
             if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
@@ -210,5 +208,12 @@ export class CalendarDataService {
 
   clearSelectedParkingLot() {
     this.selectedParkingLot = <ParkingLot>{};
+  }
+  checkPossibleActions() {
+    if(!this.hasParkingOnDays.some(el => el.day === this.selectedRangeValue.start?.getDate() && el.month === this.selectedRangeValue.start?.getMonth())) {
+      if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
+        this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
+      }
+    }
   }
 }
