@@ -30,22 +30,22 @@
 }
 .mat-button {
   font-size: 12px;
-  margin: auto;
   color: white;
   background: red;
-  width: 8rem;
+  width: 60%;
 }
 .mat-raised-button {
   background-color: #064dd6;
   color: white;
   font-size: 12px;
-  width: 8rem;
+  width: 60%;
 }
 .quantity{
   border: 0;
   display: inline-flex;
   font-weight: bold;
   position: relative;
+  justify-items: center;
 }
 
 input[type="number"] {
@@ -92,6 +92,7 @@ input[type="number"] {
   height: 2px;
   background-color: #064dd6;
   transform: translate(-50%, -50%);
+  justify-items: center;
 }
 .mat-icon-button.plus:after {
   transform: translate(-50%, -50%) rotate(90deg);
