@@ -1,11 +1,11 @@
 <mat-toolbar>
   <img src="assets/logo.svg" alt="logo" class="logo">
-  <h1 class="header">PARKINGS</h1>
+  <h1 class="header">PARKING LOTS</h1>
 </mat-toolbar>
 <section class = "main">
   <mat-card *ngFor="let parking of this.parkingLotsList let i = index">
     <mat-list-item>
-      <p style="font-size: 25px">{{parking.name}}</p>
+      <h1>{{parking.name}}</h1>
         <mat-card-actions>
         <p style="font-size: 15px">Number of parking spaces</p>
           <div class="input-wrapper">
@@ -31,7 +31,7 @@
     <mat-card>
       <div class="column">
       <mat-card-actions>
-        <p style="font-size: 25px">Add new parking</p>
+        <h1>Add new parking</h1>
         <form>
         <mat-form-field appearance="fill" id="nameInput">
           <mat-label>Enter a name</mat-label>

@@ -7,7 +7,6 @@
   justify-content: center;
   padding-top: 1rem;
   align-items: center;
-  margin: 3rem auto;
   font-family: sans-serif;
 
 }
@@ -31,7 +30,7 @@
 .mat-button {
   font-size: 12px;
   color: white;
-  background: red;
+  background: darkred;
   width: 60%;
   margin-top: 2rem !important;
 }
