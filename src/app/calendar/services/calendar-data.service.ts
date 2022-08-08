@@ -5,6 +5,8 @@ import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
 import { ParkingLotButtonStyleEnum } from '../calendar-button-toggle-group/enums/parking-lot-button-style-enum';
+import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
+import {UserPossibleAction} from "../calendar-button-toggle-group/enums/user-possible-action-enum";
 
 @Injectable({
   providedIn: 'root'

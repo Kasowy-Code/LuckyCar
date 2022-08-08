@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserPossibleAction} from "../../user-possible-action";
 import {CalendarDataService} from "../../services/calendar-data.service";
-import {DateRange} from "@angular/material/datepicker";
+import {UserPossibleAction} from "../enums/user-possible-action-enum";
 
 @Component({
   selector: 'app-free-take-button',
