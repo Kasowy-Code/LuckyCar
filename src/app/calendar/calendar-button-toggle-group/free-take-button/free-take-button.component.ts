@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CalendarDataService} from "../../services/calendar-data.service";
-import {UserPossibleAction} from "../enums/user-possible-action-enum";
+import {UserPossibleActionEnum} from "../../enums/user-possible-action-enum";
 
 @Component({
   selector: 'app-free-take-button',
@@ -9,35 +9,25 @@ import {UserPossibleAction} from "../enums/user-possible-action-enum";
 })
 export class FreeTakeButtonComponent implements OnInit {
 
-  actionMessage = "Take it"
-
-  // TO WYSYŁA MI DOMINIK ŚWITILIK
-  action = '';
-
-  constructor(private calendarDataService: CalendarDataService) {
+  constructor(public calendarDataService: CalendarDataService) {
   }
 
   ngOnInit(): void {
-    const data = this.calendarDataService.getData();
-    this.action = data.action;
-    this.setAction(this.action);
+    this.calendarDataService.setUserPossibleActionEnum();
   }
 
-  setAction(action: string) {
-    if (action === UserPossibleAction.FREE_PLACE) {
-      this.actionMessage = "Release seat";
-    }
-    if (action === UserPossibleAction.TAKE_PLACE) {
-      this.actionMessage = "Take it";
-    }
-  }
+  freeOrTake() {
+    console.log(this.calendarDataService.freeTakeButtonActionEnum);
 
-  freeOrTake(){
-    if(this.action === UserPossibleAction.TAKE_PLACE){
+    if (this.calendarDataService.freeTakeButtonActionEnum === UserPossibleActionEnum.FREE_PLACE) {
+      this.calendarDataService.freePlace();
+
+    } else if (this.calendarDataService.freeTakeButtonActionEnum === UserPossibleActionEnum.TAKE_PLACE) {
       this.calendarDataService.takePlace();
     }
-    if(this.action === UserPossibleAction.FREE_PLACE){
-      this.calendarDataService.freePlace();
-    }
+  }
+
+  log() {
+    console.log(this.calendarDataService.selectedParkingLot.parkingLotButtonStyleEnum)
   }
 }

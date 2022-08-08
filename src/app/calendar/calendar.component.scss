@@ -1,10 +1,12 @@
 .mat-form-field {
   padding-bottom: 3rem;
 }
+
 .header {
   width: 100%;
   text-align: center;
 }
+
 .main {
   padding-top: 5vh;
   display: grid;
@@ -12,27 +14,46 @@
   overflow: auto;
   padding-bottom: 50px;
 }
+
 .demo-inline-calendar-card {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 18rem;
 }
+
 .have-parking {
   border-bottom: 2px solid #064dd6 !important;
 }
+
 .available-parking {
   border-bottom: 2px solid limegreen !important;
 }
+
 button.disabled {
   background-color: #3c3c3b !important;
+}
+
+.mat-card {
+  border: 0.5px solid #e3e3e3;
+}
+
+.mat-calendar-body-cell-content {
+  color: #606060;
+  font-weight: 575;
+}
+
+.mat-calendar-body-selected {
+  color: white;
 }
 
 .mat-button-toggle-group {
   display: flex !important;
   justify-content: space-evenly !important;
 }
+
 .mat-button-toggle {
   flex-grow: 1 !important;
 }
+
 .mat-toolbar {
   display: flex;
   justify-content: center;

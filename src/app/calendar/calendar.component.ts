@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {CalendarDataService} from "./services/calendar-data.service";
+import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
 
 //TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
 //i zrobimy to tak, że jeżeli wybrałes date inną niż powinieneś to parkingi się nie podświetlają
@@ -20,7 +21,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
 
-  constructor(public calendarDataService: CalendarDataService) {
+  constructor(public calendarDataService: CalendarDataService,
+              private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
 
     const currentDate = new Date();
     //TODO zmienić na pobiernaie miesiąca z bazy
@@ -29,7 +31,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.calendarDataService.setParkingLotsOnDay();
+
+    this.calendarDataService.setCalendarView();
   }
 
   ngOnDestroy() {
@@ -49,6 +52,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
       }
     }
     this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue);
+
+    this.calendarDataService.setParkingLotsButtonStyle();
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {

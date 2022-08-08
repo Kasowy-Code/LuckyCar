@@ -24,14 +24,13 @@ export class CalendarParkingLotsHttpService {
     return this.http.get<ParkingPlaceDay[]>(`${environment.link}/api/parking-places`);
   }
 
-  freePlace(days:any) {
-    console.log(days);
+  freePlace(days: any) {
     return this.http.patch(`${environment.link}/api/parking-places/free`,
       days,
       {responseType: 'text' as 'json'});
   }
 
-  takePlace(day:any, parkingId:any){
+  takePlace(day: any, parkingId: any) {
     const request = {
       "day": day,
       "parkingLotId": parkingId
