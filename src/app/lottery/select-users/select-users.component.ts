@@ -31,7 +31,7 @@ export class SelectUsersComponent implements OnInit{
   filteredUsers: Observable<User[]>|any;
   allComplete: boolean = false;
   employees = new FormControl('');
-
+  loading = false;
   constructor(private http: HttpClient, private router: Router, private snackbar: MatSnackBar) {}
   ngOnInit() {
       this.http.get<any>(`${environment.link}/api/userdraw/users`)
@@ -49,6 +49,7 @@ export class SelectUsersComponent implements OnInit{
   }
 
   startDraw() {
+    this.loading = true;
     const deletionList = this.user.subusers?.filter(el => el.completed !== true);
     console.log(deletionList);
     this.http.patch(`${environment.link}/api/userdraw/resignfromdrawlist`, deletionList)
@@ -56,11 +57,12 @@ export class SelectUsersComponent implements OnInit{
           this.http.patch(`${environment.link}/api/draw`, {})
             .subscribe(
               () => {
+                this.loading = false;
                 this.snackbar.open('Lottery started successfully!', 'OK', {
                   duration: 5000,
                   verticalPosition: "top",
                   horizontalPosition: "right",
-                  panelClass: ["lottery-success"]
+                  panelClass: ["good-snackbar"]
                 });
                 this.router.navigate(["/lottery"]);
               },
@@ -69,7 +71,7 @@ export class SelectUsersComponent implements OnInit{
                   duration: 5000,
                   verticalPosition: "top",
                   horizontalPosition: "right",
-                  panelClass: ["lottery-error"]
+                  panelClass: ["error-snackbar"]
                 });
               }
             )
