@@ -43,4 +43,8 @@ export class CalendarParkingLotsHttpService {
       request,
       {responseType: 'text' as 'json'});
   }
+
+  getDrawEndDate() {
+    return this.http.get(`${environment.link}/api/settings`);
+  }
 }

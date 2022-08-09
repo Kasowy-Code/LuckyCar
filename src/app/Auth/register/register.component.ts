@@ -39,7 +39,7 @@ export class RegisterComponent {
 
   register() {
     this.loading = true;
-      this.registerService.register(String(this.name.value), String(this.surname.value), String(this.email.value))
+      this.registerService.register(String(this.name.value), String(this.surname.value), String(this.email.value).toLowerCase())
         .subscribe(() => {
           this.router.navigate(["/registered"]);
         }, err => {

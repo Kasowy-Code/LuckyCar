@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {RestartPasswordService} from "../restart-password/services/restart-password.service";
 import {ForgotPasswordService} from "./services/forgot-password.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -34,15 +33,15 @@ export class ForgotPasswordComponent implements OnInit {
   // LOADING BUTTON
   forgotPassword(){
     this.loading = true;
-    this.forgotService.forgotPassword(this.username).subscribe(()=> {
-      this.snackBar.open("Success! Check your email address", "", {
+    this.forgotService.forgotPassword(this.username.toLowerCase()).subscribe(()=> {
+      this.snackBar.open("Link was sent to your email address!", "", {
         duration: 5*1000,
         panelClass: ['good-snackbar'],
         horizontalPosition: "end",
         verticalPosition: "top",
       });
       this.loading = false;
-    }, err=>{
+    }, () =>{
       this.error = true;
       this.loading = false;
     })
