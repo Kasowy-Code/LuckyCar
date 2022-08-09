@@ -31,8 +31,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
-    this.calendarDataService.setCalendarView();
+    this.calendarDataService.setupCalendarComponentData();
   }
 
   ngOnDestroy() {
@@ -51,7 +50,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.calendarDataService.selectedRangeValue = new DateRange<Date>(start, end);
       }
     }
-    this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue);
+    this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue)
 
     this.calendarDataService.setParkingLotsButtonStyle();
   }

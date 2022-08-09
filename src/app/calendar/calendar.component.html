@@ -9,9 +9,7 @@
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
                     (click)="
-                    calendarDataService.setParkingLotsFreePlacesToMax();
-                    calendarDataService.setParkingLotsButtonStyle();
-                    calendarDataService.clearCalendarTemporaryData()"
+                    calendarDataService.setParkingLotsButtonStyle()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
     </mat-card>
 
