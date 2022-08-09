@@ -153,11 +153,13 @@ export class CalendarDataService {
 
       let dateToCompare = new Date(parkingPlace.date)
 
+
+      console.log(parkingPlace.userId)
       this.parkingLotsList.forEach(parkingLot => {
 
         // @ts-ignore
         if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth() && parkingPlace.userId !== null) {
-          
+
           parkingLot.freeParkingPlaces--;
         }
       });
