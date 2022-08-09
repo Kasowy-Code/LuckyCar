@@ -83,7 +83,6 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
 import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
-import { AddParkingSnackBarComponent } from './add-parking-snack-bar/add-parking-snack-bar.component';
 import { ReserveAdminButtonDialogComponent } from './calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button-dialog/reserve-admin-button-dialog.component';
 
 
@@ -129,7 +128,6 @@ import { ReserveAdminButtonDialogComponent } from './calendar/calendar-button-to
     AuthErrorComponent,
     ForgotPasswordComponent,
     ParkingLotDialogComponent,
-    AddParkingSnackBarComponent,
     ReserveAdminButtonDialogComponent
   ],
   imports: [
