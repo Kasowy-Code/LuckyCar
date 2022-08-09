@@ -51,7 +51,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   onButtonClick() {
+
     this.calendar.updateTodaysDate();
+    console.log('update date')
   }
 
   ngOnDestroy() {
@@ -82,21 +84,16 @@ export class CalendarComponent implements OnInit, OnDestroy {
         if (this.calendarDataService.hasParkingOnDays.some(item => item.day == new Date(cellDate).getDate() && item.month == new Date(cellDate).getMonth())) {
           return 'have-parking';
         }
-        this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
 
-          this.calendarDataService.allParkingPlaceList = response;
+        this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
 
-          this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
+          let dateToCompare = new Date(parkingPlace.date)
 
-            let dateToCompare = new Date(parkingPlace.date)
+          this.calendarDataService.parkingLotsList.forEach(parkingLot => {
 
-            this.calendarDataService.parkingLotsList.forEach(parkingLot => {
-
-              if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
-                parkingLot.freeParkingPlaces--;
-              }
-
-            });
+            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
+              parkingLot.freeParkingPlaces--;
+            }
           });
         });
 

@@ -35,13 +35,13 @@ export class CalendarDataService {
     this.setMyParkingPlaces();
   }
 
-  confirmDateRange(parkingLot: ParkingLot) {
-    if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
+  confirmDateRange() {
+    //if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
 
-      if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
-        this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
-      }
+    if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
+      this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
     }
+    //}
   }
 
   setMyParkingPlaces() {
@@ -52,7 +52,7 @@ export class CalendarDataService {
           const day: ParkingDay = {day: tempDate.getDate(), month: tempDate.getMonth(), parkingLotId: el.parkingLotId}
           this.hasParkingOnDays.push(day);
         });
-      this.loaded++;
+        this.loaded++;
       }
     )
   }
@@ -97,7 +97,9 @@ export class CalendarDataService {
   setParkingLotsList() {
     this.calendarParkingLotsHttpService.getParkingLots().subscribe(response => {
       this.parkingLotsList = response.filter((value: any) => value.isAvailable);
-      this.parkingLotsList.map((el: ParkingLot) => {el.freeParkingPlaces = el.parkingPlaceCount});
+      this.parkingLotsList.map((el: ParkingLot) => {
+        el.freeParkingPlaces = el.parkingPlaceCount
+      });
       this.setParkingLotsOnDay();
     })
   }
@@ -225,12 +227,16 @@ export class CalendarDataService {
   }
 
   freePlace() {
-    if (this.selectedRangeValue.start != null && this.selectedRangeValue.end != null) {
+    if (this.selectedRangeValue.start !== null) {
+      if (this.selectedRangeValue.end === null) {
+        this.confirmDateRange();
+      }
 
       const days = [];
 
       const start = new Date(this.selectedRangeValue.start);
 
+      // @ts-ignore
       const end = new Date(this.selectedRangeValue.end);
       let loop = new Date(start);
 
@@ -241,6 +247,7 @@ export class CalendarDataService {
         loop = new Date(newDate);
       }
       days.push(loop.toISOString().substring(0, 16));
+
       this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
         this.snackBar.open("Parking place has been freed", "", {
           duration: 5 * 1000,

@@ -26,7 +26,6 @@ export class FreeTakeButtonComponent implements OnInit {
 
     if (this.calendarDataService.userPossibleActionEnum === UserPossibleActionEnum.FREE_PLACE) {
       this.calendarDataService.freePlace();
-
     } else if (this.calendarDataService.userPossibleActionEnum === UserPossibleActionEnum.TAKE_PLACE) {
       this.calendarDataService.takePlace();
     }
