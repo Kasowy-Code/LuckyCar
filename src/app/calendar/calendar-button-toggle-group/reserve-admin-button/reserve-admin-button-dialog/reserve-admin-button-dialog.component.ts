@@ -62,7 +62,8 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
     }
     this.list.forEach(u => {
       const start = new Date(this.data.startDate);
-
+        start.setHours(0);
+        start.setDate(start.getDate()+1);
         let req = {};
         if (u.userId < 0) {
           req = {
@@ -79,6 +80,7 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
         this.request.push(req);
 
     });
+    console.log(this.request);
     return this.http.patch(`${environment.link}/api/reserve`, this.request).subscribe(() => {
       this.snackBar.open("The booking was successful", "", {
         duration: 5*1000,
