@@ -6,3 +6,20 @@
   margin-top: 10px;
   font-size: 20px;
 }
+
+.FREE_PLACE {
+  background-color: var(--mainColor);
+}
+
+.TAKE_PLACE {
+  background-color: green;
+}
+
+.NOTHING_TO_DO {
+  color: #606060;
+  background-color: white;
+  border: 0.5px solid #e3e3e3;
+  border-radius: 4%;
+  pointer-events: none;
+
+}

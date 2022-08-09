@@ -15,11 +15,10 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {LotteryComponent} from './lottery/lottery.component';
 import {AccountComponent} from './account/account.component';
-import {CarsComponent} from "./cars/cars.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {LoginComponent} from './Auth/login/login.component';
-import { AdminComponent } from './admin/admin.component';
+import {AdminComponent} from './admin/admin.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from './Auth/register/register.component';
 import {RegisterSuccessComponent} from './Auth/register-success/register-success.component';
@@ -72,21 +71,20 @@ import {
 import {ForgotPasswordComponent} from './Auth/forgot-password/forgot-password.component';
 import {ParkingLotDialogComponent} from './lottery/sign-up-to-lottery/parking-lot-dialog/parking-lot-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptorService} from "./shared/services/token/token-interceptor.service";
-import { AcceptUserComponent } from './Auth/accept-user/accept-user.component';
+import {AcceptUserComponent} from './Auth/accept-user/accept-user.component';
 import {ParkingComponent} from "./parkings/parking.component";
 import {MatListModule} from "@angular/material/list";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { ParkingDialogComponent } from './parkings/dialog/parking-dialog.component';
-import { LotteryDialogComponent } from './lottery/lottery-dialog/lottery-dialog.component';
-import { ReserveAdminButtonDialogComponent } from './calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button-dialog/reserve-admin-button-dialog.component';
-
-
-
+import {ParkingDialogComponent} from "./parkings/dialog/parking-dialog.component";
+import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.component";
+import {
+  ReserveAdminButtonDialogComponent
+} from "./calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button-dialog/reserve-admin-button-dialog.component";
 
 @NgModule({
   declarations: [
@@ -94,7 +92,6 @@ import { ReserveAdminButtonDialogComponent } from './calendar/calendar-button-to
     NavBarComponent,
     CalendarComponent,
     LotteryComponent,
-    CarsComponent,
     AccountComponent,
     AdminComponent,
     ParkingComponent,
@@ -180,4 +177,5 @@ import { ReserveAdminButtonDialogComponent } from './calendar/calendar-button-to
   bootstrap: [AppComponent]
 })
 
-export class AppModule{ }
+export class AppModule {
+}

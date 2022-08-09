@@ -47,7 +47,6 @@ export class ChangeRegularLotteryDateFormComponent {
               public changeLotterySettingsHttpService: ChangeLotterySettingsHttpService) {
 
     this.dateForm.valueChanges.subscribe(response => {
-      console.log(response.hour)
     })
   }
 

@@ -2,20 +2,20 @@
 
   <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
     <h1>
-      <mat-icon class="material-icons">accessibility_new</mat-icon>
-      <p>Lottery is open!</p>
+      <mat-icon class="material-icons">waving_hand</mat-icon>
+      <p>Lottery is open</p>
     </h1>
     <button
       (click)="loadChosingParkingLotForm()"
       mat-raised-button>
-      <h2>Sign up!</h2>
+      <h2>Sign up</h2>
     </button>
   </div>
 
   <div class="lotteryIsClosed" *ngSwitchCase="LotteryStateEnum.INACTIVE">
     <h1>
       <mat-icon class="material-icons">lock</mat-icon>
-      <p>lottery is closed</p>
+      <p>Lottery is closed</p>
     </h1>
     <button
       [disabled]="true"
@@ -26,8 +26,8 @@
 
   <div class="userIsSignedUpToLottery" *ngSwitchCase="LotteryStateEnum.REGISTERED">
     <h1>
-      <mat-icon class="material-icons">done</mat-icon>
-      <p>Success!</p>
+      <mat-icon class="material-icons">event_available</mat-icon>
+      <p>Signed Up</p>
     </h1>
     <button
       [disabled]="true"

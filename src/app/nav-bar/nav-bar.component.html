@@ -21,16 +21,7 @@
         </div>
       </button>
 
-<!--      <button mat-button routerLink="/cars" routerLinkActive="active-menu-item">-->
-<!--        <div class="toolbar-icon">-->
-<!--          <mat-icon>directions_car</mat-icon>-->
-<!--        </div>-->
-<!--        <div class="toolbar-icon-text">-->
-<!--          <span>My cars</span>-->
-<!--        </div>-->
-<!--      </button>-->
-
-      <button *ngIf="this.roleService.isAdmin()" mat-button routerLink="/parking-lots" routerLinkActive="active-menu-item">
+      <button *ngIf="this.roleService.isAdmin()" mat-button routerLink="/parkings" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>local_parking</mat-icon>
         </div>

@@ -5,6 +5,7 @@ import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-h
 
 //TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
 //i zrobimy to tak, że jeżeli wybrałes date inną niż powinieneś to parkingi się nie podświetlają
+// jeśli nie ma losowania, to też nie można klikać
 
 @Component({
   selector: 'app-calendar',
@@ -14,13 +15,14 @@ import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-h
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   selected: Date | undefined;
-  lotteryEndDate: string = "";
+  lotteryEndDate: string = '';
   minDate: (Date & DateRange<Date>) | Date | null;
   maxDate: (Date & DateRange<Date>) | Date | null;
 
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
 
-  constructor(public calendarDataService: CalendarDataService, public calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
+  constructor(public calendarDataService: CalendarDataService,
+              public calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
 
     const currentDate = new Date();
     //TODO zmienić na pobiernaie miesiąca z bazy
@@ -29,7 +31,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.calendarDataService.setParkingLotsOnDay();
+    this.calendarDataService.setupCalendarComponentData();
+
     this.calendarParkingLotsHttpService.getDrawEndDate().subscribe((res:any) => {
       if(res.temporaryDrawDate) {
         this.lotteryEndDate = res.temporaryDrawDate;
@@ -45,7 +48,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.calendarDataService.parkingLotsList.splice(0);
   }
   selectedRangeChange(m: any) {
-    console.log(m);
     if (!this.calendarDataService.selectedRangeValue?.start || this.calendarDataService.selectedRangeValue?.end) {
       this.calendarDataService.selectedRangeValue = new DateRange<Date>(m, null);
     } else {
@@ -57,9 +59,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.calendarDataService.selectedRangeValue = new DateRange<Date>(start, end);
       }
     }
+    this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue)
 
-
-    this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue);
+    this.calendarDataService.setParkingLotsButtonStyle();
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {

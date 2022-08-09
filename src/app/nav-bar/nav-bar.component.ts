@@ -10,7 +10,9 @@ import {RoleService} from "../role.service";
 export class NavBarComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor(private router: Router, public roleService: RoleService) { }
+  constructor(private router: Router,
+              public roleService: RoleService) {
+  }
 
   ngOnInit(): void {
   }

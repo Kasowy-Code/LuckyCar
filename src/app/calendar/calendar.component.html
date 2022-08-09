@@ -9,17 +9,14 @@
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
                     (click)="
-                    calendarDataService.setParkingLotsFreePlacesToMax();
-                    calendarDataService.countFreeParkingPlacesOnEachParkingLot();
-                    calendarDataService.setParkingLotsButtonStyle();
-                    calendarDataService.clearSelectedParkingLot();
-                    calendarDataService.checkPossibleActions()"
+                    calendarDataService.setParkingLotsButtonStyle()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
     </mat-card>
 
     <app-calendar-button-toggle-group></app-calendar-button-toggle-group>
 
     <app-free-take-button *ngIf="true"></app-free-take-button>
+
     <app-reserve-admin-button></app-reserve-admin-button>
   </div>
 </div>

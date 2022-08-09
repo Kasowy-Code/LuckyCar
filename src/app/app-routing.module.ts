@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CalendarComponent} from "./calendar/calendar.component";
 import {LotteryComponent} from "./lottery/lottery.component";
-import {CarsComponent} from "./cars/cars.component";
 import {AccountComponent} from "./account/account.component";
 import {ParkingComponent} from "./parkings/parking.component";
 
@@ -44,4 +43,5 @@ const routes: Routes = [{path: "lottery", component: LotteryComponent},
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

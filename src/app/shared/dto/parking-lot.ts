@@ -1,4 +1,4 @@
-import {ParkingLotButtonStyleEnum} from "../../calendar/calendar-button-toggle-group/enums/parking-lot-button-style-enum";
+import {ParkingLotButtonStyleEnum} from "../../calendar/enums/parking-lot-button-style-enum";
 
 export interface ParkingLot {
   id: number;

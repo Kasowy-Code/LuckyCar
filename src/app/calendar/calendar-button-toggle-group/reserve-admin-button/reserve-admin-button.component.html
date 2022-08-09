@@ -1,1 +1,4 @@
-<button mat-raised-button (click)="test()">Reserve</button>
+<button
+  [disabled]="calendarService.selectedParkingLot.parkingLotButtonStyleEnum === 'NOTHING_INTERESTING' || calendarService.selectedRangeValue.end !== null"
+  mat-raised-button (click)="test()">Reserve
+</button>

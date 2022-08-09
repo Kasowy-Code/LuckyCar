@@ -6,8 +6,14 @@
   --light-grey: #b3b3b2;
 }
 
-html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .error-snackbar {
   background: indianred;
@@ -21,6 +27,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: var(--mainColor);
   height: 50px;
   color: white;
+  box-shadow: 1px 0px 5px gray;
   z-index: 1000000;
 }
 .logo {
@@ -40,10 +47,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: green;
   color: white;
 }
+
 .lottery-error {
   background-color: red;
   color: white;
 }
+
 .mat-simple-snackbar-action {
   color: white;
 }
@@ -51,4 +60,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .logo-color {
     display: none;
   }
+}
+
+.mat-button-toggle-label-content {
+  padding: 0 !important;
 }
