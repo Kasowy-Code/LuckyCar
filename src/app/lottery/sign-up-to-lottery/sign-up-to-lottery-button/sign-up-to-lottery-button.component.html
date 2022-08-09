@@ -3,12 +3,12 @@
   <div class="youCanSignUpToLottery" *ngSwitchCase="LotteryStateEnum.ACTIVE">
     <h1>
       <mat-icon class="material-icons">accessibility_new</mat-icon>
-      <p>lottery is open!</p>
+      <p>Lottery is open!</p>
     </h1>
     <button
       (click)="loadChosingParkingLotForm()"
       mat-raised-button>
-      <h2>sign up!</h2>
+      <h2>Sign up!</h2>
     </button>
   </div>
 
@@ -20,14 +20,14 @@
     <button
       [disabled]="true"
       mat-flat-button>
-      <h2>you can't sign up</h2>
+      <h2>You can't sign up</h2>
     </button>
   </div>
 
   <div class="userIsSignedUpToLottery" *ngSwitchCase="LotteryStateEnum.REGISTERED">
     <h1>
       <mat-icon class="material-icons">done</mat-icon>
-      <p>success!</p>
+      <p>Success!</p>
     </h1>
     <button
       [disabled]="true"

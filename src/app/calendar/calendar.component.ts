@@ -31,7 +31,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.calendarDataService.setParkingLotsOnDay();
     this.calendarParkingLotsHttpService.getDrawEndDate().subscribe((res:any) => {
-      this.lotteryEndDate = res.drawDate;
+      if(res.temporaryDrawDate) {
+        this.lotteryEndDate = res.temporaryDrawDate;
+      }
+      else {
+        this.lotteryEndDate = res.drawDate;
+      }
       console.log(this.lotteryEndDate);
     })
   }
@@ -40,6 +45,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.calendarDataService.parkingLotsList.splice(0);
   }
   selectedRangeChange(m: any) {
+    console.log(m);
     if (!this.calendarDataService.selectedRangeValue?.start || this.calendarDataService.selectedRangeValue?.end) {
       this.calendarDataService.selectedRangeValue = new DateRange<Date>(m, null);
     } else {
@@ -57,7 +63,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
 
     if (view == "month") {
-      if(this.calendarDataService.hasParkingOnDays.some(item => item.day == cellDate.getDate() && item.month == cellDate.getMonth())) {
+      if(this.calendarDataService.hasParkingOnDays.some(item => item.day == new Date(cellDate).getDate() && item.month == new Date(cellDate).getMonth())) {
         return 'have-parking';
       }
       this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
@@ -78,13 +84,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 
 
-            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === cellDate.getDate() && dateToCompare.getMonth() === cellDate.getMonth()) {
+            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
               parkingLot.freeParkingPlaces--;
             }
 
           });
         });
       });
+      this.calendarDataService.allParkingPlaceList
+
       if (this.calendarDataService.parkingLotsList.some((el: any) => el.freeParkingPlaces > 0) && cellDate > new Date() && cellDate <= new Date(this.lotteryEndDate)) {
         return 'available-parking';
       }
