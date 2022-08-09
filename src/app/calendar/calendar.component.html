@@ -4,8 +4,8 @@
 </mat-toolbar>
 <div class="main">
 
-  <mat-spinner *ngIf="!calendarDataService.loaded"></mat-spinner>
-  <div *ngIf="calendarDataService.loaded">
+  <mat-spinner *ngIf="calendarDataService.loaded % 3 != 0"></mat-spinner>
+  <div *ngIf="calendarDataService.loaded % 3 == 0">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
                     (click)="
@@ -15,7 +15,7 @@
 
     <app-calendar-button-toggle-group></app-calendar-button-toggle-group>
 
-    <app-free-take-button *ngIf="true"></app-free-take-button>
+    <app-free-take-button *ngIf="true" (buttonClick)="onButtonClick()"></app-free-take-button>
 
     <app-reserve-admin-button></app-reserve-admin-button>
   </div>

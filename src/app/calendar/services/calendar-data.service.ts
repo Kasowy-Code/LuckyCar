@@ -15,7 +15,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class CalendarDataService {
   hasParkingOnDays: ParkingDay[] = [];
   parkingLotsOnDay: any = [];
-  loaded = false;
+  loaded = 0;
   allParkingPlaceList = <ParkingPlaceDay[]>[];
 
   selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
@@ -52,7 +52,7 @@ export class CalendarDataService {
           const day: ParkingDay = {day: tempDate.getDate(), month: tempDate.getMonth(), parkingLotId: el.parkingLotId}
           this.hasParkingOnDays.push(day);
         });
-        this.loaded = true;
+      this.loaded++;
       }
     )
   }
@@ -75,6 +75,7 @@ export class CalendarDataService {
             ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
           }
         })
+        this.loaded++;
       })
   }
 
@@ -89,13 +90,14 @@ export class CalendarDataService {
   setAllParkingPlace() {
     this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
       this.allParkingPlaceList = response;
+      this.loaded++;
     });
   }
 
   setParkingLotsList() {
     this.calendarParkingLotsHttpService.getParkingLots().subscribe(response => {
       this.parkingLotsList = response.filter((value: any) => value.isAvailable);
-
+      this.parkingLotsList.map((el: ParkingLot) => {el.freeParkingPlaces = el.parkingPlaceCount});
       this.setParkingLotsOnDay();
     })
   }
@@ -112,6 +114,8 @@ export class CalendarDataService {
       this.parkingLotsList.forEach(parkingLot => {
         if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+          this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE
+          this.selectedParkingLot = parkingLot
           hasParking = true;
         }
       })
@@ -154,8 +158,6 @@ export class CalendarDataService {
 
       let dateToCompare = new Date(parkingPlace.date)
 
-
-      console.log(parkingPlace.userId)
       this.parkingLotsList.forEach(parkingLot => {
 
         // @ts-ignore

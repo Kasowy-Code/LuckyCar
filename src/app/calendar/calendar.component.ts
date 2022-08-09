@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {DateRange, MatCalendarCellClassFunction} from "@angular/material/datepicker";
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {DateRange, MatCalendar, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {CalendarDataService} from "./services/calendar-data.service";
 import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
 
@@ -14,10 +14,17 @@ import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-h
   encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit, OnDestroy {
+
+  @ViewChild(MatCalendar)
+    // @ts-ignore
+  calendar: MatCalendar<Date>;
+
   selected: Date | undefined;
   lotteryEndDate: string = '';
   minDate: (Date & DateRange<Date>) | Date | null;
   maxDate: (Date & DateRange<Date>) | Date | null;
+
+  dateClass: MatCalendarCellClassFunction<Date> = this.getMatCalendarCellClassFunction();
 
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
 
@@ -33,20 +40,24 @@ export class CalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.calendarDataService.setupCalendarComponentData();
 
-    this.calendarParkingLotsHttpService.getDrawEndDate().subscribe((res:any) => {
-      if(res.temporaryDrawDate) {
+    this.calendarParkingLotsHttpService.getDrawEndDate().subscribe((res: any) => {
+      if (res.temporaryDrawDate) {
         this.lotteryEndDate = res.temporaryDrawDate;
-      }
-      else {
+      } else {
         this.lotteryEndDate = res.drawDate;
       }
       console.log(this.lotteryEndDate);
     })
   }
 
+  onButtonClick() {
+    this.calendar.updateTodaysDate();
+  }
+
   ngOnDestroy() {
     this.calendarDataService.parkingLotsList.splice(0);
   }
+
   selectedRangeChange(m: any) {
     if (!this.calendarDataService.selectedRangeValue?.start || this.calendarDataService.selectedRangeValue?.end) {
       this.calendarDataService.selectedRangeValue = new DateRange<Date>(m, null);
@@ -64,44 +75,37 @@ export class CalendarComponent implements OnInit, OnDestroy {
     this.calendarDataService.setParkingLotsButtonStyle();
   }
 
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+  public getMatCalendarCellClassFunction(): MatCalendarCellClassFunction<Date> {
+    return (cellDate, view) => {
+      if (view == "month") {
 
-    if (view == "month") {
-      if(this.calendarDataService.hasParkingOnDays.some(item => item.day == new Date(cellDate).getDate() && item.month == new Date(cellDate).getMonth())) {
-        return 'have-parking';
-      }
-      this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
-        // console.log(response);
-        // console.log(this.selectedRangeValue);
+        if (this.calendarDataService.hasParkingOnDays.some(item => item.day == new Date(cellDate).getDate() && item.month == new Date(cellDate).getMonth())) {
+          return 'have-parking';
+        }
+        this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(response => {
 
-        this.calendarDataService.allParkingPlaceList = response;
-        // console.log(this.allParkingPlaceList[0].date);
+          this.calendarDataService.allParkingPlaceList = response;
 
-        this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
+          this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
 
-          let dateToCompare = new Date(parkingPlace.date)
+            let dateToCompare = new Date(parkingPlace.date)
 
-          this.calendarDataService.parkingLotsList.forEach(parkingLot => {
+            this.calendarDataService.parkingLotsList.forEach(parkingLot => {
 
-            // console.log("their parkingLot id " + parkingPlace.parkingLotId)
-            // console.log("ours parkingLot id  " + parkingLot.id)
+              if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
+                parkingLot.freeParkingPlaces--;
+              }
 
-
-
-            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
-              parkingLot.freeParkingPlaces--;
-            }
-
+            });
           });
         });
-      });
-      this.calendarDataService.allParkingPlaceList
 
-      if (this.calendarDataService.parkingLotsList.some((el: any) => el.freeParkingPlaces > 0) && cellDate > new Date() && cellDate <= new Date(this.lotteryEndDate)) {
-        return 'available-parking';
+        if (this.calendarDataService.parkingLotsList.some((el: any) => el.freeParkingPlaces > 0) && cellDate > new Date() && cellDate <= new Date(this.lotteryEndDate)) {
+          return 'available-parking';
+        }
+        // if(this.calendarDataService.hasParkingOnDays.some(item => item.day == cellDate.getDate() && item.month == cellDate.getMonth())) {}
       }
-      // if(this.calendarDataService.hasParkingOnDays.some(item => item.day == cellDate.getDate() && item.month == cellDate.getMonth())) {}
-    }
-    return "";
-  };
+      return "";
+    };
+  }
 }
