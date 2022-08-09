@@ -112,6 +112,8 @@ export class CalendarDataService {
       this.parkingLotsList.forEach(parkingLot => {
         if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+          this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE
+          this.selectedParkingLot = parkingLot
           hasParking = true;
         }
       })
@@ -154,8 +156,6 @@ export class CalendarDataService {
 
       let dateToCompare = new Date(parkingPlace.date)
 
-
-      console.log(parkingPlace.userId)
       this.parkingLotsList.forEach(parkingLot => {
 
         // @ts-ignore

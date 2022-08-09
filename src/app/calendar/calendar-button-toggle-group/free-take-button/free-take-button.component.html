@@ -1,17 +1,20 @@
 <button *ngIf="calendarDataService.userPossibleActionEnum === 'NOTHING_TO_DO'" mat-raised-button
-        [class]="calendarDataService.userPossibleActionEnum">Choose Parking Lot
+        disabled
+        [class]="calendarDataService.userPossibleActionEnum">Release / Take
 </button>
 
 <button
   *ngIf="calendarDataService.userPossibleActionEnum === 'FREE_PLACE'"
   mat-raised-button
   (click)="freeOrTake(); buttonClick.emit();
-        calendarDataService.setupCalendarComponentData()"
+        calendarDataService.setupCalendarComponentData();
+        calendarDataService.setParkingLotsButtonStyle()"
   [class]="calendarDataService.userPossibleActionEnum">Release Parking Place
 </button>
 
 <button *ngIf="calendarDataService.userPossibleActionEnum === 'TAKE_PLACE'" mat-raised-button
         (click)="freeOrTake(); buttonClick.emit();
-        calendarDataService.setupCalendarComponentData()"
+        calendarDataService.setupCalendarComponentData();
+        calendarDataService.setParkingLotsButtonStyle()"
         [class]="calendarDataService.userPossibleActionEnum">Take Parking Place
 </button>

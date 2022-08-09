@@ -79,8 +79,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
     return (cellDate, view) => {
       if (view == "month") {
 
-        console.log(cellDate, view);
-
         if (this.calendarDataService.hasParkingOnDays.some(item => item.day == new Date(cellDate).getDate() && item.month == new Date(cellDate).getMonth())) {
           return 'have-parking';
         }
