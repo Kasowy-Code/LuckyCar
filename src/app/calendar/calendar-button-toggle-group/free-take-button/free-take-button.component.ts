@@ -19,6 +19,8 @@ export class FreeTakeButtonComponent implements OnInit {
   freeOrTake() {
     console.log(this.calendarDataService.freeTakeButtonActionEnum);
 
+    console.log(this.calendarDataService.selectedRangeValue)
+
     if (this.calendarDataService.freeTakeButtonActionEnum === UserPossibleActionEnum.FREE_PLACE) {
       this.calendarDataService.freePlace();
 

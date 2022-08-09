@@ -17,7 +17,6 @@ export class CalendarDataService {
   loaded = false;
   allParkingPlaceList = <ParkingPlaceDay[]>[];
 
-  //TODO dane potrzebne Domino
   selectedRangeValue: DateRange<Date> = new DateRange<Date>(null, null);
   parkingLotsList: ParkingLot[] = [];
   selectedParkingLot = <ParkingLot>{};
@@ -25,7 +24,6 @@ export class CalendarDataService {
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
   }
-
 
   confirmDateRange(parkingLot: ParkingLot) {
     if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
@@ -50,7 +48,7 @@ export class CalendarDataService {
   }
 
   setCalendarView() {
-    this.setParkingLotsOnDay();
+    //this.setParkingLotsOnDay();
   }
 
   private setParkingLotsOnDay() {
@@ -87,8 +85,8 @@ export class CalendarDataService {
                 }
               }
             )
-            this.setMyParkingPlaces();
-            this.setUserPossibleActionEnum();
+            // this.setMyParkingPlaces();
+            // this.setUserPossibleActionEnum();
           })
       }
     )
@@ -118,7 +116,6 @@ export class CalendarDataService {
   }
 
   setAllParkingPlace(parkingLotsList: ParkingPlaceDay[]) {
-
     this.allParkingPlaceList = parkingLotsList;
 
     console.log("tylko raz!!")
@@ -126,19 +123,12 @@ export class CalendarDataService {
 
   countFreeParkingPlacesOnEachParkingLot() {
     if (this.ifShouldShowFreeParkingPlaces()) {
-      // console.log(response);
-      // console.log(this.selectedRangeValue);
-
-      // console.log(this.allParkingPlaceList[0].date);
 
       this.allParkingPlaceList.forEach(parkingPlace => {
 
         let dateToCompare = new Date(parkingPlace.date)
 
         this.parkingLotsList.forEach(parkingLot => {
-
-          // console.log("their parkingLot id " + parkingPlace.parkingLotId)
-          // console.log("ours parkingLot id  " + parkingLot.id)
 
           // @ts-ignore
           if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
@@ -244,6 +234,9 @@ export class CalendarDataService {
 
   freePlace() {
     if (this.selectedRangeValue.start != null && this.selectedRangeValue.end != null) {
+      this.selectedRangeValue.start.setHours(2);
+      this.selectedRangeValue.end.setHours(2);
+
       const days = [];
 
       const start = new Date(this.selectedRangeValue.start);
@@ -259,7 +252,7 @@ export class CalendarDataService {
       }
       days.push(loop.toISOString().substring(0, 16));
       this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
-        
+
         this.setCalendarView();
       });
     }
@@ -267,6 +260,7 @@ export class CalendarDataService {
 
   takePlace() {
     if (this.selectedRangeValue.start != null) {
+
       let day = new Date(this.selectedRangeValue.start);
       day.setDate(day.getDate() + 1);
       const parkingId = this.selectedParkingLot.id;
