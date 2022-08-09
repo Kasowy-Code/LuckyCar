@@ -1,0 +1,17 @@
+<div class="content">
+  <h2>Select the place you want to reserve</h2>
+  <div class="users-list">
+
+    <div *ngFor="let employee of users" class="user-field">
+      <mat-checkbox [(ngModel)]="employee.completed"
+                    color="primary">
+        {{employee.userName}} {{employee.userSurname}}
+      </mat-checkbox>
+    </div>
+
+  </div>
+  <mat-divider></mat-divider>
+
+  <button mat-raised-button class="book" mat-dialog-close (click)="reserve()">Book for a client</button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</div>
