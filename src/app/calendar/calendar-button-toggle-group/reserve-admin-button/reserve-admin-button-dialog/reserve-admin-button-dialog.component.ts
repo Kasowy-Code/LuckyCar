@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface User {
   userName: string;
@@ -21,7 +22,8 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
   list: User[] = [];
   request: any = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient,
+              private snackBar:MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -78,6 +80,12 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
 
     });
     return this.http.patch(`${environment.link}/api/reserve`, this.request).subscribe(() => {
+      this.snackBar.open("The booking was successful", "", {
+        duration: 5*1000,
+        panelClass: ['good-snackbar'],
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
     });
   }
 }

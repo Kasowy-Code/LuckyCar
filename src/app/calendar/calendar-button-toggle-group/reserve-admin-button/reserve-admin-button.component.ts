@@ -31,9 +31,11 @@ export class ReserveAdminButtonComponent implements OnInit {
     this.endDate = this.calendarService.selectedRangeValue.end;
     this.startDate.setDate(this.startDate.getDate()+1);
     this.start = this.startDate.toISOString().substring(0,16)
+    this.startDate.setDate(this.startDate.getDate()-1);
     if(this.endDate != null) {
       this.endDate.setDate(this.endDate.getDate() + 1);
       this.end = this.endDate.toISOString().substring(0,16);
+      this.endDate.setDate(this.startDate.getDate()-1);
     }else{
       this.end = null;
     }
