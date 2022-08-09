@@ -45,6 +45,7 @@ export class CalendarDataService {
   }
 
   setMyParkingPlaces() {
+    this.hasParkingOnDays = [];
     this.calendarParkingLotsHttpService.getMyParkingPlaces().subscribe(
       (date: any) => {
         date.forEach((el: ParkingDateDTO) => {
