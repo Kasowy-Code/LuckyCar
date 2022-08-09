@@ -6,7 +6,7 @@ import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
 import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
 import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
-
+import {UserPossibleAction} from "../calendar-button-toggle-group/enums/user-possible-action-enum";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class CalendarDataService {
   //TODO dane potrzebne Domino
   parkingLotsList: ParkingLot[] = [];
   selectedParkingLot = <ParkingLot>{};
+
+  //DOMINO VARIABLE
+  action = UserPossibleAction.TAKE_PLACE;
+  parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
   }
@@ -83,6 +87,37 @@ export class CalendarDataService {
     this.setMyParkingPlaces();
   }
 
+  //DOMINO
+  getData() {
+    return {
+      "action": this.action
+    }
+  }
+
+  //TO USTAWIA DOMINIK
+  setData(action: any, parkingId: number) {
+    this.action = action;
+    this.parkingId = parkingId;
+  }
+
+  freePlace() {
+    const days = [];
+    // @ts-ignore
+    const start = new Date(this.selectedRangeValue.start);
+    // @ts-ignore
+    const end = new Date(this.selectedRangeValue.end);
+    let loop = new Date(start);
+    loop.setDate(loop.getDate() + 1);
+    while (loop <= end) {
+      days.push(loop.toISOString().substring(0, 16));
+      let newDate = loop.setDate(loop.getDate() + 1);
+      loop = new Date(newDate);
+    }
+    days.push(loop.toISOString().substring(0, 16));
+    this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
+    });
+  }
+
   setParkingLotsFreePlacesToMax() {
     this.parkingLotsList.forEach(parkingLot => {
       parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
@@ -123,7 +158,6 @@ export class CalendarDataService {
 
             // console.log("their parkingLot id " + parkingPlace.parkingLotId)
             // console.log("ours parkingLot id  " + parkingLot.id)
-
 
             // @ts-ignore
             if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth()) {
@@ -215,5 +249,15 @@ export class CalendarDataService {
         this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
       }
     }
+  }
+
+  takePlace() {
+    //@ts-ignore
+    let day = new Date(this.selectedRangeValue.start);
+    day.setDate(day.getDate() + 1);
+    const parkingId = this.parkingId;
+
+    this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
+    });
   }
 }

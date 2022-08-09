@@ -24,6 +24,26 @@ export class CalendarParkingLotsHttpService {
     return this.http.get<ParkingPlaceDay[]>(`${environment.link}/api/parking-places`);
   }
 
+  freePlace(days:any) {
+    console.log(days);
+    return this.http.patch(`${environment.link}/api/parking-places/free`,
+      days,
+      {responseType: 'text' as 'json'});
+  }
+
+  takePlace(day:any, parkingId:any){
+    const request = {
+      "day": day,
+      "parkingLotId": parkingId
+    }
+    console.log(parkingId);
+    console.log(request);
+
+    return this.http.patch(`${environment.link}/api/parking-places/own`,
+      request,
+      {responseType: 'text' as 'json'});
+  }
+
   getDrawEndDate() {
     return this.http.get(`${environment.link}/api/settings`);
   }
