@@ -4,7 +4,7 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
-import { ParkingLotButtonStyleEnum } from '../calendar-button-toggle-group/enums/parking-lot-button-style-enum';
+import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
 import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
 import {UserPossibleAction} from "../calendar-button-toggle-group/enums/user-possible-action-enum";
 
@@ -64,11 +64,8 @@ export class CalendarDataService {
 
         this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
           (res: any) => {
-
             res.forEach((el: ParkingDateDTO) => {
-                if (!this.parkingLotsOnDay.some((object: any) => {
-                  object.date == new Date(el.date)
-                })) {
+                if (!this.parkingLotsOnDay.some((object: any) =>  object.date.valueOf() == new Date(el.date).valueOf())) {
                   this.parkingLotsOnDay.push({
                     parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
                     date: new Date(el.date)
@@ -83,7 +80,6 @@ export class CalendarDataService {
                 }
               }
             )
-            console.log(this.parkingLotsOnDay);
           }
         )
       }
@@ -247,6 +243,13 @@ export class CalendarDataService {
   clearSelectedParkingLot() {
     this.selectedParkingLot = <ParkingLot>{};
   }
+  checkPossibleActions() {
+    if(!this.hasParkingOnDays.some(el => el.day === this.selectedRangeValue.start?.getDate() && el.month === this.selectedRangeValue.start?.getMonth())) {
+      if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
+        this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
+      }
+    }
+  }
 
   takePlace() {
     //@ts-ignore
@@ -258,6 +261,3 @@ export class CalendarDataService {
     });
   }
 }
-
-
-

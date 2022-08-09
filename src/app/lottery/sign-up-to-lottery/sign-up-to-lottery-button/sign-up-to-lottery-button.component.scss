@@ -80,5 +80,10 @@ p {
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
-
-
+.loading {
+  display: grid;
+  justify-content: center;
+}
+.mat-spinner {
+  justify-self: center;
+}
