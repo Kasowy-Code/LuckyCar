@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
+import {RoleService} from "../role.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 export class NavBarComponent implements OnInit {
   @Output() public sidenavToggle = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public roleService: RoleService) { }
 
   ngOnInit(): void {
   }

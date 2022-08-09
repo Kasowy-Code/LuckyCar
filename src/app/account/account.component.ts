@@ -14,7 +14,8 @@ import {DialogComponent} from "./dialog/dialog.component";
 export class AccountComponent implements OnInit {
   loading = false;
   delete = false;
-
+  name = "";
+  surname = "";
   constructor(private logoutService:LogoutService, public roleService:RoleService,
               private accountService:AccountService, private router:Router,
               private dialog:MatDialog) { }
@@ -26,6 +27,13 @@ export class AccountComponent implements OnInit {
         }else {
           this.delete = false;
         }
+      }
+    )
+    this.accountService.getPersonalInfo().subscribe(
+      (res: any) => {
+          this.name = res.name;
+          this.surname = res.surname;
+          console.log(res);
       }
     )
   }

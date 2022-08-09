@@ -84,5 +84,9 @@ export class AccountService {
         });
       }))
   }
+
+  getPersonalInfo() {
+    return this.http.get(`${environment.link}/api/user/account`);
+  }
 }
 
