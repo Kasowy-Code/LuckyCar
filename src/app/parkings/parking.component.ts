@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ParkingDialogComponent} from "./dialog/parking-dialog.component";
 import {ParkingLotsListService} from "../shared/services/parking-lots-list.service";
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 import {ParkingLot} from "../shared/dto/parking-lot";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {AddParkingSnackBarComponent} from "../add-parking-snack-bar/add-parking-snack-bar.component";
 
 
 @Component({
@@ -20,7 +19,7 @@ export class ParkingComponent implements OnInit {
   inputValue = new FormControl('');
   numberInputValue = new FormControl('1');
   parkingLot = <ParkingLot>{};
-  durationInSeconds = 2;
+  durationInSeconds = 3;
 
 
   constructor(public dialog: MatDialog,
@@ -130,16 +129,19 @@ export class ParkingComponent implements OnInit {
 
   changeIsAvailableState(parking: ParkingLot){
     if(parking.isAvailable == true){
-      return this.text = "Disable parking lot";
+      return this.text = "Enabled";
     }
     else {
-      return this.text = "Enable parking lot"
+      return this.text = "Disabled"
     }
   }
 
   openSnackBar(){
-    this.snackBar.openFromComponent(AddParkingSnackBarComponent, {
+    this.snackBar.open("Parking lot added successfully!", "", {
       duration: this.durationInSeconds * 1000,
+      verticalPosition: "top",
+      horizontalPosition: "right",
+      panelClass: ["good-snackbar"]
     });
   }
 
