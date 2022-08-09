@@ -4,9 +4,10 @@ import {ParkingDay} from "../interfaces/parking-day-interface";
 import {DateRange} from "@angular/material/datepicker";
 import {ParkingDateDTO} from "../interfaces/parking-date-dto";
 import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.service";
-import {ParkingLotButtonStyleEnum} from '../enums/parking-lot-button-style-enum';
+import {ParkingLotButtonStyleEnum} from "../enums/parking-lot-button-style-enum";
 import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
 import {UserPossibleActionEnum} from "../enums/user-possible-action-enum";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class CalendarDataService {
   selectedParkingLot = <ParkingLot>{};
   userPossibleActionEnum = UserPossibleActionEnum.NOTHING_TO_DO;
 
-  constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
+  constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService,
+              private snackBar: MatSnackBar) {
   }
 
   setupCalendarComponentData() {
@@ -54,32 +56,27 @@ export class CalendarDataService {
     )
   }
 
-  private setParkingLotsOnDay() {
-    // this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
-    //   (res: any) => {
-    //
-    //     res.forEach((el: ParkingDateDTO) => {
-    //         if (!this.parkingLotsOnDay.some((object: any) => {
-    //           object.date == new Date(el.date)
-    //         })) {
-    //           this.parkingLotsOnDay.push({
-    //             parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
-    //             date: new Date(el.date)
-    //           });
-    //         }
-    //         const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
-    //           return e.date.valueOf() === new Date(el.date).valueOf();
-    //         });
-    //
-    //         if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
-    //           ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
-    //         }
-    //       }
-    //     )
-    //     this.setMyParkingPlaces();
-    //     this.setUserPossibleActionEnum();
-    //   })
+  setParkingLotsOnDay() {
+    this.calendarParkingLotsHttpService.getAllParkingPlaces().subscribe(
+      (res: any) => {
+        res.forEach((el: ParkingDateDTO) => {
+          if (!this.parkingLotsOnDay.some((object: any) => object.date.valueOf() == new Date(el.date).valueOf())) {
+            this.parkingLotsOnDay.push({
+              parkingLotsList: JSON.parse(JSON.stringify(this.parkingLotsList)),
+              date: new Date(el.date)
+            });
+          }
+          const ParkingDay = this.parkingLotsOnDay.find((e: any) => {
+            return e.date.valueOf() === new Date(el.date).valueOf();
+          });
+
+          if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
+            ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
+          }
+        })
+      })
   }
+
 
   setParkingLotsFreePlacesToMax() {
     this.parkingLotsList.forEach(parkingLot => {
@@ -240,6 +237,12 @@ export class CalendarDataService {
       }
       days.push(loop.toISOString().substring(0, 16));
       this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
+        this.snackBar.open("Parking place has been freed", "", {
+          duration: 5 * 1000,
+          panelClass: ['good-snackbar'],
+          horizontalPosition: "end",
+          verticalPosition: "top",
+        });
 
         this.setupCalendarComponentData();
       });

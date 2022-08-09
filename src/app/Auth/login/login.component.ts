@@ -37,11 +37,11 @@ export class LoginComponent implements OnInit {
   }
 
   public getAccessToken() {
-    this.loginService.loginUser(this.username, this.password)
+    this.loginService.loginUser(this.username.toLowerCase(), this.password)
       .subscribe(() => {
           this.router.navigate(["/calendar"]);
         },
-        error => {
+        () => {
           this.error = true;
         });
   }

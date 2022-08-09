@@ -83,6 +83,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {AddParkingSnackBarComponent} from "./add-parking-snack-bar/add-parking-snack-bar.component";
 import {ParkingDialogComponent} from "./parkings/dialog/parking-dialog.component";
 import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.component";
+import {ParkingDialogComponent} from './parkings/dialog/parking-dialog.component';
+import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.co
     NavBarComponent,
     CalendarComponent,
     LotteryComponent,
+    CarsComponent,
     AccountComponent,
     AdminComponent,
     ParkingComponent,
@@ -123,7 +126,7 @@ import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.co
     AuthErrorComponent,
     ForgotPasswordComponent,
     ParkingLotDialogComponent,
-    AddParkingSnackBarComponent,
+    ReserveAdminButtonDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -164,8 +167,7 @@ import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.co
     MatToolbarModule,
     MatMenuModule,
     MatToolbarModule,
-    MatButtonToggleModule,
-
+    MatButtonToggleModule
   ],
   providers: [LoginService, AuthGuard, LoginGuard, RoleGuard, {
     provide: HTTP_INTERCEPTORS,
