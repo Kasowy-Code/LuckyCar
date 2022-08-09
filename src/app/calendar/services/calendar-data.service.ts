@@ -7,6 +7,7 @@ import {CalendarParkingLotsHttpService} from "./calendar-parking-lots-http.servi
 import {ParkingLotButtonStyleEnum} from "../calendar-button-toggle-group/enums/parking-lot-button-style-enum";
 import {ParkingPlaceDay} from "../../shared/dto/parking-place-day";
 import {UserPossibleAction} from "../calendar-button-toggle-group/enums/user-possible-action-enum";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class CalendarDataService {
   action = UserPossibleAction.TAKE_PLACE;
   parkingId = 3;
 
-  constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
+  constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService,
+              private snackBar:MatSnackBar) {
   }
 
   confirmDateRange(parkingLot: ParkingLot) {
@@ -115,6 +117,12 @@ export class CalendarDataService {
     }
     days.push(loop.toISOString().substring(0, 16));
     this.calendarParkingLotsHttpService.freePlace(days).subscribe(() => {
+      this.snackBar.open("Parking place has been freed", "", {
+        duration: 5*1000,
+        panelClass: ['good-snackbar'],
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
     });
   }
 
@@ -254,10 +262,17 @@ export class CalendarDataService {
   takePlace() {
     //@ts-ignore
     let day = new Date(this.selectedRangeValue.start);
+    day.setHours(0);
     day.setDate(day.getDate() + 1);
     const parkingId = this.parkingId;
 
     this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
+      this.snackBar.open("Parking place has been taken", "", {
+        duration: 5*1000,
+        panelClass: ['good-snackbar'],
+        horizontalPosition: "end",
+        verticalPosition: "top",
+      });
     });
   }
 }
