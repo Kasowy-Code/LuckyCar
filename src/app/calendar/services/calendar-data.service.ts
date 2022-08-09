@@ -23,7 +23,7 @@ export class CalendarDataService {
   selectedParkingLot = <ParkingLot>{};
 
   //DOMINO VARIABLE
-  action = UserPossibleAction.FREE_PLACE;
+  action = UserPossibleAction.TAKE_PLACE;
   parkingId = 3;
 
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
@@ -251,14 +251,13 @@ export class CalendarDataService {
   takePlace() {
     //@ts-ignore
     let day = new Date(this.selectedRangeValue.start);
+    day.setHours(0);
     day.setDate(day.getDate() + 1);
     const parkingId = this.parkingId;
 
     this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
     });
   }
-
-
 }
 
 

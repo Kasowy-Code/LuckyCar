@@ -1,6 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {map, Observable, startWith} from "rxjs";
-import {FormControl} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
@@ -21,6 +19,7 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
 
   users: User[] = [];
   list: User[] = [];
+  request: any = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {
   }
@@ -31,10 +30,10 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
       this.data)
       .subscribe(Users => {
         console.log(Users);
-        let i :number = -1;
+        let i: number = -1;
         for (let response of Users) {
           console.log(response);
-          if(response != null) {
+          if (response != null) {
             this.users.push({
               userName: response.userName,
               userSurname: response.userSurname,
@@ -53,14 +52,33 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
       });
   }
 
-  reserve(){
-    for(let user of this.users){
-      if(user.completed){
+  reserve() {
+    for (let user of this.users) {
+      if (user.completed) {
         this.list.push(user);
       }
     }
-    this.list.forEach(u =>{
-      console.log(u.userId)
+    this.list.forEach(u => {
+      const start = new Date(this.data.startDate);
+
+        let req = {};
+        if (u.userId < 0) {
+          req = {
+            "userId": null,
+            "date": start.toISOString().substring(0, 16)
+          }
+        } else {
+          req = {
+            "userId": u.userId,
+            "date": start.toISOString().substring(0, 16)
+          }
+        }
+
+        this.request.push(req);
+
+    });
+    return this.http.patch(`${environment.link}/api/reserve`, this.request).subscribe(() => {
     });
   }
 }
+

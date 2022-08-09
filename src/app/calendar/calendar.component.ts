@@ -47,6 +47,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
         this.calendarDataService.selectedRangeValue = new DateRange<Date>(start, end);
       }
     }
+
+
     this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue);
   }
 
