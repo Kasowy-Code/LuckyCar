@@ -15,11 +15,11 @@ export class ReserveAdminButtonComponent implements OnInit {
   end: any;
   parkingId = -1;
 
-  constructor(private dialog: MatDialog, private calendarService: CalendarDataService) {
+  constructor(private dialog: MatDialog, public calendarService: CalendarDataService) {
   }
 
   ngOnInit() {
-
+    console.log(this.calendarService.selectedParkingLot.parkingLotButtonStyleEnum)
   }
 
   test() {

@@ -29,6 +29,7 @@ export class CalendarDataService {
 
   setupCalendarComponentData() {
     this.userPossibleActionEnum = UserPossibleActionEnum.NOTHING_TO_DO;
+    this.selectedParkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
     this.setParkingLotsList();
     this.setAllParkingPlace();
     this.setMyParkingPlaces();
