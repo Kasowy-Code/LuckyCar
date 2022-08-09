@@ -1,8 +1,9 @@
 <h1 mat-dialog-title>Remove parking</h1>
-<div mat-dialog-content style="text-align: center">
+<div mat-dialog-content>
   Are you sure?
 </div>
   <br>
-  <button mat-button style="width: 100%; color: red" (click) = delete()>Ok</button>
-  <button mat-button style="width: 100%" [mat-dialog-close] = true>No</button>
-
+<div mat-dialog-actions>
+  <button mat-button style="background-color: darkred; color: white;" (click) = delete()>Delete</button>
+  <button mat-button style="background-color: var(--mainColor); color: white;" [mat-dialog-close] = true>No</button>
+</div>

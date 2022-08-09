@@ -14,7 +14,7 @@ export class AccountService {
   changePassword(){
     return this.http.get(`${environment.link}/api/restartPassword`, {responseType: 'text' as 'json'})
       .pipe(tap(data =>{
-        this.snackBar.open("Success! Check your email", "", {
+        this.snackBar.open("Link was sent to your email address!", "", {
           duration: 5*1000,
           panelClass: ['good-snackbar'],
           horizontalPosition: "end",

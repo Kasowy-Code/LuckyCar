@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPassword(){
     this.loading = true;
     this.forgotService.forgotPassword(this.username.toLowerCase()).subscribe(()=> {
-      this.snackBar.open("Success! Check your email address", "", {
+      this.snackBar.open("Link was sent to your email address!", "", {
         duration: 5*1000,
         panelClass: ['good-snackbar'],
         horizontalPosition: "end",
