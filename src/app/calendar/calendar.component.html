@@ -15,7 +15,7 @@
 
     <app-calendar-button-toggle-group></app-calendar-button-toggle-group>
 
-    <app-free-take-button *ngIf="true"></app-free-take-button>
+    <app-free-take-button *ngIf="true" (buttonClick)="onButtonClick()"></app-free-take-button>
 
     <app-reserve-admin-button></app-reserve-admin-button>
   </div>

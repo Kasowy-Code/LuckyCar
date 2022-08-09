@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CalendarDataService} from "../../services/calendar-data.service";
 import {UserPossibleActionEnum} from "../../enums/user-possible-action-enum";
 
@@ -8,6 +8,9 @@ import {UserPossibleActionEnum} from "../../enums/user-possible-action-enum";
   styleUrls: ['./free-take-button.component.scss']
 })
 export class FreeTakeButtonComponent implements OnInit {
+
+  @Output()
+  buttonClick = new EventEmitter();
 
   constructor(public calendarDataService: CalendarDataService) {
   }
