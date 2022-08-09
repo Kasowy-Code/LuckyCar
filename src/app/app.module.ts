@@ -80,11 +80,11 @@ import {ParkingComponent} from "./parkings/parking.component";
 import {MatListModule} from "@angular/material/list";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {AddParkingSnackBarComponent} from "./add-parking-snack-bar/add-parking-snack-bar.component";
 import {ParkingDialogComponent} from "./parkings/dialog/parking-dialog.component";
 import {LotteryDialogComponent} from "./lottery/lottery-dialog/lottery-dialog.component";
-import {ParkingDialogComponent} from './parkings/dialog/parking-dialog.component';
-import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.component';
+import {
+  ReserveAdminButtonDialogComponent
+} from "./calendar/calendar-button-toggle-group/reserve-admin-button/reserve-admin-button-dialog/reserve-admin-button-dialog.component";
 
 @NgModule({
   declarations: [
@@ -92,7 +92,6 @@ import {LotteryDialogComponent} from './lottery/lottery-dialog/lottery-dialog.co
     NavBarComponent,
     CalendarComponent,
     LotteryComponent,
-    CarsComponent,
     AccountComponent,
     AdminComponent,
     ParkingComponent,

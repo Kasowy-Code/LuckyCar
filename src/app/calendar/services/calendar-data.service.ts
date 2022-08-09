@@ -77,7 +77,6 @@ export class CalendarDataService {
       })
   }
 
-
   setParkingLotsFreePlacesToMax() {
     this.parkingLotsList.forEach(parkingLot => {
       parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
@@ -157,7 +156,8 @@ export class CalendarDataService {
       this.parkingLotsList.forEach(parkingLot => {
 
         // @ts-ignore
-        if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth() && parkingPlace.user !== undefined) {
+        if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth() && parkingPlace.userId !== null) {
+          
           parkingLot.freeParkingPlaces--;
         }
       });
