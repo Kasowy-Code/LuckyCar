@@ -13,5 +13,7 @@
   <mat-divider></mat-divider>
 
   <button mat-raised-button class="book" mat-dialog-close (click)="reserve();">Book for a client</button>
-  <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial (click)="calendarDataService.setupCalendarComponentData()">
+    Cancel
+  </button>
 </div>
