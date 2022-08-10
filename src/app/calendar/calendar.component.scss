@@ -12,12 +12,14 @@
   display: grid;
   justify-content: center;
   overflow: auto;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 }
-
+.mat-card {
+  padding: 0 !important;
+}
 .demo-inline-calendar-card {
+  width: 340px;
   margin-bottom: 1rem;
-  width: 18rem;
 }
 
 .have-parking {
