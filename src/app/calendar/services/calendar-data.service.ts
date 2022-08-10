@@ -76,7 +76,7 @@ export class CalendarDataService {
           });
 
           if (new Date(el.date).valueOf() == ParkingDay.date.valueOf()) {
-            ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
+           // ParkingDay.parkingLotsList[el.parkingLotId - 1].parkingPlaceCount -= 1;
           }
         })
         this.loaded++;
