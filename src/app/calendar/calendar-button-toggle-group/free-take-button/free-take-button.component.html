@@ -8,11 +8,11 @@
   mat-raised-button
   (click)="freeOrTake(); buttonClick.emit();
         "
-  [class]="calendarDataService.userPossibleActionEnum">Release Parking Place
+  [class]="calendarDataService.userPossibleActionEnum">Release Place
 </button>
 
 <button *ngIf="calendarDataService.userPossibleActionEnum === 'TAKE_PLACE'" mat-raised-button
         (click)="freeOrTake(); buttonClick.emit();
         "
-        [class]="calendarDataService.userPossibleActionEnum">Take Parking Place
+        [class]="calendarDataService.userPossibleActionEnum">Take Place
 </button>

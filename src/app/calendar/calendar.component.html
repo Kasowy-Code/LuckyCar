@@ -5,7 +5,7 @@
 <div class="main">
 
   <mat-spinner *ngIf="calendarDataService.loaded % 3 != 0"></mat-spinner>
-  <div *ngIf="calendarDataService.loaded % 3 == 0">
+  <div *ngIf="calendarDataService.loaded % 3 == 0" class="content">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
                     (click)="calendarDataService.checkIfDisable()"
