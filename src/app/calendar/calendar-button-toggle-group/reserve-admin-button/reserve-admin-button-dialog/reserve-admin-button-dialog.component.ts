@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CalendarDataService} from "../../../services/calendar-data.service";
 
 interface User {
   userName: string;
@@ -22,8 +23,10 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
   list: User[] = [];
   request: any = [];
 
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient,
-              private snackBar:MatSnackBar) {
+              private snackBar: MatSnackBar,
+              public calendarDataService: CalendarDataService) {
   }
 
   ngOnInit(): void {
@@ -62,32 +65,34 @@ export class ReserveAdminButtonDialogComponent implements OnInit {
     }
     this.list.forEach(u => {
       const start = new Date(this.data.startDate);
-        start.setHours(0);
-        start.setDate(start.getDate()+1);
-        let req = {};
-        if (u.userId < 0) {
-          req = {
-            "userId": null,
-            "date": start.toISOString().substring(0, 16)
-          }
-        } else {
-          req = {
-            "userId": u.userId,
-            "date": start.toISOString().substring(0, 16)
-          }
+      start.setHours(0);
+      start.setDate(start.getDate() + 1);
+      let req = {};
+      if (u.userId < 0) {
+        req = {
+          "userId": null,
+          "date": start.toISOString().substring(0, 16)
         }
+      } else {
+        req = {
+          "userId": u.userId,
+          "date": start.toISOString().substring(0, 16)
+        }
+      }
 
-        this.request.push(req);
+      this.request.push(req);
 
     });
     console.log(this.request);
     return this.http.patch(`${environment.link}/api/reserve`, this.request).subscribe(() => {
       this.snackBar.open("The booking was successful", "", {
-        duration: 5*1000,
+        duration: 5 * 1000,
         panelClass: ['good-snackbar'],
         horizontalPosition: "end",
         verticalPosition: "top",
       });
+
+      this.calendarDataService.setupCalendarComponentData();
     });
   }
 }

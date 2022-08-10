@@ -13,15 +13,6 @@ h3 {
   height: 100%;
 }
 
-.mat-button-toggle {
-  color: #606060;
-  background-color: white;
-  border: 0.5px solid #e3e3e3;
-  border-radius: 4%;
-  height: 100%;
-
-}
-
 .mat-button-toggle-label-content {
   padding-right: 0 !important;
   padding-left: 0 !important;
@@ -41,18 +32,40 @@ h5 {
 }
 
 #YOU_HAVE_PARKING_PLACE {
+  color: #606060;
+  background-color: white;
+  border: 0.5px solid #e3e3e3;
+  border-radius: 4%;
+}
+
+#YOU_HAVE_PARKING_PLACE_CLICKED {
   background: var(--mainColor);
   color: white;
   border-radius: 4%;
 }
 
 #THERE_IS_FREE_PLACE {
+  color: #606060;
+  background-color: white;
+  border: 0.5px solid #e3e3e3;
+  border-radius: 4%;
+
+}
+
+#THERE_IS_FREE_PLACE_CLICKED {
   background: green;
   color: white;
   border-radius: 4%;
 }
 
 #NOTHING_INTERESTING {
+  color: #606060;
+  background-color: white;
+  border: 0.5px solid #e3e3e3;
+  border-radius: 4%;
+}
+
+#CLICKABLE {
   color: #606060;
   background-color: white;
   border: 0.5px solid #e3e3e3;

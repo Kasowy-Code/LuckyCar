@@ -1,3 +1,4 @@
-<button disabled
-        mat-raised-button (click)="test()">Reserve
+<button [disabled]="calendarDataService.disableReserve"
+        mat-raised-button (click)="openDialog(); buttonClickReserve.emit()">
+  Reserve for Client
 </button>
