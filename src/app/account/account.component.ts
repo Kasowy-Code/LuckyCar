@@ -21,14 +21,16 @@ export class AccountComponent implements OnInit {
               private dialog:MatDialog) { }
 
   ngOnInit(): void {
-    this.accountService.adminAmount().subscribe(data=>{
-        if(data === 'true'){
-          this.delete = true;
-        }else {
-          this.delete = false;
+    if(this.roleService.isAdmin()) {
+      this.accountService.adminAmount().subscribe(data => {
+          if (data === 'true') {
+            this.delete = true;
+          } else {
+            this.delete = false;
+          }
         }
-      }
-    )
+      )
+    }
     this.accountService.getPersonalInfo().subscribe(
       (res: any) => {
           this.name = res.name;

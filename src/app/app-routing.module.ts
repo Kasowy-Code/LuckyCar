@@ -21,11 +21,11 @@ import {UsersComponent} from "./account/users/users.component";
 import {AuthErrorComponent} from "./Auth/auth-error/auth-error.component";
 import {ForgotPasswordComponent} from "./Auth/forgot-password/forgot-password.component";
 
-const routes: Routes = [{path: "lottery", component: LotteryComponent},
-  {path: "lottery/selectUsers", component: SelectUsersComponent},
+const routes: Routes = [{path: "lottery", component: LotteryComponent, canActivate: [AuthGuard, TokenGuard]},
+  {path: "lottery/selectUsers", component: SelectUsersComponent, canActivate: [AuthGuard, TokenGuard]},
   {path: "calendar", component: CalendarComponent, canActivate: [AuthGuard, TokenGuard]},
   {path: "account", component: AccountComponent, canActivate: [AuthGuard, TokenGuard]},
-  {path: "parking-lots", component: ParkingComponent},
+  {path: "parking-lots", component: ParkingComponent, canActivate: [AuthGuard, TokenGuard, RoleGuard]},
   {path: "login", component: LoginComponent, canActivate: [LoginGuard]},
   {path: "register", component: RegisterComponent, canActivate: [LoginGuard]},
   {path: "registered", component: RegisterSuccessComponent},
