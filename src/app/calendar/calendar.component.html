@@ -8,6 +8,7 @@
   <div *ngIf="calendarDataService.loaded % 3 == 0">
     <mat-card class="demo-inline-calendar-card">
       <mat-calendar [minDate]="minDate" [maxDate]="maxDate" (selectedChange)="selectedRangeChange($event)"
+                    (click)="calendarDataService.checkIfDisable()"
                     [selected]="calendarDataService.selectedRangeValue" [dateClass]="dateClass"></mat-calendar>
     </mat-card>
 

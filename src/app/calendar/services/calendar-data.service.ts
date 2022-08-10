@@ -23,6 +23,8 @@ export class CalendarDataService {
   selectedParkingLot = <ParkingLot>{};
   userPossibleActionEnum = UserPossibleActionEnum.NOTHING_TO_DO;
 
+  disableReserve = true;
+
   constructor(private calendarParkingLotsHttpService: CalendarParkingLotsHttpService,
               private snackBar: MatSnackBar) {
   }
@@ -39,6 +41,8 @@ export class CalendarDataService {
     if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
       this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
     }
+    console.log('confirm date range')
+    console.log(this.selectedRangeValue)
   }
 
   setMyParkingPlaces() {
@@ -118,19 +122,18 @@ export class CalendarDataService {
 
       this.parkingLotsList.forEach(parkingLot => {
         if (this.checkIfUserHasParkingPlaceOnParkingLot(parkingLot)) {
-          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
-          this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE
-          this.selectedParkingLot = parkingLot
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE_CLICKED;
+          this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE;
+          console.log('dddddddddddd')
+          this.selectedParkingLot = parkingLot;
           hasParking = true;
         } else {
           parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
         }
       })
-      console.log('sss')
       this.countFreeParkingPlacesOnEachParkingLot()
 
       if (!hasParking) {
-        console.log('not has parking')
         if (this.ifShouldShowFreeParkingPlaces()) {
           this.parkingLotsList.forEach(parkingLot => {
             if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
@@ -175,7 +178,6 @@ export class CalendarDataService {
         // @ts-ignore
         if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth() && parkingPlace.userId !== null) {
           //console.log('------')
-          console.log('Im in ' + parkingLot.name)
 
           parkingLot.freeParkingPlaces--;
         }
@@ -291,5 +293,21 @@ export class CalendarDataService {
         this.setupCalendarComponentData();
       });
     }
+  }
+
+  checkIfDisable() {
+    //this.calendarDataService.confirmDateRange();
+
+    if (this.selectedRangeValue.start !== null) {
+      if (this.selectedParkingLot.isAvailable !== undefined) {
+
+        if (this.selectedRangeValue.end === this.selectedRangeValue.start) {
+          this.disableReserve = false;
+        } else if (this.selectedRangeValue.end === null) {
+          this.disableReserve = false;
+        }
+      }
+    }
+    this.disableReserve = true;
   }
 }

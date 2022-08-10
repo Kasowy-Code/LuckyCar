@@ -32,6 +32,16 @@ export class CalendarButtonToggleGroupComponent implements OnInit {
       this.calendarDataService.parkingLotsList.find(obj => {
         return obj === parkingLot;
       }).parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE_CLICKED;
+    } else {
+      this.calendarDataService.parkingLotsList.forEach(el => {
+        el.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE;
+      })
+
+      console.log(parkingLot)
+      // @ts-ignore
+      this.calendarDataService.parkingLotsList.find(obj => {
+        return obj === parkingLot;
+      }).parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE_CLICKED;
     }
     //}
   }

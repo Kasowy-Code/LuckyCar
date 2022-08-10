@@ -32,6 +32,13 @@ h5 {
 }
 
 #YOU_HAVE_PARKING_PLACE {
+  color: #606060;
+  background-color: white;
+  border: 0.5px solid #e3e3e3;
+  border-radius: 4%;
+}
+
+#YOU_HAVE_PARKING_PLACE_CLICKED {
   background: var(--mainColor);
   color: white;
   border-radius: 4%;

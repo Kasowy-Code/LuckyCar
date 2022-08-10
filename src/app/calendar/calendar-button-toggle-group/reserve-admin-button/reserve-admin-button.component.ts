@@ -53,19 +53,5 @@ export class ReserveAdminButtonComponent implements OnInit {
     });
   }
 
-  checkIfDisable() {
-    this.calendarDataService.confirmDateRange();
 
-    if (this.calendarDataService.selectedRangeValue.start !== null) {
-      if (this.calendarDataService.selectedParkingLot.isAvailable !== undefined) {
-        
-        if (this.calendarDataService.selectedRangeValue.end === this.calendarDataService.selectedRangeValue.start) {
-          return false;
-        } else if (this.calendarDataService.selectedRangeValue.end === null) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 }

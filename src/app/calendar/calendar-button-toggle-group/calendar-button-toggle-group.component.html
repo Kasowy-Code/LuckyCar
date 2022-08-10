@@ -1,6 +1,7 @@
 <mat-button-toggle-group appearance="legacy">
   <mat-button-toggle *ngFor="let parking of calendarDataService.parkingLotsList"
                      (click)="
+                     calendarDataService.confirmDateRange();
                      setClickedParking(parking);
                      calendarDataService.setUserPossibleActionEnum()"
                      [id]=parking.parkingLotButtonStyleEnum

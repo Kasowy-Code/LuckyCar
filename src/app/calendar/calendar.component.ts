@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild, ViewEncap
 import {DateRange, MatCalendar, MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {CalendarDataService} from "./services/calendar-data.service";
 import {CalendarParkingLotsHttpService} from "./services/calendar-parking-lots-http.service";
+import {ParkingLot} from "../shared/dto/parking-lot";
+import {RoleService} from "../role.service";
 
 //TODO pozwól wybrać tylko datę większą lub równą dzisiejszej
 //i zrobimy to tak, że jeżeli wybrałes date inną niż powinieneś to parkingi się nie podświetlają
@@ -29,7 +31,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
   @Output() selectedRangeValueChange = new EventEmitter<DateRange<Date>>();
 
   constructor(public calendarDataService: CalendarDataService,
-              public calendarParkingLotsHttpService: CalendarParkingLotsHttpService) {
+              public calendarParkingLotsHttpService: CalendarParkingLotsHttpService,
+              public roleService: RoleService) {
 
     const currentDate = new Date();
     //TODO zmienić na pobiernaie miesiąca z bazy
@@ -46,14 +49,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
       } else {
         this.lotteryEndDate = res.drawDate;
       }
-      console.log(this.lotteryEndDate);
+      //console.log(this.lotteryEndDate);
     })
   }
 
   onButtonClick() {
 
     this.calendar.updateTodaysDate();
-    console.log('update date')
+
+    this.calendarDataService.selectedRangeValue = <DateRange<Date>>{};
   }
 
   ngOnDestroy() {
@@ -74,6 +78,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     }
     this.selectedRangeValueChange.emit(this.calendarDataService.selectedRangeValue)
 
+    this.calendarDataService.selectedParkingLot = <ParkingLot>{};
     this.calendarDataService.setParkingLotsButtonStyle();
   }
 
@@ -85,17 +90,17 @@ export class CalendarComponent implements OnInit, OnDestroy {
           return 'have-parking';
         }
 
-        this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
-
-          let dateToCompare = new Date(parkingPlace.date)
-
-          this.calendarDataService.parkingLotsList.forEach(parkingLot => {
-
-            if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
-              parkingLot.freeParkingPlaces--;
-            }
-          });
-        });
+        // this.calendarDataService.allParkingPlaceList.forEach(parkingPlace => {
+        //
+        //   let dateToCompare = new Date(parkingPlace.date)
+        //
+        //   this.calendarDataService.parkingLotsList.forEach(parkingLot => {
+        //
+        //     if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === new Date(cellDate).getDate() && dateToCompare.getMonth() === new Date(cellDate).getMonth()) {
+        //       //parkingLot.freeParkingPlaces--;
+        //     }
+        //   });
+        // });
 
         if (this.calendarDataService.parkingLotsList.some((el: any) => el.freeParkingPlaces > 0) && cellDate > new Date() && cellDate <= new Date(this.lotteryEndDate)) {
           return 'available-parking';
