@@ -32,9 +32,11 @@ export class CalendarDataService {
   setupCalendarComponentData() {
     this.userPossibleActionEnum = UserPossibleActionEnum.NOTHING_TO_DO;
     this.selectedParkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+    this.selectedRangeValue = new DateRange<Date>(null, null);
     this.setParkingLotsList();
     this.setAllParkingPlace();
     this.setMyParkingPlaces();
+    this.checkIfDisable();
   }
 
   confirmDateRange() {
@@ -297,17 +299,24 @@ export class CalendarDataService {
 
   checkIfDisable() {
     //this.calendarDataService.confirmDateRange();
-
     if (this.selectedRangeValue.start !== null) {
+
+      console.log(this.selectedParkingLot.isAvailable)
       if (this.selectedParkingLot.isAvailable !== undefined) {
+        console.log('s')
 
         if (this.selectedRangeValue.end === this.selectedRangeValue.start) {
           this.disableReserve = false;
         } else if (this.selectedRangeValue.end === null) {
           this.disableReserve = false;
+        } else {
+          this.disableReserve = true;
         }
+      } else {
+        this.disableReserve = true;
       }
+    } else {
+      this.disableReserve = true;
     }
-    this.disableReserve = true;
   }
 }

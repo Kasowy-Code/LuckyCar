@@ -43,6 +43,7 @@ export class CalendarButtonToggleGroupComponent implements OnInit {
         return obj === parkingLot;
       }).parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE_CLICKED;
     }
+    this.calendarDataService.checkIfDisable()
     //}
   }
 }
