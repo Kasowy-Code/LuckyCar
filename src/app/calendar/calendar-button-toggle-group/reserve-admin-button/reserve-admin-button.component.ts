@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {ReserveAdminButtonDialogComponent} from "./reserve-admin-button-dialog/reserve-admin-button-dialog.component";
 import {CalendarDataService} from "../../services/calendar-data.service";
@@ -15,19 +15,23 @@ export class ReserveAdminButtonComponent implements OnInit {
   end: any;
   parkingId = -1;
 
-  constructor(private dialog: MatDialog, public calendarService: CalendarDataService) {
+  @Output()
+  buttonClickReserve = new EventEmitter();
+
+  constructor(private dialog: MatDialog, public calendarDataService: CalendarDataService) {
   }
 
   ngOnInit() {
-    console.log(this.calendarService.selectedParkingLot.parkingLotButtonStyleEnum)
+    //console.log(this.calendarService.selectedParkingLot.parkingLotButtonStyleEnum)
   }
 
-  test() {
-    this.parkingId = this.calendarService.selectedParkingLot.id;
+  openDialog() {
+    console.log(this.calendarDataService.selectedParkingLot.id)
+    this.parkingId = this.calendarDataService.selectedParkingLot.id;
     //@ts-ignore
-    this.startDate = this.calendarService.selectedRangeValue.start;
+    this.startDate = this.calendarDataService.selectedRangeValue.start;
     //@ts-ignore
-    this.endDate = this.calendarService.selectedRangeValue.end;
+    this.endDate = this.calendarDataService.selectedRangeValue.end;
     this.startDate.setDate(this.startDate.getDate() + 1);
     this.start = this.startDate.toISOString().substring(0, 16)
     this.startDate.setDate(this.startDate.getDate() - 1);
@@ -47,5 +51,21 @@ export class ReserveAdminButtonComponent implements OnInit {
         'parkingLotId': this.parkingId
       }
     });
+  }
+
+  checkIfDisable() {
+    this.calendarDataService.confirmDateRange();
+
+    if (this.calendarDataService.selectedRangeValue.start !== null) {
+      if (this.calendarDataService.selectedParkingLot.isAvailable !== undefined) {
+        
+        if (this.calendarDataService.selectedRangeValue.end === this.calendarDataService.selectedRangeValue.start) {
+          return false;
+        } else if (this.calendarDataService.selectedRangeValue.end === null) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

@@ -36,12 +36,9 @@ export class CalendarDataService {
   }
 
   confirmDateRange() {
-    //if (parkingLot.parkingLotButtonStyleEnum !== ParkingLotButtonStyleEnum.NOTHING_INTERESTING) {
-
     if (this.selectedRangeValue?.start && !this.selectedRangeValue?.end) {
       this.selectedRangeValue = new DateRange<Date>(this.selectedRangeValue.start, this.selectedRangeValue.start);
     }
-    //}
   }
 
   setMyParkingPlaces() {
@@ -84,7 +81,7 @@ export class CalendarDataService {
     this.parkingLotsList.forEach(parkingLot => {
       parkingLot.freeParkingPlaces = parkingLot.parkingPlaceCount;
 
-      parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
+      //parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
     })
   }
 
@@ -100,18 +97,23 @@ export class CalendarDataService {
       this.parkingLotsList = response.filter((value: any) => value.isAvailable);
       this.parkingLotsList.map((el: ParkingLot) => {
         el.freeParkingPlaces = el.parkingPlaceCount
+
+        el.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING
       });
       this.setParkingLotsOnDay();
     })
   }
 
   setParkingLotsButtonStyle() {
+    console.log('burrrrton')
+
     this.userPossibleActionEnum = UserPossibleActionEnum.NOTHING_TO_DO;
     this.setParkingLotsFreePlacesToMax();
 
     // if data sie nie zgadza i nie ma losowania, then nothing interesting
 
     if (this.selectedRangeValue.start !== null) {
+
       let hasParking = false;
 
       this.parkingLotsList.forEach(parkingLot => {
@@ -120,16 +122,20 @@ export class CalendarDataService {
           this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE
           this.selectedParkingLot = parkingLot
           hasParking = true;
+        } else {
+          parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
         }
       })
-
+      console.log('sss')
       this.countFreeParkingPlacesOnEachParkingLot()
 
       if (!hasParking) {
+        console.log('not has parking')
         if (this.ifShouldShowFreeParkingPlaces()) {
           this.parkingLotsList.forEach(parkingLot => {
             if (this.checkIfThereIsFreeParkingPlaceOnParkingLot(parkingLot)) {
               parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE;
+              this.confirmDateRange();
 
             } else {
               parkingLot.parkingLotButtonStyleEnum = ParkingLotButtonStyleEnum.NOTHING_INTERESTING;
@@ -156,15 +162,20 @@ export class CalendarDataService {
   }
 
   countFreeParkingPlacesOnEachParkingLot() {
-
+    // console.log('----------------------------')
+    //console.log('counting')
     this.allParkingPlaceList.forEach(parkingPlace => {
 
       let dateToCompare = new Date(parkingPlace.date)
-
+      //console.log('--------')
+      //console.log('place ' + parkingPlace.date)
       this.parkingLotsList.forEach(parkingLot => {
-
+        //console.log('parking lot ' + parkingLot.name)
+        //console.log(parkingLot.freeParkingPlaces)
         // @ts-ignore
         if (parkingLot.id === parkingPlace.parkingLotId && dateToCompare.getDate() === this.selectedRangeValue.start.getDate() && dateToCompare.getMonth() === this.selectedRangeValue.start.getMonth() && parkingPlace.userId !== null) {
+          //console.log('------')
+          console.log('Im in ' + parkingLot.name)
 
           parkingLot.freeParkingPlaces--;
         }
@@ -222,7 +233,7 @@ export class CalendarDataService {
 
     if (this.selectedParkingLot.parkingLotButtonStyleEnum === ParkingLotButtonStyleEnum.YOU_HAVE_PARKING_PLACE) {
       this.userPossibleActionEnum = UserPossibleActionEnum.FREE_PLACE;
-    } else if (this.selectedParkingLot.parkingLotButtonStyleEnum === ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE) {
+    } else if (this.selectedParkingLot.parkingLotButtonStyleEnum === ParkingLotButtonStyleEnum.THERE_IS_FREE_PLACE_CLICKED) {
       this.userPossibleActionEnum = UserPossibleActionEnum.TAKE_PLACE;
     }
   }
@@ -271,6 +282,12 @@ export class CalendarDataService {
 
       this.calendarParkingLotsHttpService.takePlace(day.toISOString().substring(0, 16), parkingId).subscribe(() => {
 
+        this.snackBar.open("Parking place has been Taken", "", {
+          duration: 5 * 1000,
+          panelClass: ['good-snackbar'],
+          horizontalPosition: "end",
+          verticalPosition: "top",
+        });
         this.setupCalendarComponentData();
       });
     }

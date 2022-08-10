@@ -1,11 +1,11 @@
 <mat-button-toggle-group appearance="legacy">
   <mat-button-toggle *ngFor="let parking of calendarDataService.parkingLotsList"
                      (click)="
-                     calendarDataService.confirmDateRange();
                      setClickedParking(parking);
                      calendarDataService.setUserPossibleActionEnum()"
                      [id]=parking.parkingLotButtonStyleEnum
-                     [disabled]="parking.parkingLotButtonStyleEnum === 'NOTHING_INTERESTING'">
+                     [disabled]="parking.parkingLotButtonStyleEnum === 'YOU_HAVE_PARKING_PLACE'"
+  >
     <h3>{{parking.name}}</h3>
     <!--    wolne miejsca wyświetlamy tylko jeśli jest wybrana pojedyncza data-->
     <h5 *ngIf="calendarDataService.ifShouldShowFreeParkingPlaces()">free places {{parking.freeParkingPlaces}}</h5>
